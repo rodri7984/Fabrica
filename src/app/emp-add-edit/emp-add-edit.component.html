@@ -1,0 +1,70 @@
+<div mat-dialog-title>
+    <h1>Formulario Cliente</h1>
+</div>
+
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="content">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre">
+          </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido">
+          </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Rut</mat-label>
+            <input matInput formControlName="rut">
+          </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field>
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option value="one">PLan 1</mat-option>
+              <mat-option value="two">Plan 2</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Fecha de pago</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fpago">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Fecha de inicio</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fInicio">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+    </div>
+
+
+
+</div>
+
+<div mat-dialog-actions class="action">
+
+    <button mat-raised-button class="boton"> Cancelar</button>
+    <button mat-raised-button class="boton" color="primary" type="submit" >Agregar</button>
+</div>
+
+</form>
