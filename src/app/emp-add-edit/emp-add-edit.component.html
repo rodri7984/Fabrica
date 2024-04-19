@@ -2,7 +2,7 @@
     <h1>Formulario Cliente</h1>
 </div>
 
-<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="empForm" (ngSubmit)="guardarDatos()" >
 <div mat-dialog-content class="content">
     <div class="row">
         <mat-form-field appearance="outline">
@@ -12,11 +12,20 @@
     </div>
 
     <div class="row">
+      <mat-form-field appearance="outline">
+          <mat-label>Segundo nombre </mat-label>
+          <input matInput >
+        </mat-form-field>
+  </div>
+
+    <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Apellido</mat-label>
             <input matInput formControlName="apellido">
           </mat-form-field>
     </div>
+
+
 
     <div class="row">
         <mat-form-field appearance="outline">
@@ -29,6 +38,14 @@
             <input matInput formControlName="dv">
           </mat-form-field>
     </div>
+
+
+    <!-- <div class="row">
+      <mat-form-field appearance="outline">
+          <mat-label>Mapellido</mat-label>
+          <input matInput formControlName="maternoApellidoUser">
+        </mat-form-field>
+  </div> -->
 
     <div class="row">
         <mat-form-field>
@@ -43,7 +60,7 @@
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Fecha de pago</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fpago">
+            <input matInput [matDatepicker]="picker" >
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -51,13 +68,14 @@
           
     </div>
 
+
+
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Fecha de inicio</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fInicio">
+            <input matInput  >
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+
           </mat-form-field>
           
     </div>
@@ -69,7 +87,7 @@
 <div mat-dialog-actions class="action">
 
     <button mat-raised-button class="boton"> Cancelar</button>
-    <button mat-raised-button class="boton" color="primary" type="submit" >Agregar</button>
+    <button mat-raised-button class="boton" color="primary" type="submit"  >Agregar</button>
 </div>
 
 </form>
