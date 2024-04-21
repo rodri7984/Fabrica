@@ -1,27 +1,37 @@
-<div mat-dialog-title>
+
+
+<form [formGroup]="empForm"  *ngIf ="mostrarFormulario" >
+  <div mat-dialog-title>
     <h1>Formulario Cliente</h1>
 </div>
 
-<form [formGroup]="empForm" (ngSubmit)="guardarDatos()" >
 <div mat-dialog-content class="content">
+  
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Nombre </mat-label>
             <input matInput formControlName="nombre">
           </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Segundo nombre </mat-label>
+            <input matInput formControlName="Snombre">
+          </mat-form-field>
     </div>
 
     <div class="row">
-      <mat-form-field appearance="outline">
-          <mat-label>Segundo nombre </mat-label>
-          <input matInput >
-        </mat-form-field>
+
   </div>
 
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Apellido</mat-label>
             <input matInput formControlName="apellido">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Segundo apellido</mat-label>
+            <input matInput formControlName="apellidoM">
           </mat-form-field>
     </div>
 
@@ -39,46 +49,33 @@
           </mat-form-field>
     </div>
 
-
-    <!-- <div class="row">
+    <div class="row">
       <mat-form-field appearance="outline">
-          <mat-label>Mapellido</mat-label>
-          <input matInput formControlName="maternoApellidoUser">
-        </mat-form-field>
-  </div> -->
+        <mat-label>Mail</mat-label>
+        <input matInput formControlName="mail">
+      </mat-form-field>
 
-    <div class="row">
-        <mat-form-field>
-            <mat-label>Select</mat-label>
-            <mat-select>
-              <mat-option value="one">PLan 1</mat-option>
-              <mat-option value="two">Plan 2</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="telefono">
+      </mat-form-field>
     </div>
 
     <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Fecha de pago</mat-label>
-            <input matInput [matDatepicker]="picker" >
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha nacimiento</mat-label>
+        <input matInput formControlName="Fnac">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo usuario</mat-label>
+        <input matInput formControlName="tipoUser">
+      </mat-form-field>
     </div>
 
 
 
-    <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Fecha de inicio</mat-label>
-            <input matInput  >
-            <mat-hint>MM/DD/YYYY</mat-hint>
-
-          </mat-form-field>
-          
-    </div>
+    
 
 
 
@@ -86,8 +83,8 @@
 
 <div mat-dialog-actions class="action">
 
-    <button mat-raised-button class="boton"> Cancelar</button>
-    <button mat-raised-button class="boton" color="primary" type="submit"  >Agregar</button>
+    <button mat-raised-button class="boton" (click)="cancelar()"> Cancelar</button>
+    <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos()" >Agregar</button>
 </div>
 
 </form>

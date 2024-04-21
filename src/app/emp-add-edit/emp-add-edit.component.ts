@@ -9,6 +9,10 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Validators  } from '@angular/forms';
 import { ClienteService } from '../core/services/cliente.service';
 import { Usuario } from '../usuario';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+
 
 
 
@@ -22,7 +26,9 @@ import { Usuario } from '../usuario';
             MatDatepickerModule,
             MatNativeDateModule,
             MatButtonModule,
-          ReactiveFormsModule
+          ReactiveFormsModule,
+          CommonModule,
+          
         ],
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
@@ -33,7 +39,8 @@ export class EmpAddEditComponent {
 
   empForm: FormGroup; // Define el FormGroup para tu formulario
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService )
+
+  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router )
     {
     // Inicializa el formulario con los campos y validadores necesarios
     this.empForm = this.fb.group({
@@ -50,8 +57,9 @@ export class EmpAddEditComponent {
     });
   }
 
-  usuario: Usuario = new Usuario(1,'22', 'John', 'Carlos', 'Perez', 'Gonzales', 'juan@example.com', 987654321, '1990-05-15', 'Cliente');
-  
+  usuario: Usuario = new Usuario(null,'', '', '', '', '', '', null, '', 'Cliente');
+  mostrarFormulario: boolean = true; // Inicialmente, el formulario se muestra
+
 
   guardarDatos() {
     if (this.empForm.valid) {
@@ -73,4 +81,15 @@ export class EmpAddEditComponent {
       console.warn('El formulario no es válido. Verifica los campos.');
     }
   }
+
+  cancelar(): void {
+    // Realiza cualquier acción necesaria antes de redirigir
+    // Por ejemplo, cerrar el formulario o limpiar datos
+  
+    // Redirige a la página principal
+    this.router.navigate(['/home']); // Cambia '/' por la ruta correcta de tu página principal
+      // Oculta el formulario
+    this.mostrarFormulario = false;
+  }
+  
 }

@@ -1,25 +1,25 @@
 // usuario.ts
 export class Usuario {
-    runUser: number;
+    runUser: number | null;
     digitoVUser: string;
     primerNombreUser: string;
     segundoNombreUser: string;
     paternoApellidoUser: string;
     maternoApellidoUser: string;
     correoElectronicoUser: string;
-    telefonoUser: number;
+    telefonoUser: number | null;
     fechaNacimientoUser: string;
     tipoUser: string;
   
     constructor(
-      runUser: number,
+      runUser: number | null,
       digitoVUser: string,
       primerNombreUser: string,
       segundoNombreUser: string,
       paternoApellidoUser: string,
       maternoApellidoUser: string,
       correoElectronicoUser: string,
-      telefonoUser: number,
+      telefonoUser: number | null,
       fechaNacimientoUser: string,
       tipoUser: string
     ) {

@@ -6,6 +6,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {EmpAddEditComponent} from './emp-add-edit/emp-add-edit.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class AppComponent {
   title = 'fabricaApp';
-  constructor(private _dialog: MatDialog) {}
+  constructor(private _dialog: MatDialog , private router : Router) {}
 
   openAddEditEmpForm() {
     this._dialog.open(EmpAddEditComponent);
