@@ -1,6 +1,6 @@
 // usuario.ts
 export class Usuario {
-    runUser: number | null;
+    run: string;
     digitoVUser: string;
     primerNombreUser: string;
     segundoNombreUser: string;
@@ -12,7 +12,7 @@ export class Usuario {
     tipoUser: string;
   
     constructor(
-      runUser: number | null,
+      run: string,
       digitoVUser: string,
       primerNombreUser: string,
       segundoNombreUser: string,
@@ -23,7 +23,7 @@ export class Usuario {
       fechaNacimientoUser: string,
       tipoUser: string
     ) {
-      this.runUser = runUser;
+      this.run = run;
       this.digitoVUser = digitoVUser;
       this.primerNombreUser = primerNombreUser;
       this.segundoNombreUser = segundoNombreUser;

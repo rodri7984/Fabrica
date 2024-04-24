@@ -13,7 +13,7 @@ export class ClienteService {
   constructor(private http: HttpClient) {}
 
   agregarUsuario(usuario: any) {
-    return this.http.post(`${this.apiUrl}/creaUsuario`, usuario);
+    return this.http.post(`${this.apiUrl}/createUsuario`, usuario);
   }
 }
 

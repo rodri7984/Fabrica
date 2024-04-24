@@ -48,7 +48,7 @@ export class EmpAddEditComponent {
       Snombre: [this.usuario.segundoNombreUser],
       apellido: [this.usuario.paternoApellidoUser],
       apellidoM: [this.usuario.maternoApellidoUser],
-      run: [this.usuario.runUser ],
+      run: [this.usuario.run ],
       dv: [this.usuario.digitoVUser ],
       mail: [this.usuario.correoElectronicoUser ],
       telefono: [this.usuario.telefonoUser],
@@ -57,7 +57,7 @@ export class EmpAddEditComponent {
     });
   }
 
-  usuario: Usuario = new Usuario(null,'', '', '', '', '', '', null, '', 'Cliente');
+  usuario: Usuario = new Usuario('','', '', '', '', '', '', null, '', 'Clienteeee');
   mostrarFormulario: boolean = true; // Inicialmente, el formulario se muestra
 
 
