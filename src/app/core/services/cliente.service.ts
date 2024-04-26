@@ -10,10 +10,10 @@ export class ClienteService {
   private apiUrl = 'http://localhost:8080/usuarios';
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   agregarUsuario(usuario: any) {
-    return this.http.post(`${this.apiUrl}/createUsuario`, usuario);
+    return this.httpClient.post(`${this.apiUrl}/createUsuario`, usuario);
   }
 }
 

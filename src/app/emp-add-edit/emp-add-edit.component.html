@@ -10,12 +10,12 @@
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Nombre </mat-label>
-            <input matInput formControlName="nombre">
-          </mat-form-field>
+            
+            <input formControlName="primerNombre" matInput>          </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Segundo nombre </mat-label>
-            <input matInput formControlName="Snombre">
+            <input formControlName="segundoNombre" matInput >
           </mat-form-field>
     </div>
 
@@ -26,12 +26,12 @@
     <div class="row">
         <mat-form-field appearance="outline">
             <mat-label>Apellido</mat-label>
-            <input matInput formControlName="apellido">
+            <input matInput formControlName="paternoApellido">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Segundo apellido</mat-label>
-            <input matInput formControlName="apellidoM">
+            <input matInput formControlName="maternoApellido">
           </mat-form-field>
     </div>
 
@@ -52,24 +52,24 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Mail</mat-label>
-        <input matInput formControlName="mail">
+        <input matInput formControlName="email">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Telefono</mat-label>
-        <input matInput formControlName="telefono">
+        <input matInput formControlName="fono">
       </mat-form-field>
     </div>
 
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Fecha nacimiento</mat-label>
-        <input matInput formControlName="Fnac">
+        <input matInput formControlName="fechaNacimiento">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Tipo usuario</mat-label>
-        <input matInput formControlName="tipoUser">
+        <input matInput formControlName="tipoUsuario">
       </mat-form-field>
     </div>
 
@@ -81,10 +81,14 @@
 
 </div>
 
-<div mat-dialog-actions class="action">
 
-    <button mat-raised-button class="boton" (click)="cancelar()"> Cancelar</button>
-    <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos()">Agregar</button>
-</div>
 
 </form>
+
+<div mat-dialog-actions class="action">
+
+  <button mat-raised-button class="boton" (click)="cancelar()"> Cancelar</button>
+  <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos()">Agregar</button>
+</div>
+
+{{ empForm.value | json}}
