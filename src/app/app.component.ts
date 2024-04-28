@@ -11,6 +11,7 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { ClienteService } from './core/services/cliente.service';
 import { HttpClient } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
+import { Usuario } from './usuario';
 
 
 
@@ -34,16 +35,65 @@ import {MatInputModule} from '@angular/material/input';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
+// export interface usuarios {
+
+
+// }
+  // {
+  //   "run": "19933184",
+  //   "dv": "string",
+  //   "primerNombre": "string",
+  //   "segundoNombre": "string",
+  //   "paternoApellido": "string",
+  //   "maternoApellido": "string",
+  //   "email": "string",
+  //   "fono": 0,
+  //   "fechaNacimiento": "string",
+  //   "tipoUsuario": "string"
+  // }
+  // ,
+  // {
+  //   "run": "19933184",
+  //   "dv": "string",
+  //   "primerNombre": "string",
+  //   "segundoNombre": "string",
+  //   "paternoApellido": "string",
+  //   "maternoApellido": "string",
+  //   "email": "string",
+  //   "fono": 0,
+  //   "fechaNacimiento": "string",
+  //   "tipoUsuario": "string"
+  // }];
+
+
+
+
 export class AppComponent implements OnInit{
+  usuarios: Usuario[] = [];
+  // ELEMENT_DATA = this.mostrarDatos();
+
+
+  
   title = 'fabricaApp';
   public desplegarColumna : string[] = ['run','dv','primerNombre','paternoApellido','tipoUsuario'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<Usuario>;
   constructor(private _dialog: MatDialog , private router : Router , private http: HttpClient, private clienteService: ClienteService) {}
 
   ngOnInit(): void {
-    this.mostrarDatos()
+    // this.mostrarDatos();
+    this.clienteService.getUsuarios().subscribe((data) => {
+      this.usuarios = data;
+      
+    });
+  }
+    
+  ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.usuarios);
+;
   }
 
+  
 
   openAddEditEmpForm() {
     this._dialog.open(EmpAddEditComponent);

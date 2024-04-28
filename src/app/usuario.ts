@@ -10,6 +10,8 @@ export class Usuario {
     fono: number | null;
     fechaNacimiento: string;
     tipoUsuario: string;
+
+    
   
     constructor(
       run: string ,
