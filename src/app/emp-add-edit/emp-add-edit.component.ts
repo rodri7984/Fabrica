@@ -34,19 +34,34 @@ import { CommonModule } from '@angular/common';
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
 })
-export class EmpAddEditComponent  {
+export class EmpAddEditComponent   {
 
-
+  tipo: Usuario[] = [];
   // nombre = new FormControl('', Validators.required);
 
 
 
    usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
  
+   tipoUsuarioSeleccionado = [
+    {tipo :'Staff'},
+    {tipo :'Cliente'},
+   ];
 
+    tipoUsuarioSeleccionado2 : string[] = ['staff', 'cliente'];
+
+
+    selectorElegido : string = '';
+
+    onTipoUsuarioSelectionChange(event: any) {
+      const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+      this.empForm.get('tipoUsuario')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+    }
+  
+   
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router) {
-
+    // this.tipoUsuarioSeleccionado[0]
 
   }
 
@@ -59,8 +74,8 @@ export class EmpAddEditComponent  {
     dv: ['', Validators.required],
     email: ['', Validators.required,],
     fono: [null, Validators.required],
-    fechaNacimiento: ['', Validators.required],
-    tipoUsuario: ['', Validators.required],
+    fechaNacimiento: ['DD/MM/YY', Validators.required],
+    tipoUsuario: ['0'],
   });
 
 
@@ -79,6 +94,7 @@ export class EmpAddEditComponent  {
           console.log('Usuario guardado exitosamente:', response);
 
           console.log('rut:', this.empForm.value);
+          
 
           // const nombreControl = this.empForm.get('nombre');
           // if (nombreControl != null) {

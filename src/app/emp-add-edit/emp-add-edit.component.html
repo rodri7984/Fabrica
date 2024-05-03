@@ -1,6 +1,6 @@
 
 
-<form [formGroup]="empForm"  *ngIf ="mostrarFormulario" >
+<form [formGroup]="empForm"  *ngIf ="mostrarFormulario" #f="ngForm" >
   <div mat-dialog-title>
     <h1>Formulario Cliente</h1>
 </div>
@@ -62,22 +62,35 @@
     </div>
 
     <div class="row">
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Fecha nacimiento</mat-label>
-        <input matInput formControlName="fechaNacimiento">
+        <input matInput formControlName="fechaNacimiento" placeholder="DD/MM/YY">
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Tipo usuario</mat-label>
-        <input matInput formControlName="tipoUsuario">
-      </mat-form-field>
+      <div class="row">
+      
+        <mat-form-field >
+          
+
+          <mat-select name="tipoUsuario"    placeholder="Tipo" (selectionChange)="onTipoUsuarioSelectionChange($event)">
+            <mat-option value=""> Tipo usuario  </mat-option>
+            <mat-option *ngFor="let tipoUsuario of tipoUsuarioSeleccionado2" [value]="tipoUsuario">
+              {{tipoUsuario}}
+            </mat-option>      
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-
-
     
-
-
 
 </div>
 

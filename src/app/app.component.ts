@@ -15,6 +15,7 @@ import { Usuario } from './usuario';
 
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,47 +37,15 @@ import { Usuario } from './usuario';
   styleUrl: './app.component.css'
 })
 
-// export interface usuarios {
-
-
-// }
-  // {
-  //   "run": "19933184",
-  //   "dv": "string",
-  //   "primerNombre": "string",
-  //   "segundoNombre": "string",
-  //   "paternoApellido": "string",
-  //   "maternoApellido": "string",
-  //   "email": "string",
-  //   "fono": 0,
-  //   "fechaNacimiento": "string",
-  //   "tipoUsuario": "string"
-  // }
-  // ,
-  // {
-  //   "run": "19933184",
-  //   "dv": "string",
-  //   "primerNombre": "string",
-  //   "segundoNombre": "string",
-  //   "paternoApellido": "string",
-  //   "maternoApellido": "string",
-  //   "email": "string",
-  //   "fono": 0,
-  //   "fechaNacimiento": "string",
-  //   "tipoUsuario": "string"
-  // }];
-
-
 
 
 export class AppComponent implements OnInit{
   usuarios: Usuario[] = [];
-  // ELEMENT_DATA = this.mostrarDatos();
 
 
   
   title = 'fabricaApp';
-  public desplegarColumna : string[] = ['run','dv','primerNombre','paternoApellido','tipoUsuario'];
+  public desplegarColumna : string[] = ['rut', 'primerNombre','paternoApellido','tipoUsuario','fechaNacimiento'];
   dataSource = new MatTableDataSource<Usuario>;
   constructor(private _dialog: MatDialog , private router : Router , private http: HttpClient, private clienteService: ClienteService) {}
 
