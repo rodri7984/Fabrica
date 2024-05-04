@@ -11,10 +11,10 @@ import { run } from 'node:test';
 })
 export class ClienteService {
   private apiUrl = 'http://localhost:8080/usuarios';
-  
+
   private run = '19331975';
 
-  constructor(private httpClient: HttpClient ) { }
+  constructor(private httpClient: HttpClient) { }
 
 
 
@@ -28,19 +28,15 @@ export class ClienteService {
     return this.httpClient.get(`${this.apiUrl}/listUsuarios`).subscribe((data) => {
       // console.table(data);
       this.getJsonValue = data;
-      
-      
+
+
     });
 
+  }
 
+  getUsuarios(): Observable<Usuario[]> {
+    return this.httpClient.get<Usuario[]>(`${this.apiUrl}/listUsuarios`);
+  }
 
-  
-
-    }
-
-    getUsuarios(): Observable<Usuario[]> {
-      return this.httpClient.get<Usuario[]>(`${this.apiUrl}/listUsuarios`);
-    }
-  
 }
 
