@@ -40,12 +40,15 @@ import { Usuario } from './usuario';
 
 
 export class AppComponent implements OnInit{
+editarUsuario(_t68: any) {
+throw new Error('Method not implemented.');
+}
   usuarios: Usuario[] = [];
 
 
   
   title = 'fabricaApp';
-  public desplegarColumna : string[] = ['rut', 'primerNombre','paternoApellido','tipoUsuario','fechaNacimiento'];
+  public desplegarColumna : string[] = ['rut', 'primerNombre','paternoApellido','rolUsuario','fechaNacimiento'];
   dataSource = new MatTableDataSource<Usuario>;
   constructor(private _dialog: MatDialog , private router : Router , private http: HttpClient, private clienteService: ClienteService) {}
 
@@ -80,3 +83,5 @@ export class AppComponent implements OnInit{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
+
+

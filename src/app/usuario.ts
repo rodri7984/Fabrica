@@ -8,8 +8,11 @@ export class Usuario {
     maternoApellido: string;
     email: string;
     fono: number | null;
-    fechaNacimiento: string;
-    tipoUsuario: string;
+    fechaNacimiento: Date;
+    rolUsuario: string;
+    fechaRegistro: Date;
+    estado: string;
+    
 
     
   
@@ -22,8 +25,10 @@ export class Usuario {
       maternoApellido: string,
       email: string,
       fono: number | null,
-      fechaNacimientoUser: string,
-      tipoUser: string
+      fechaNacimientoUser: Date,
+      rolUsuario: string,
+      estado: string,
+      fechaRegistro: Date
     ) {
       this.run = run;
       this.digitoVUser = digitoVUser;
@@ -34,6 +39,8 @@ export class Usuario {
       this.email = email;
       this.fono = fono;
       this.fechaNacimiento = fechaNacimientoUser;
-      this.tipoUsuario = tipoUser;
+      this.rolUsuario = rolUsuario;
+      this.estado = estado;
+      this.fechaRegistro = fechaRegistro;
     }
   }

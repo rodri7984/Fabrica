@@ -11,6 +11,8 @@ import { ClienteService } from '../core/services/cliente.service';
 import { Usuario } from '../usuario';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AppComponent } from '../app.component';
+import { formatDate } from '@angular/common';
 
 
 
@@ -34,36 +36,50 @@ import { CommonModule } from '@angular/common';
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
 })
-export class EmpAddEditComponent   {
+export class EmpAddEditComponent    {
+
+  post: Usuario = {
+    fechaNacimiento: new Date(Date.now()),
+    fechaRegistro: new Date(Date.now()),
+    run: '',
+    digitoVUser: '',
+    primerNombre: '',
+    segundoNombre: '',
+    paternoApellido: '',
+    maternoApellido: '',
+    email: '',
+    fono: null,
+    rolUsuario: '',
+    estado: ''
+  }
+
 
   tipo: Usuario[] = [];
-  // nombre = new FormControl('', Validators.required);
-
-
-
-   usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
+  //  usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
  
    tipoUsuarioSeleccionado = [
     {tipo :'Staff'},
     {tipo :'Cliente'},
    ];
 
-    tipoUsuarioSeleccionado2 : string[] = ['staff', 'cliente'];
+    tipoUsuarioSeleccionado2 : string[] = ['CLIENTE', 'STAFF','ADMIN'];
 
 
     selectorElegido : string = '';
 
     onTipoUsuarioSelectionChange(event: any) {
       const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-      this.empForm.get('tipoUsuario')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+      this.empForm.get('rolUsuario')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
     }
   
-   
+    editForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router) {
-    // this.tipoUsuarioSeleccionado[0]
+
 
   }
+ 
+
 
   empForm = this.fb.group({
     primerNombre: ['', Validators.required],
@@ -74,8 +90,11 @@ export class EmpAddEditComponent   {
     dv: ['', Validators.required],
     email: ['', Validators.required,],
     fono: [null, Validators.required],
-    fechaNacimiento: ['DD/MM/YY', Validators.required],
-    tipoUsuario: ['0'],
+    fechaNacimiento: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), [Validators.required]],
+    rolUsuario : ['0'],
+    estado: ["ACTIVO"],
+    fechaRegistro : [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required]
+    
   });
 
 
@@ -92,23 +111,13 @@ export class EmpAddEditComponent   {
       this.clienteService.agregarUsuario(this.empForm.value).subscribe(
         (response) => {
           console.log('Usuario guardado exitosamente:', response);
-
           console.log('rut:', this.empForm.value);
           
 
-          // const nombreControl = this.empForm.get('nombre');
-          // if (nombreControl != null) {
-          //   const nombre = nombreControl.value;
-          //   // console.log('nombre formcontrol', nombre.value);
-          // }
-
-
-
-          // Puedes redirigir a otra página o mostrar un mensaje de éxito aquí
         },
         (error) => {
           console.error('Error al guardar el usuario:', error);
-          // Maneja el error según tus necesidades
+
         }
       );
     } else {
