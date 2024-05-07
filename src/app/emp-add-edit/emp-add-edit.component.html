@@ -75,11 +75,8 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <div class="row">
-      
+      <div class="row"> 
         <mat-form-field >
-          
-
           <mat-select name="tipoUsuario"    placeholder="Tipo" (selectionChange)="onTipoUsuarioSelectionChange($event)">
             <mat-option value=""> Tipo usuario  </mat-option>
             <mat-option *ngFor="let tipoUsuario of tipoUsuarioSeleccionado2" [value]="tipoUsuario">
@@ -89,6 +86,18 @@
         </mat-form-field>
       </div>
     </div>
+
+    <div class="row"> 
+      <mat-form-field >
+        <mat-select name="tipoUsuario"    placeholder="Plan" >
+          <mat-option value=""> Plan  </mat-option>
+          <mat-option >
+           
+          </mat-option>      
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
 
     
 

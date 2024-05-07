@@ -1,4 +1,6 @@
 // usuario.ts
+import { RolUsuario } from "./modelos/rol-usuario";
+
 export class Usuario {
     run: string;
     digitoVUser: string;

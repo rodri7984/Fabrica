@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { formatDate } from '@angular/common';
+import { PlanService } from '../core/services/plan.service';
 
 
 
@@ -57,15 +58,17 @@ export class EmpAddEditComponent    {
   tipo: Usuario[] = [];
   //  usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
  
-   tipoUsuarioSeleccionado = [
-    {tipo :'Staff'},
-    {tipo :'Cliente'},
-   ];
+  //  tipoUsuarioSeleccionado = [
+  //   {tipo :'Staff'},
+  //   {tipo :'Cliente'},
+  //  ];
 
     tipoUsuarioSeleccionado2 : string[] = ['CLIENTE', 'STAFF','ADMIN'];
 
+    
 
-    selectorElegido : string = '';
+
+    // selectorElegido : string = '';
 
     onTipoUsuarioSelectionChange(event: any) {
       const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
@@ -74,10 +77,7 @@ export class EmpAddEditComponent    {
   
     editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router) {
-
-
-  }
+  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private PlanService : PlanService) {}
  
 
 
