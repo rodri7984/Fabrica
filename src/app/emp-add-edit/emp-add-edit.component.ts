@@ -9,11 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Validators, FormsModule } from '@angular/forms';
 import { ClienteService } from '../core/services/cliente.service';
 import { Usuario } from '../usuario';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { formatDate } from '@angular/common';
 import { PlanService } from '../core/services/plan.service';
+import { TipoPlan } from '../modelos/tipo-plan';
+import { Location } from '@angular/common';
 
 
 
@@ -31,13 +33,14 @@ import { PlanService } from '../core/services/plan.service';
     MatButtonModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
 
   ],
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
 })
-export class EmpAddEditComponent    {
+export class EmpAddEditComponent {
 
   post: Usuario = {
     fechaNacimiento: new Date(Date.now()),
@@ -50,35 +53,39 @@ export class EmpAddEditComponent    {
     maternoApellido: '',
     email: '',
     fono: null,
-    rolUsuario: '',
-    estado: ''
+    estado: '',
+    idTipoPlan: '',
+    descuento: 0
   }
 
 
   tipo: Usuario[] = [];
   //  usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
- 
+
   //  tipoUsuarioSeleccionado = [
   //   {tipo :'Staff'},
   //   {tipo :'Cliente'},
   //  ];
 
-    tipoUsuarioSeleccionado2 : string[] = ['CLIENTE', 'STAFF','ADMIN'];
-
-    
+  tipoUsuarioSeleccionado2: string[] = ['CLIENTE', 'STAFF'];
 
 
-    // selectorElegido : string = '';
 
-    onTipoUsuarioSelectionChange(event: any) {
-      const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-      this.empForm.get('rolUsuario')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
-    }
-  
-    editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private PlanService : PlanService) {}
- 
+
+  // selectorElegido : string = '';
+
+  onTipoUsuarioSelectionChange(event: any) {
+    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+    this.empForm.get('idTipoPlan')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+  }
+
+  editForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private route : ActivatedRoute, private PlanService: PlanService
+    , public _location : Location
+  ) { }
+
 
 
   empForm = this.fb.group({
@@ -91,10 +98,11 @@ export class EmpAddEditComponent    {
     email: ['', Validators.required,],
     fono: [null, Validators.required],
     fechaNacimiento: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), [Validators.required]],
-    rolUsuario : ['0'],
+    fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
     estado: ["ACTIVO"],
-    fechaRegistro : [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required]
-    
+    idTipoPlan : ['', Validators.required],
+    descuento : [0, Validators.required]
+
   });
 
 
@@ -113,6 +121,7 @@ export class EmpAddEditComponent    {
           console.log('Usuario guardado exitosamente:', response);
           console.log('rut:', this.empForm.value);
           
+
 
         },
         (error) => {
@@ -135,4 +144,29 @@ export class EmpAddEditComponent    {
     this.mostrarFormulario = false;
   }
 
+  refrescar(): void {
+
+    window.location.reload();
+    }
+  
+
+
+
+  // metodos y variables para obtener un get de los planes
+
+  tiposDePlan: TipoPlan[] = [];
+
+  dataSource: any;
+
+  traerPlanes() {
+
+
+    this.PlanService.getPLanes().subscribe((data) => {
+      this.tiposDePlan = data;
+
+    });
+
+
+
+  }
 }

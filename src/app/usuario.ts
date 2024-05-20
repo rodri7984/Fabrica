@@ -11,10 +11,10 @@ export class Usuario {
     email: string;
     fono: number | null;
     fechaNacimiento: Date;
-    rolUsuario: string;
     fechaRegistro: Date;
     estado: string;
-    
+    idTipoPlan : string;
+    descuento : number;
 
     
   
@@ -28,9 +28,10 @@ export class Usuario {
       email: string,
       fono: number | null,
       fechaNacimientoUser: Date,
-      rolUsuario: string,
       estado: string,
-      fechaRegistro: Date
+      fechaRegistro: Date,
+      idTipoPlan : string,
+      descuento : number
     ) {
       this.run = run;
       this.digitoVUser = digitoVUser;
@@ -41,8 +42,9 @@ export class Usuario {
       this.email = email;
       this.fono = fono;
       this.fechaNacimiento = fechaNacimientoUser;
-      this.rolUsuario = rolUsuario;
       this.estado = estado;
       this.fechaRegistro = fechaRegistro;
+      this.idTipoPlan = idTipoPlan;
+      this.descuento = descuento;
     }
   }

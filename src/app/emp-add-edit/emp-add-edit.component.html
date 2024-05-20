@@ -77,7 +77,7 @@
 
       <div class="row"> 
         <mat-form-field >
-          <mat-select name="tipoUsuario"    placeholder="Tipo" (selectionChange)="onTipoUsuarioSelectionChange($event)">
+          <mat-select name="idTipoPlan"    placeholder="Tipo" (selectionChange)="onTipoUsuarioSelectionChange($event)">
             <mat-option value=""> Tipo usuario  </mat-option>
             <mat-option *ngFor="let tipoUsuario of tipoUsuarioSeleccionado2" [value]="tipoUsuario">
               {{tipoUsuario}}
@@ -110,6 +110,6 @@
 <div mat-dialog-actions class="action">
 
 
-  <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos()">Agregar</button>
+  <button   mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() " (click)="traerPlanes()" (click)="refrescar()">Agregar</button>
 </div>
 
