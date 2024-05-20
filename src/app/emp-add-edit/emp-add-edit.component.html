@@ -97,10 +97,29 @@
         </mat-select>
       </mat-form-field>
     </div>
-  
 
+
+   
+
+
+      <div class="row"> 
+        <mat-form-field >
+          <mat-select name="numeroMes"    placeholder="Meses a pagar" (selectionChange)="onTipoUsuarioSelectionChange($event)">
+            <mat-option value=""> Meses a pagar  </mat-option>
+            <mat-option *ngFor="let numMes of mesesAPagar" [value]="numMes">
+              {{numMes}}
+            </mat-option>      
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descuento</mat-label>
+          <input matInput formControlName="descuento">
+        </mat-form-field>
+      </div>
     
 
+  
 </div>
 
 

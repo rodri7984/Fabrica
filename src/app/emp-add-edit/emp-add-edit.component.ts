@@ -68,7 +68,7 @@ export class EmpAddEditComponent {
   //  ];
 
   tipoUsuarioSeleccionado2: string[] = ['CLIENTE', 'STAFF'];
-
+  mesesAPagar : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
 
 
 
@@ -78,6 +78,11 @@ export class EmpAddEditComponent {
   onTipoUsuarioSelectionChange(event: any) {
     const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
     this.empForm.get('idTipoPlan')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+  }
+
+  onmesesAPagarSelectionChange(event: any) {
+    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+    
   }
 
   editForm!: FormGroup;
