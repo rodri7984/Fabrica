@@ -17,9 +17,7 @@
   <ng-container matColumnDef="rut" >
     <th mat-header-cell *matHeaderCellDef class="columna"> Rut </th>
     <td mat-cell *matCellDef="let element"> {{ element.run }} - {{ element.dv }} </td>
-    <td>
-      19331
-    </td>
+
   </ng-container>
 
 
@@ -28,59 +26,55 @@
     <th mat-header-cell *matHeaderCellDef> Nombre </th>
     <td mat-cell *matCellDef="let element"> {{element.primerNombre}} </td>
 
-    <td>
-      rodr
-    </td>
+
   </ng-container>
 
   <!-- paterno Column -->
   <ng-container matColumnDef="paternoApellido">
     <th mat-header-cell *matHeaderCellDef> Apellido </th>
     <td mat-cell *matCellDef="let element"> {{element.paternoApellido}} </td>   
-    <td>Molina</td> 
+ 
   </ng-container>
 
       <!-- Inicio Column -->
-      <ng-container matColumnDef="inicio">
-        <th mat-header-cell *matHeaderCellDef> Inicio Plan </th>
-  
-        <td>{{fechaIn.format('DD/MM/YYYY')}}</td>
+      <ng-container matColumnDef="fechaRegistro">
+        <th mat-header-cell *matHeaderCellDef> Fecha registro </th>
+        <td mat-cell *matCellDef="let element"> {{formatDate(element.fechaRegistro)}}
+        <!-- <td>{{fechaIn.format('DD/MM/YYYY')}}</td> -->
           
       </ng-container>
 
-    <!-- vencimiento Column -->
-    <ng-container matColumnDef="vencimiento">
-      <th mat-header-cell *matHeaderCellDef> Vencimiento </th>
 
-      <td>{{fechaFin.format('DD/MM/YYYY')}}</td>
-        
-    </ng-container>
 
-      <!-- dias restantes Column -->
-      <ng-container matColumnDef="restantes">
-        <th mat-header-cell *matHeaderCellDef> Dias restantes </th>
-  
-        <td>{{fechaDiferencia}}</td>
-          
-      </ng-container>  
-    
-  
-
-  <!-- Tipo usuario Column -->
-  <ng-container matColumnDef="rolUsuario">
-    <th mat-header-cell *matHeaderCellDef> Tipo usuario </th>
-    <td mat-cell *matCellDef="let element"> {{element.rolUsuario}} </td>
-  </ng-container>
 
   <!-- Tipo fecha nac Column -->
-  <ng-container matColumnDef="fechaNacimiento">
-    <th mat-header-cell *matHeaderCellDef> fecha nacimiento </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaNacimiento }}
+  <ng-container matColumnDef="fechaRegistro2">
+    <th mat-header-cell *matHeaderCellDef> Dias vencimiento </th>
+    <td mat-cell *matCellDef="let element"> {{calcularDiferencia(element.fechaRegistro)}}
       <button mat-icon-button (click)="editarUsuario(element)">
         <mat-icon>edit</mat-icon>
       </button> </td>
 
   </ng-container>
+
+
+      <!-- vencimiento Column -->
+    <!-- <ng-container matColumnDef="vencimiento">
+      <th mat-header-cell *matHeaderCellDef> Vencimiento </th> -->
+
+      <!-- <td>{{fechaFin.format('DD/MM/YYYY')}}</td> -->
+        
+    <!-- </ng-container> -->
+
+      <!-- dias restantes Column -->
+      <!-- <ng-container matColumnDef="restantes">
+        <th mat-header-cell *matHeaderCellDef> Dias restantes </th> -->
+  
+        <!-- <td>{{fechaDiferencia}}</td> -->
+          
+      <!-- </ng-container>   -->
+    
+  
 
 
 

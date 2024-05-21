@@ -2,7 +2,7 @@
 
 <form [formGroup]="empForm"  *ngIf ="mostrarFormulario" #f="ngForm" >
   <div mat-dialog-title>
-    <h1>Formulario Cliente</h1>
+    <h1 style="text-align: center;">Formulario Cliente</h1>
 </div>
 
 <div mat-dialog-content class="content">
@@ -126,7 +126,7 @@
 
 </form>
 
-<div mat-dialog-actions class="action">
+<div style="text-align: center;" mat-dialog-actions class="action">
 
 
   <button   mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() " (click)="traerPlanes()" (click)="refrescar()">Agregar</button>
