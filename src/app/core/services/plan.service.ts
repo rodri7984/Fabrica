@@ -1,36 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TipoPlan } from '../../modelos/tipo-plan';
 import { Observable } from 'rxjs';
+import { Plan } from '../../modelos/plan';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanService {
-  private apiUrl = 'http://localhost:9000/tipoPlan';
+  private apiUrl = 'http://localhost:8080/plan';
 
   constructor(private httpClient: HttpClient) { }
 
-  agregarPlan(tipoPlan: any) {
-    return this.httpClient.post(`${this.apiUrl}/createTipoPlan`, tipoPlan);
+  agregarPlan(plan: any) {
+    return this.httpClient.post(`${this.apiUrl}/createPlan`, plan);
   }
 
-  public getJsonValue: any;
-
-  public obtenerTipoPlan() {
-    return this.httpClient.get(`${this.apiUrl}/listTipoPlan`).subscribe((data) => {
-      // console.table(data);
-      this.getJsonValue = data;
-      
-      
-    });
-    }
 
     obtenerPlanesDesdeAPI() {
-      return this.httpClient.get<TipoPlan[]>(`${this.apiUrl}/listTipoPlan`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
+      return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
     }
 
-    getPLanes(): Observable<TipoPlan[]> {
-      return this.httpClient.get<TipoPlan[]>(`${this.apiUrl}/listTipoPlan`);
+    getPLanes(): Observable<Plan[]> {
+      return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);
     }
 }

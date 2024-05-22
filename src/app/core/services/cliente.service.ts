@@ -10,7 +10,7 @@ import { run } from 'node:test';
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = 'http://localhost:9000/usuarios';
+  private apiUrl = 'http://localhost:8080/usuarios';
   
   private run = '19331975';
 

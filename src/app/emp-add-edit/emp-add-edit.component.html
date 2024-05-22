@@ -62,10 +62,6 @@
     </div>
 
     <div class="row">
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Fecha nacimiento</mat-label>
-        <input matInput formControlName="fechaNacimiento" placeholder="DD/MM/YY">
-      </mat-form-field> -->
 
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
@@ -75,37 +71,29 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <div class="row"> 
-        <mat-form-field >
-          <mat-select name="idTipoPlan"    placeholder="Tipo Planes" (selectionChange)="onPlanSelectionChange($event)">
-            <mat-option value=""> Tipo Planes  </mat-option>
-            <mat-option *ngFor="let idPlan of idsPlanes" [value]="idPlan">
-              {{idPlan}}
-            </mat-option>      
+      <div class="row">
+        <mat-form-field>
+          <mat-select name="idTipoPlan" placeholder="Tipo Planes" (selectionChange)="onPlanSelectionChange($event)">
+            <mat-option value="">Tipo Planes</mat-option>
+            <mat-option *ngFor="let plan of nombresPlanes" [value]="plan">
+              {{plan}}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
 
-    <div class="row"> 
-      <mat-form-field >
-        <mat-select name="tipoUsuario"    placeholder="Plan" >
-          <mat-option value=""> Plan  </mat-option>
-          <mat-option >
-           
-          </mat-option>      
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-
-   
+    <mat-form-field appearance="outline">
+      <mat-label>id tipo plan</mat-label>
+      <input matInput formControlName="idTipoPlan">
+    </mat-form-field>
+  
 
 
       <div class="row"> 
         <mat-form-field >
           <mat-select name="numeroMes"    placeholder="Meses a pagar" (selectionChange)="onTipoUsuarioSelectionChange($event)">
-            <mat-option value=""> Meses a pagar  </mat-option>
+            <mat-option value="">Meses a pagar </mat-option>
             <mat-option *ngFor="let numMes of mesesAPagar" [value]="numMes">
               {{numMes}}
             </mat-option>      

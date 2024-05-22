@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 import { PlanService } from '../core/services/plan.service';
 import { TipoPlan } from '../modelos/tipo-plan';
 import { Location } from '@angular/common';
+import { Plan } from '../modelos/plan';
 
 
 
@@ -60,37 +61,32 @@ export class EmpAddEditComponent {
 
 
   tipo: Usuario[] = [];
-  //  usuario: Usuario = new Usuario('0', '','th', '', '', '', '', null, '', 'Clienteeee');
 
-  //  tipoUsuarioSeleccionado = [
-  //   {tipo :'Staff'},
-  //   {tipo :'Cliente'},
-  //  ];
 
   tipoUsuarioSeleccionado2: string[] = ['CLIENTE', 'STAFF'];
   mesesAPagar : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   idsPlanes: string[] = [];
- 
+  selectedPlanId: string = '';
   onPlanSelectionChange(event: any) {
-    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-    this.empForm.get('idTipoPlan')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+    this.selectedPlanId = event.value; // Actualiza el valor seleccionado
+    this.empForm.get('idTipoPlan')?.setValue(this.selectedPlanId); // Actualiza el valor en el 
   }
   
 
   onTipoUsuarioSelectionChange(event: any) {
     const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-    this.empForm.get('idTipoPlan')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+    this.empForm.get('descuento')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
   }
 
-  onmesesAPagarSelectionChange(event: any) {
-    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+  // onmesesAPagarSelectionChange(event: any) {
+  //   const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
     
-  }
+  // }
 
   editForm!: FormGroup;
-
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private route : ActivatedRoute, private PlanService: PlanService
-    , public _location : Location 
+  nombresPlanes: any[] = [];
+  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router,
+    public _location : Location, private planService : PlanService
   ) { }
 
 
@@ -113,9 +109,17 @@ export class EmpAddEditComponent {
   });
 
 
-  ngOnInit() {
-    this.PlanService.obtenerPlanesDesdeAPI().subscribe((planes) => {
-      this.idsPlanes = planes.map((plan) => plan.nombrePlan);
+  // ngOnInit() {
+  //   this.PlanService.obtenerPlanesDesdeAPI().subscribe((planes) => {
+  //     this.idsPlanes = planes.map((plan) => plan.nombrePlan);
+  //   });
+  // }
+
+  ngOnInit(): void {
+
+    this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
+      // Filtra solo los nombres de los planes
+      this.nombresPlanes = planes.map(plan => plan.nombrePlan);
     });
   }
 
@@ -165,14 +169,14 @@ export class EmpAddEditComponent {
 
   // metodos y variables para obtener un get de los planes
 
-  tiposDePlan: TipoPlan[] = [];
+  tiposDePlan: Plan[] = [];
 
   dataSource: any;
 
   traerPlanes() {
 
 
-    this.PlanService.getPLanes().subscribe((data) => {
+    this.planService.getPLanes().subscribe((data) => {
       this.tiposDePlan = data;
 
     });

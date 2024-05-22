@@ -5,24 +5,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule, MatFormFieldControl } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { ClienteService } from './core/services/cliente.service';
 import { HttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { Usuario } from './usuario';
-import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
-
-
+import { ColaboradorComponent } from './componentes/form-colaboradores/colaboradores-component.component';
+import { PlanService } from './core/services/plan.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,
+  imports: [
+    RouterOutlet,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -31,96 +33,64 @@ import dayjs from 'dayjs';
     MatFormFieldModule,
     MatTableModule,
     MatInputModule,
-    CommonModule
-
-
-
-
+    CommonModule,
+    MatSidenavModule,
+    MatListModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-
-
-
 export class AppComponent implements OnInit {
-date: any;
-
-  editarUsuario(_t68: any) {
-    throw new Error('Method not implemented.');
-  }
   usuarios: Usuario[] = [];
   title = 'fabricaApp';
-  public desplegarColumna: string[] = ['rut', 
-  'primerNombre',
-   'paternoApellido',
-   
-     
-    'fechaRegistro',
-    'fechaRegistro2'];
-  dataSource = new MatTableDataSource<Usuario>;
+  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaRegistro', 'fechaRegistro2', 'precioPlan'];
+  dataSource = new MatTableDataSource<Usuario>();
+  planes: { [key: string]: number } = {};
 
-  constructor(private _dialog: MatDialog, private router: Router, private http: HttpClient, private clienteService: ClienteService) { }
+  constructor(
+    private _dialog: MatDialog,
+    private router: Router,
+    private http: HttpClient,
+    private clienteService: ClienteService,
+    private planService: PlanService
+  ) { }
 
   ngOnInit(): void {
-
-    
-    // this.mostrarDatos();
     this.clienteService.getUsuarios().subscribe((data) => {
       this.usuarios = data;
-      
+      this.dataSource.data = this.usuarios; // Asegúrate de actualizar la dataSource aquí
     });
-  }
 
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.usuarios);
-    ;
+    this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
+      console.log("Planes obtenidos desde la API:", planes);
+      this.planes = planes.reduce<{ [key: string]: number }>((acc, plan) => {
+        acc[plan.idPlan] = plan.valorPlan;
+        return acc;
+      }, {});
+      console.log("Objeto planes mapeado:", this.planes);
+    });
   }
 
   openAddEditEmpForm() {
     this._dialog.open(EmpAddEditComponent);
   }
 
-
-  mostrarDatos() {
-    this.clienteService.getMetodo();
-    this.dataSource = this.clienteService.getJsonValue;
-
-    // ???
-    this.dataSource.data.forEach((usuario) => {
-      const fechaNacimientoFormatted = dayjs(usuario.fechaNacimiento).format('YYYY-MM-DD'); // Cambia el formato según tus necesidades
-      usuario.fechaNacimiento = new Date(fechaNacimientoFormatted);    });
-
+  openColaborador() {
+    this._dialog.open(ColaboradorComponent);
   }
-  today = dayjs(new Date());
-
-
 
   calcularDiferencia(date: Date): number {
-    this.today = dayjs(new Date());
+    const today = dayjs(new Date());
     const masUnMes = dayjs(date).add(30, 'days');
-    const fechaCalculada = dayjs(masUnMes).diff(this.today, 'days');
-    
-    console.log('fecha normal :', dayjs(date).format('DD/MM/YYYY'));
-    console.log('fecha registro + 30 :', dayjs(date).add(30, 'days').format('DD/MM/YYYY')); 
-    console.log('numero de dias:', fechaCalculada);
-    
-    return fechaCalculada;
+    return masUnMes.diff(today, 'days');
   }
 
-
   getColor(diasTotal: number): string {
-    if (diasTotal >= 15 && diasTotal <= 30) {
-      return 'green';
-    } else if (diasTotal >= 7 && diasTotal <= 14) {
-      return 'yellow';
-    } else if (diasTotal >= 1 && diasTotal <= 6) {
-      return 'orange';
-    } else if (diasTotal <= 0) {
-      return 'red';
-    } else {
-      return 'black'; // Default color if the number doesn't fall into any range
-    }
+    if (diasTotal >= 15 && diasTotal <= 30) return 'green';
+    if (diasTotal >= 7 && diasTotal <= 14) return 'yellow';
+    if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
+    if (diasTotal <= 0) return 'red';
+    return 'black';
   }
 
   applyFilter(event: Event) {
@@ -129,22 +99,15 @@ date: any;
   }
 
   formatDate(date: Date): string {
-    // Implementa tu lógica de formato de fecha aquí
-    // Por ejemplo, usando day.js:
     return dayjs(date).format('DD/MM/YYYY');
-    // return date.toISOString(); // Formato ISO 8601
   }
-  
 
+  getPrecioPlan(idPlan: string): number {
+    console.log("Obteniendo precio para el plan:", idPlan, "Valor:", this.planes[idPlan]);
+    return this.planes[idPlan] || 0;
+  }
 
-fechaIn = dayjs('2024/05/01')
-fechaFin = this.fechaIn.add(30, 'days');
-
-fechaDiferencia = this.fechaFin.diff(this.today, 'days')
-
-
-
-
+  editarUsuario(_t68: any) {
+    throw new Error('Method not implemented.');
+  }
 }
-
-
