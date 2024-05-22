@@ -137,9 +137,6 @@ date: any;
   
 
 
-
- 
-
 fechaIn = dayjs('2024/05/01')
 fechaFin = this.fechaIn.add(30, 'days');
 

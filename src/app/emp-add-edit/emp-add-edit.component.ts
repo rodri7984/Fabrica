@@ -69,11 +69,13 @@ export class EmpAddEditComponent {
 
   tipoUsuarioSeleccionado2: string[] = ['CLIENTE', 'STAFF'];
   mesesAPagar : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
-
-
-
-
-  // selectorElegido : string = '';
+  idsPlanes: string[] = [];
+ 
+  onPlanSelectionChange(event: any) {
+    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+    this.empForm.get('idTipoPlan')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+  }
+  
 
   onTipoUsuarioSelectionChange(event: any) {
     const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
@@ -88,7 +90,7 @@ export class EmpAddEditComponent {
   editForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private route : ActivatedRoute, private PlanService: PlanService
-    , public _location : Location
+    , public _location : Location 
   ) { }
 
 
@@ -111,7 +113,11 @@ export class EmpAddEditComponent {
   });
 
 
-
+  ngOnInit() {
+    this.PlanService.obtenerPlanesDesdeAPI().subscribe((planes) => {
+      this.idsPlanes = planes.map((plan) => plan.nombrePlan);
+    });
+  }
 
   mostrarFormulario: boolean = true; // Inicialmente, el formulario se muestra
 

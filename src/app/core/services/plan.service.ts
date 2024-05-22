@@ -26,6 +26,10 @@ export class PlanService {
     });
     }
 
+    obtenerPlanesDesdeAPI() {
+      return this.httpClient.get<TipoPlan[]>(`${this.apiUrl}/listTipoPlan`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
+    }
+
     getPLanes(): Observable<TipoPlan[]> {
       return this.httpClient.get<TipoPlan[]>(`${this.apiUrl}/listTipoPlan`);
     }

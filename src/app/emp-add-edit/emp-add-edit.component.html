@@ -77,10 +77,10 @@
 
       <div class="row"> 
         <mat-form-field >
-          <mat-select name="idTipoPlan"    placeholder="Tipo" (selectionChange)="onTipoUsuarioSelectionChange($event)">
-            <mat-option value=""> Tipo usuario  </mat-option>
-            <mat-option *ngFor="let tipoUsuario of tipoUsuarioSeleccionado2" [value]="tipoUsuario">
-              {{tipoUsuario}}
+          <mat-select name="idTipoPlan"    placeholder="Tipo Planes" (selectionChange)="onPlanSelectionChange($event)">
+            <mat-option value=""> Tipo Planes  </mat-option>
+            <mat-option *ngFor="let idPlan of idsPlanes" [value]="idPlan">
+              {{idPlan}}
             </mat-option>      
           </mat-select>
         </mat-form-field>
