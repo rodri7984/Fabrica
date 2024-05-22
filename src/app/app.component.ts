@@ -45,6 +45,7 @@ import dayjs from 'dayjs';
 
 export class AppComponent implements OnInit {
 date: any;
+
   editarUsuario(_t68: any) {
     throw new Error('Method not implemented.');
   }
@@ -91,28 +92,35 @@ date: any;
       usuario.fechaNacimiento = new Date(fechaNacimientoFormatted);    });
 
   }
+  today = dayjs(new Date());
 
-  diasTotal = 0 ;
-  calcularDiferencia(date: Date): number{
+
+
+  calcularDiferencia(date: Date): number {
     this.today = dayjs(new Date());
-    this.diasTotal = 0; 
-   
-    this.dataSource.data.forEach((usuario) => {
-      this.diasTotal = 0;
-      const masUnMes = dayjs(date).add(30, 'days');
-      const fechaCalculada = dayjs(masUnMes).diff(this.today, 'days')
-      
-      this.diasTotal += fechaCalculada;
+    const masUnMes = dayjs(date).add(30, 'days');
+    const fechaCalculada = dayjs(masUnMes).diff(this.today, 'days');
+    
+    console.log('fecha normal :', dayjs(date).format('DD/MM/YYYY'));
+    console.log('fecha registro + 30 :', dayjs(date).add(30, 'days').format('DD/MM/YYYY')); 
+    console.log('numero de dias:', fechaCalculada);
+    
+    return fechaCalculada;
+  }
 
-      const dias = this.diasTotal
-      console.log('fecha normal :',dayjs(date).format('DD/MM/YYYY'))
-      console.log('fecha registro + 30 :',dayjs(date).add(30, 'days').format('DD/MM/YYYY')) 
-      console.log('numero de dias:',dayjs(masUnMes).diff(this.today, 'days') );
- 
-    });
-    console.log('fuera del loop :',this.diasTotal)
 
-    return  this.diasTotal;
+  getColor(diasTotal: number): string {
+    if (diasTotal >= 15 && diasTotal <= 30) {
+      return 'green';
+    } else if (diasTotal >= 7 && diasTotal <= 14) {
+      return 'yellow';
+    } else if (diasTotal >= 1 && diasTotal <= 6) {
+      return 'orange';
+    } else if (diasTotal <= 0) {
+      return 'red';
+    } else {
+      return 'black'; // Default color if the number doesn't fall into any range
+    }
   }
 
   applyFilter(event: Event) {
@@ -134,7 +142,7 @@ date: any;
 
 fechaIn = dayjs('2024/05/01')
 fechaFin = this.fechaIn.add(30, 'days');
-today = dayjs(new Date());
+
 fechaDiferencia = this.fechaFin.diff(this.today, 'days')
 
 
