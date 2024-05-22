@@ -42,7 +42,8 @@ export class ColaboradorComponent {
     password: ['', Validators.required],
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
-    rolColaborador: ['', Validators.required],
+    rolColaborador: ["STAFF"],
+    // rolColaborador: ['', Validators.required],
     estado: ["ACTIVO"]
   });
 
