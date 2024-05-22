@@ -17,13 +17,12 @@ import { PlanService } from '../core/services/plan.service';
 
 
 
-
-
 @Component({
   selector: 'app-emp-add-edit',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule,
+  imports: [
+    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
@@ -32,7 +31,6 @@ import { PlanService } from '../core/services/plan.service';
     ReactiveFormsModule,
     CommonModule,
     FormsModule
-
   ],
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
@@ -51,7 +49,8 @@ export class EmpAddEditComponent    {
     email: '',
     fono: null,
     rolUsuario: '',
-    estado: ''
+    estado: '',
+    descuento: null
   }
 
 
@@ -65,8 +64,6 @@ export class EmpAddEditComponent    {
 
     tipoUsuarioSeleccionado2 : string[] = ['CLIENTE', 'STAFF','ADMIN'];
 
-    
-
 
     // selectorElegido : string = '';
 
@@ -77,7 +74,11 @@ export class EmpAddEditComponent    {
   
     editForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router, private PlanService : PlanService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private clienteService: ClienteService, 
+    private router: Router, 
+    private PlanService : PlanService) {}
  
 
 

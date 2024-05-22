@@ -12,6 +12,7 @@ import { ClienteService } from './core/services/cliente.service';
 import { HttpClient } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { Usuario } from './usuario';
+import { ColaboradorComponent } from './core/colaborador/colaborador.component';
 
 
 
@@ -27,10 +28,8 @@ import { Usuario } from './usuario';
             MatDialogModule,
             MatFormFieldModule,
             MatTableModule,
-            MatInputModule
-            
-            
-            
+            MatInputModule,
+            ColaboradorComponent
             
           ],
   templateUrl: './app.component.html',
@@ -69,6 +68,10 @@ throw new Error('Method not implemented.');
 
   openAddEditEmpForm() {
     this._dialog.open(EmpAddEditComponent);
+  }
+
+  openColaborador(){
+    this._dialog.open(ColaboradorComponent);
   }
 
 
