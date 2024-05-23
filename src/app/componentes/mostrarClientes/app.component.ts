@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
+import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { ClienteService } from './core/services/cliente.service';
+import { ClienteService } from '../../core/services/cliente.service';
 import { HttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
-import { Usuario } from './usuario';
+import { Usuario } from '../../usuario';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
-import { ColaboradorComponent } from './componentes/form-colaboradores/colaboradores-component.component';
-import { PlanService } from './core/services/plan.service';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { ColaboradorComponent } from '../form-colaboradores/colaboradores-component.component';
+import { PlanService } from '../../core/services/plan.service';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 
@@ -43,6 +43,12 @@ import { MatListModule } from '@angular/material/list';
 export class AppComponent implements OnInit {
   usuarios: Usuario[] = [];
   title = 'fabricaApp';
+
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  closeSidenav() {
+    this.sidenav.close();
+  }
   desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaRegistro', 'fechaRegistro2', 'precioPlan'];
   dataSource = new MatTableDataSource<Usuario>();
   planes: { [key: string]: number } = {};

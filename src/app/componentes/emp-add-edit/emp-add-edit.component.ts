@@ -7,16 +7,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Validators, FormsModule } from '@angular/forms';
-import { ClienteService } from '../core/services/cliente.service';
-import { Usuario } from '../usuario';
+import { ClienteService } from '../../core/services/cliente.service';
+import { Usuario } from '../../usuario';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AppComponent } from '../app.component';
+import { AppComponent } from '../mostrarClientes/app.component';
 import { formatDate } from '@angular/common';
-import { PlanService } from '../core/services/plan.service';
-import { TipoPlan } from '../modelos/tipo-plan';
+import { PlanService } from '../../core/services/plan.service';
+import { TipoPlan } from '../../modelos/tipo-plan';
 import { Location } from '@angular/common';
-import { Plan } from '../modelos/plan';
+import { Plan } from '../../modelos/plan';
 
 
 

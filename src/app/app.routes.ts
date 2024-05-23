@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { EmpAddEditComponent } from './emp-add-edit/emp-add-edit.component';
-import { AppComponent } from './app.component';
+import { EmpAddEditComponent } from './componentes/emp-add-edit/emp-add-edit.component';
+import { AppComponent } from './componentes/mostrarClientes/app.component';
 
 
 export const routes: Routes = [

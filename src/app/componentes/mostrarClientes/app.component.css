@@ -18,3 +18,21 @@
 .horizontal-gradient {
   
 }
+
+.sidenav-container {
+  height: 100%;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-elevation-z8 {
+  margin: 20px;
+}
