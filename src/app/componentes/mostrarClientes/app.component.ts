@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
   }
 
   getPrecioPlan(idPlan: string): number {
-    console.log("Obteniendo precio para el plan:", idPlan, "Valor:", this.planes[idPlan]);
+    // console.log("Obteniendo precio para el plan:", idPlan, "Valor:", this.planes[idPlan]);
     return this.planes[idPlan] || 0;
   }
 
