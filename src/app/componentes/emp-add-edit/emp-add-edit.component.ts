@@ -55,8 +55,7 @@ export class EmpAddEditComponent {
     email: '',
     fono: null,
     estado: '',
-    idTipoPlan: '',
-    descuento: 0
+ 
   }
 
 
@@ -67,16 +66,18 @@ export class EmpAddEditComponent {
   mesesAPagar : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   idsPlanes: string[] = [];
   selectedPlanId: string = '';
-  onPlanSelectionChange(event: any) {
-    this.selectedPlanId = event.value; // Actualiza el valor seleccionado
-    this.empForm.get('idTipoPlan')?.setValue(this.selectedPlanId); // Actualiza el valor en el 
-  }
+
+  
+  // onPlanSelectionChange(event: any) {
+  //   this.selectedPlanId = event.value; // Actualiza el valor seleccionado
+  //   this.empForm.get('idTipoPlan')?.setValue(this.selectedPlanId); // Actualiza el valor en el 
+  // }
   
 
-  onTipoUsuarioSelectionChange(event: any) {
-    const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-    this.empForm.get('descuento')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
-  }
+  // onTipoUsuarioSelectionChange(event: any) {
+  //   const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
+  //   this.empForm.get('descuento')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
+  // }
 
   // onmesesAPagarSelectionChange(event: any) {
   //   const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
@@ -102,9 +103,8 @@ export class EmpAddEditComponent {
     fono: [null, Validators.required],
     fechaNacimiento: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), [Validators.required]],
     fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
-    estado: ["ACTIVO"],
-    idTipoPlan : ['', Validators.required],
-    descuento : [0, Validators.required]
+    estado: ["ACTIVO"]
+
 
   });
 

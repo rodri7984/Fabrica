@@ -13,10 +13,9 @@ export class Usuario {
     fechaNacimiento: Date;
     fechaRegistro: Date;
     estado: string;
-    idTipoPlan : string;
-    descuento : number;
+ 
 
-    
+
   
     constructor(
       run: string ,
@@ -30,8 +29,7 @@ export class Usuario {
       fechaNacimientoUser: Date,
       estado: string,
       fechaRegistro: Date,
-      idTipoPlan : string,
-      descuento : number
+
     ) {
       this.run = run;
       this.digitoVUser = digitoVUser;
@@ -44,7 +42,6 @@ export class Usuario {
       this.fechaNacimiento = fechaNacimientoUser;
       this.estado = estado;
       this.fechaRegistro = fechaRegistro;
-      this.idTipoPlan = idTipoPlan;
-      this.descuento = descuento;
+
     }
   }
