@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { Usuario } from '../../usuario';
 import { CommonModule } from '@angular/common';
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { ColaboradorComponent } from '../form-colaboradores/colaboradores-component.component';
 import { PlanService } from '../../core/services/plan.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -35,7 +35,8 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     CommonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
