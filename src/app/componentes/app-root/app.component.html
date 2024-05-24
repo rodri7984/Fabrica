@@ -5,10 +5,13 @@
         <button mat-button (click)="showClienteDashboard()"> Cliente</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button (click)="showStaffDashboard()" (click)="closeSidenav()"> Staff</button>
+        <button mat-button (click)="showStaffDashboard()" > Staff</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button (click)="showplanesUsuarioDashboard()" (click)="closeSidenav()"> Clientes con planes</button>
+        <button mat-button (click)="showplanesUsuarioDashboard()" > Clientes con planes</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="showPLanDashboard()"> PLanes</button>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
@@ -26,5 +29,6 @@
     <app-tabla-cliente *ngIf="activeComponent === 'cliente'"></app-tabla-cliente>
     <app-mostrar-staff *ngIf="activeComponent === 'staff'"></app-mostrar-staff>
     <app-tabla-planes-usuario *ngIf="activeComponent === 'planesUsuario'"></app-tabla-planes-usuario>
+    <app-tabla-plan *ngIf="activeComponent === 'plan'"></app-tabla-plan>
     <!-- <app-emp-add-edit *ngIf="activeComponent === 'EmpAddEditComponent'"></app-emp-add-edit> -->
 

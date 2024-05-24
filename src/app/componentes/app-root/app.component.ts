@@ -19,6 +19,7 @@ import { TablaPlanesUsuarioComponent } from "../tabla-planes-usuario/tabla-plane
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
 
 
 
@@ -33,17 +34,15 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
         MatIconModule,
         MatButtonModule,
         MatDialogModule,
-        
         MatFormFieldModule,
         ReactiveFormsModule,
-
         MatInputModule,
         CommonModule,
         MatSidenavModule,
         MatListModule,
         RouterModule, TablaClienteComponent, MostrarStaffComponent,
-         TablaPlanesUsuarioComponent,
-         EmpAddEditComponent]
+        TablaPlanesUsuarioComponent,
+        EmpAddEditComponent, TablaPlanComponent]
 })
 export class AppComponent {
   toggleSidenav = new EventEmitter<void>();
@@ -51,7 +50,7 @@ sidenavv!: MatSidenav;
  
   title = 'fabrica';
   
-  activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | null = null;
+  activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' | null = null;
  
 
 
@@ -89,6 +88,10 @@ showpEmpAddEditComponent() {
 
 openColaborador() {
   this._dialog.open(ColaboradorComponent);
+}
+
+showPLanDashboard(){
+  this.activeComponent = 'plan';
 }
 
 }
