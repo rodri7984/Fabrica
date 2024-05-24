@@ -11,7 +11,7 @@ import { ClienteService } from '../../core/services/cliente.service';
 import { Usuario } from '../../usuario';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AppComponent } from '../mostrarClientes/app.component';
+import { AppComponent } from '../app-root/app.component';
 import { formatDate } from '@angular/common';
 import { PlanService } from '../../core/services/plan.service';
 import { TipoPlan } from '../../modelos/tipo-plan';

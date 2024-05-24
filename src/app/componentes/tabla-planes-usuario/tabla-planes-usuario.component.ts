@@ -18,13 +18,15 @@ import { ColaboradorComponent } from '../form-colaboradores/colaboradores-compon
 import { PlanService } from '../../core/services/plan.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { RouterModule } from '@angular/router';
+import { AppComponent } from '../app-root/app.component';
+import { PlanUsuario } from '../../modelos/plan-usuario';
+import { PlanUsuarioService } from '../../core/service/plan-usuario.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-tabla-planes-usuario',
   standalone: true,
-  imports: [
-    RouterOutlet,
+  imports: [RouterOutlet,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -35,45 +37,36 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     CommonModule,
     MatSidenavModule,
-    MatListModule
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    MatListModule,
+    RouterModule, AppComponent],
+  templateUrl: './tabla-planes-usuario.component.html',
+  styleUrl: './tabla-planes-usuario.component.css'
 })
-export class AppComponent implements OnInit {
-  usuarios: Usuario[] = [];
-  title = 'fabricaApp';
+export class TablaPlanesUsuarioComponent {
+
+  planUsers: PlanUsuario[] = [];
+  title = 'tabla planesUsuario';
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaRegistro', 'fechaRegistro2', 'precioPlan'];
-  dataSource = new MatTableDataSource<Usuario>();
-  planes: { [key: string]: number } = {};
-
+  desplegarColumna: string[] = [ 'nombreUsuario', 'nombrePlan', 'fechaRegistroPlan', 'fechaInicio','fechaFin','monto'];
+  dataSource = new MatTableDataSource<PlanUsuario>();
+  
   constructor(
     private _dialog: MatDialog,
     private router: Router,
     private http: HttpClient,
     private clienteService: ClienteService,
-    private planService: PlanService
+    private planUsuarioService: PlanUsuarioService
   ) { }
 
   ngOnInit(): void {
-    this.clienteService.getUsuarios().subscribe((data) => {
-      this.usuarios = data;
-      this.dataSource.data = this.usuarios; // Asegúrate de actualizar la dataSource aquí
-    });
-
-    this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
-      console.log("Planes obtenidos desde la API:", planes);
-      this.planes = planes.reduce<{ [key: string]: number }>((acc, plan) => {
-        acc[plan.idPlan] = plan.valorPlan;
-        return acc;
-      }, {});
-      console.log("Objeto planes mapeado:", this.planes);
+    this.planUsuarioService.obtenerPlanesDesdeAPI().subscribe((data) => {
+      this.planUsers = data;
+      this.dataSource.data = this.planUsers; // Asegúrate de actualizar la dataSource aquí
     });
   }
 
@@ -85,35 +78,8 @@ export class AppComponent implements OnInit {
     this._dialog.open(ColaboradorComponent);
   }
 
-  calcularDiferencia(date: Date): number {
-    const today = dayjs(new Date());
-    const masUnMes = dayjs(date).add(30, 'days');
-    return masUnMes.diff(today, 'days');
-  }
-
-  getColor(diasTotal: number): string {
-    if (diasTotal >= 15 && diasTotal <= 30) return 'green';
-    if (diasTotal >= 7 && diasTotal <= 14) return 'yellow';
-    if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
-    if (diasTotal <= 0) return 'red';
-    return 'black';
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  formatDate(date: Date): string {
-    return dayjs(date).format('DD/MM/YYYY');
-  }
-
-  getPrecioPlan(idPlan: string): number {
-    // console.log("Obteniendo precio para el plan:", idPlan, "Valor:", this.planes[idPlan]);
-    return this.planes[idPlan] || 0;
-  }
-
-  editarUsuario(_t68: any) {
-    throw new Error('Method not implemented.');
   }
 }

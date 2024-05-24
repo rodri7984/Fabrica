@@ -1,0 +1,28 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-button (click)="showClienteDashboard()"> Cliente</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="showStaffDashboard()" (click)="closeSidenav()"> Staff</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="showplanesUsuarioDashboard()" (click)="closeSidenav()"> Clientes con planes</button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Gestor clientes La Fabrica</span>
+      <span class="example-spacer"></span>
+      <button mat-raised-button (click)="openAddEditEmpForm()">Agregar cliente</button>
+      <button mat-raised-button (click)="openColaborador()">Agregar empleado</button>
+    </mat-toolbar>
+
+    <app-tabla-cliente *ngIf="activeComponent === 'cliente'"></app-tabla-cliente>
+    <app-mostrar-staff *ngIf="activeComponent === 'staff'"></app-mostrar-staff>
+    <app-tabla-planes-usuario *ngIf="activeComponent === 'planesUsuario'"></app-tabla-planes-usuario>
