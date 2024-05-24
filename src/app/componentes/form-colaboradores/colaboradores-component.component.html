@@ -1,7 +1,7 @@
 
 <form [formGroup]="colForm" #f="ngForm">
     <div mat-dialog-title>
-        <h1>Formulario Empleado</h1>
+        <h1 style="text-align: center;">Formulario Empleado</h1>
     </div>
 
 
@@ -57,7 +57,7 @@
 
 </form>
 
-<div mat-dialog-actions class="action">
-    <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarColaborador()">Agregar
+<div mat-dialog-actions class="action" style="text-align: center;">
+    <button  mat-raised-button class="boton" color="primary" type="submit" (click)="guardarColaborador()" (click)="refrescar()">Agregar
         Empleado</button>
 </div>

@@ -51,7 +51,7 @@ export class TablaClienteComponent implements OnInit {
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaRegistro', 'fechaRegistro2'];
+  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido','fechaNacimiento', 'fechaRegistro','fono'];
   dataSource = new MatTableDataSource<Usuario>();
   planes: { [key: string]: number } = {};
 

@@ -79,4 +79,12 @@ export class ColaboradorComponent {
   }
   */
 
+
+  
+  refrescar(): void {
+
+    window.location.reload();
+    }
+  
+
 }

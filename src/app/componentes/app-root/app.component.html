@@ -17,12 +17,14 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Gestor clientes La Fabrica</span>
+      <span>La Fabrica</span>
       <span class="example-spacer"></span>
-      <button mat-raised-button (click)="openAddEditEmpForm()">Agregar cliente</button>
+      <button mat-raised-button (click)="showpEmpAddEditComponent() ">Agregar cliente</button>
       <button mat-raised-button (click)="openColaborador()">Agregar empleado</button>
     </mat-toolbar>
 
     <app-tabla-cliente *ngIf="activeComponent === 'cliente'"></app-tabla-cliente>
     <app-mostrar-staff *ngIf="activeComponent === 'staff'"></app-mostrar-staff>
     <app-tabla-planes-usuario *ngIf="activeComponent === 'planesUsuario'"></app-tabla-planes-usuario>
+    <!-- <app-emp-add-edit *ngIf="activeComponent === 'EmpAddEditComponent'"></app-emp-add-edit> -->
+

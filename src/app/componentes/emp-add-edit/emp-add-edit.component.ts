@@ -17,6 +17,7 @@ import { PlanService } from '../../core/services/plan.service';
 import { TipoPlan } from '../../modelos/tipo-plan';
 import { Location } from '@angular/common';
 import { Plan } from '../../modelos/plan';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -27,6 +28,7 @@ import { Plan } from '../../modelos/plan';
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [MatFormFieldModule,
+    MatDialogModule,
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
@@ -35,7 +37,7 @@ import { Plan } from '../../modelos/plan';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
 
   ],
   templateUrl: './emp-add-edit.component.html',
@@ -94,18 +96,16 @@ export class EmpAddEditComponent {
 
   empForm = this.fb.group({
     primerNombre: ['', Validators.required],
-    segundoNombre: ['', Validators.required],
+    segundoNombre: [''], // Sin validadores para el segundo nombre
     paternoApellido: ['', Validators.required],
     maternoApellido: ['', Validators.required],
-    run: ['', Validators.required],
-    dv: ['', Validators.required],
-    email: ['', Validators.required,],
-    fono: [null, Validators.required],
+    run: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+    dv: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern(/^[0-9kK]$/)]],
+    email: ['', [Validators.required, Validators.email]],
+    fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     fechaNacimiento: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), [Validators.required]],
     fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
     estado: ["ACTIVO"]
-
-
   });
 
 
@@ -149,15 +149,6 @@ export class EmpAddEditComponent {
     }
   }
 
-  cancelar(): void {
-    // Realiza cualquier acción necesaria antes de redirigir
-    // Por ejemplo, cerrar el formulario o limpiar datos
-
-    // Redirige a la página principal
-    this.router.navigate(['/home']); // Cambia '/' por la ruta correcta de tu página principal
-    // Oculta el formulario
-    this.mostrarFormulario = false;
-  }
 
   refrescar(): void {
 
