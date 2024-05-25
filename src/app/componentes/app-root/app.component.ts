@@ -15,12 +15,13 @@ import { RouterModule } from '@angular/router';
 import { ColaboradorComponent } from '../form-colaboradores/colaboradores-component.component';
 import { TablaClienteComponent } from '../tabla-cliente/tabla-cliente.component';
 import { MostrarStaffComponent } from '../mostrarStaff/mostrar-staff/mostrar-staff.component';
-import { TablaPlanesUsuarioComponent } from "../tabla-planes-usuario/tabla-planes-usuario.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
 import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
+import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
+import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-planes-usuario.component';
 
 
 
@@ -98,6 +99,11 @@ openColaborador() {
 
 showPLanDashboard(){
   this.activeComponent = 'plan';
+}
+
+openRelacionClientePlanComponent() {
+  const dialogRef = this._dialog.open(RelacionClientePlanComponent);
+
 }
 
 }

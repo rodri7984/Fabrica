@@ -21,7 +21,8 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from '../app-root/app.component';
 import { PlanUsuario } from '../../modelos/plan-usuario';
-import { PlanUsuarioService } from '../../core/service/plan-usuario.service';
+import { PlanUsuarioService } from '../../core/services/plan-usuario.service';
+
 
 @Component({
   selector: 'app-tabla-planes-usuario',
@@ -64,7 +65,7 @@ export class TablaPlanesUsuarioComponent {
   ) { }
 
   ngOnInit(): void {
-    this.planUsuarioService.obtenerPlanesDesdeAPI().subscribe((data) => {
+    this.planUsuarioService.obtenerPlanUsuario().subscribe((data) => {
       this.planUsers = data;
       this.dataSource.data = this.planUsers; // Asegúrate de actualizar la dataSource aquí
     });
