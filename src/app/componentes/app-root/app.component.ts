@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
+import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
 
 
 
@@ -42,7 +43,7 @@ import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
         MatListModule,
         RouterModule, TablaClienteComponent, MostrarStaffComponent,
         TablaPlanesUsuarioComponent,
-        EmpAddEditComponent, TablaPlanComponent]
+        EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent]
 })
 export class AppComponent {
   toggleSidenav = new EventEmitter<void>();
@@ -50,7 +51,8 @@ sidenavv!: MatSidenav;
  
   title = 'fabrica';
   
-  activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' | null = null;
+  activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' |
+  'historialPago' | null = null;
  
 
 
@@ -69,6 +71,10 @@ showStaffDashboard() {
 
 showplanesUsuarioDashboard() {
   this.activeComponent = 'planesUsuario';
+}
+
+showHPagoDashboard() {
+  this.activeComponent = 'historialPago';
 }
 
 showpEmpAddEditComponent() {
