@@ -18,12 +18,12 @@
       <span class="example-spacer"></span>
       <button mat-raised-button (click)="openAddEditEmpForm()">Agregar cliente</button>
       <button mat-raised-button (click)="openColaborador()">Agregar empleado</button>
+      <button mat-raised-button (click)="openPlan()">Agregar Plan</button>
     </mat-toolbar>
     <mat-form-field>
       <mat-label>Buscar...</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Nombre / Rut " #input>
     </mat-form-field>
-
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Rut Column -->
       <ng-container matColumnDef="rut">
@@ -40,7 +40,7 @@
       <!-- Apellido Paterno Column -->
       <ng-container matColumnDef="paternoApellido">
         <th mat-header-cell *matHeaderCellDef>Apellido</th>
-        <td mat-cell *matCellDef="let element">{{ element.paternoApellido }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.paternoApellido }} {{ element.maternoApellido }}</td>
       </ng-container>
 
       <!-- Fecha Registro Column -->

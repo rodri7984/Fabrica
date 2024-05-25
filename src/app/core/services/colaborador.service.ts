@@ -6,7 +6,7 @@ import { Colaborador } from '../../modelos/colaborador';
   providedIn: 'root'
 })
 export class ColaboradorService {
-  private apiUrl = 'http://localhost:9000/colaborador';
+  private apiUrl = 'http://localhost:8080/colaboradores';
 
   constructor(private httpClient: HttpClient) { }
 

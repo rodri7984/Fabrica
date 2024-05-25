@@ -18,6 +18,7 @@ import { ColaboradorComponent } from '../form-colaboradores/colaboradores-compon
 import { PlanService } from '../../core/services/plan.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { PlanComponent } from '../plan/plan.component';
 
 
 @Component({
@@ -36,7 +37,7 @@ import { MatListModule } from '@angular/material/list';
     CommonModule,
     MatSidenavModule,
     MatListModule,
-    
+
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -86,6 +87,10 @@ export class AppComponent implements OnInit {
     this._dialog.open(ColaboradorComponent);
   }
 
+  openPlan() {
+    this._dialog.open(PlanComponent);
+  }
+
   calcularDiferencia(date: Date): number {
     const today = dayjs(new Date());
     const masUnMes = dayjs(date).add(30, 'days');
@@ -117,4 +122,5 @@ export class AppComponent implements OnInit {
   editarUsuario(_t68: any) {
     throw new Error('Method not implemented.');
   }
+
 }

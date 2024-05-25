@@ -7,7 +7,7 @@ import { Plan } from '../../modelos/plan';
   providedIn: 'root'
 })
 export class PlanService {
-  private apiUrl = 'http://localhost:8080/plan';
+  private apiUrl = 'http://localhost:8080/planes';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -16,11 +16,15 @@ export class PlanService {
   }
 
 
-    obtenerPlanesDesdeAPI() {
-      return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
-    }
+  obtenerPlanesDesdeAPI() {
+    return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
+  }
 
-    getPLanes(): Observable<Plan[]> {
-      return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);
-    }
+  getPLanes(): Observable<Plan[]> {
+    return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);
+  }
+
+  obtenerIdPlan(){
+    return this.httpClient.get<Plan[]>(`${this.apiUrl}/getPlan/{id}`);
+  }
 }

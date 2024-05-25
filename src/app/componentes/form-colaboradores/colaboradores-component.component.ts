@@ -36,7 +36,7 @@ export class ColaboradorComponent {
     private fb: FormBuilder,
     private colaboradorService: ColaboradorService
 
-  ){}
+  ) { }
 
   colForm = this.fb.group({
     username: ['', Validators.required],
@@ -48,25 +48,25 @@ export class ColaboradorComponent {
     estado: ["ACTIVO"]
   });
 
-  guardarColaborador(){
-    if(this.colForm.valid) {
+  guardarColaborador() {
+    if (this.colForm.valid) {
       this.colaboradorService.agregarColaborador(this.colForm.value).subscribe(
         (response: any) => {
           console.log('Colaborador guardado exitosamente: ', response);
         },
-      (error: any) => {
-        console.error('Error al guardar colaborador: ', error);
-      });
+        (error: any) => {
+          console.error('Error al guardar colaborador: ', error);
+        });
     } else {
       console.warn('El formulario no es valido. Verifica los campos')
     }
   }
 
-  tipoColaborador: string[]= ['Administrador', 'Staff'];
+  tipoColaborador: string[] = ['Administrador', 'Staff'];
 
   selecTipoColaborador(event: any) {
     const selectedValue = event.value;
-    this.colForm.get('rolColaborador')?.setValue(selectedValue); 
+    this.colForm.get('rolColaborador')?.setValue(selectedValue);
   }
 
   /*
