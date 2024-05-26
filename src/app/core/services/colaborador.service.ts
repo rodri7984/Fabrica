@@ -17,4 +17,8 @@ export class ColaboradorService {
   obtenercolaboradorDesdeAPI() {
     return this.httpClient.get<Colaborador[]>(`${this.apiUrl}/listColaborador`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
   }
+
+  editarEstado(estado: string){
+    return this.httpClient.put(`${this.apiUrl}/createColaborador/{username}`,estado )
+  }
 }
