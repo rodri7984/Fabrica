@@ -82,11 +82,22 @@ export class RelacionClientePlanComponent implements OnInit {
     monto: [0, Validators.required],
     metodoPago: ['', Validators.required],
     descuento: [0, Validators.required],
-    mensualidades: [0, Validators.required]
+    mensualidades: [0, Validators.required],
+    total: [{ value: 0, disabled: true }] 
   });
   this.relacionForm.get('fechaInicio')?.valueChanges.subscribe(() => this.calculateFechaFin());
-  this.relacionForm.get('mensualidades')?.valueChanges.subscribe(() => this.calculateFechaFin());
-}
+    this.relacionForm.get('mensualidades')?.valueChanges.subscribe(() => {
+      this.calculateFechaFin();
+      this.calculateTotal();
+    });
+    this.relacionForm.get('monto')?.valueChanges.subscribe(() => this.calculateTotal());
+    this.setFechaRegistroPlan();
+  }
+
+  setFechaRegistroPlan() {
+    const fechaActual = dayjs().format('DD/MM/YYYY');
+    this.relacionForm.patchValue({ fechaRegistroPlan: fechaActual });
+  }
 
 calculateFechaFin() {
   const fechaInicio = this.relacionForm.get('fechaInicio')?.value;
@@ -94,10 +105,18 @@ calculateFechaFin() {
 
   if (fechaInicio && mensualidades) {
     const fechaInicioDayjs = dayjs(fechaInicio);
-    const fechaFin = fechaInicioDayjs.add(mensualidades, 'month').toDate();
+    const fechaFin = fechaInicioDayjs.add(mensualidades, 'month').format('DD/MM/YYYY');
     this.relacionForm.patchValue({ fechaFin });
   }
 }
+
+calculateTotal() {
+  const monto = this.relacionForm.get('monto')?.value || 0;
+  const mensualidades = this.relacionForm.get('mensualidades')?.value || 0;
+  const total = monto * mensualidades;
+  this.relacionForm.patchValue({ total });
+}
+
 
 ngOnInit() {
   this.clienteService.getUsuarios().subscribe((data) => {

@@ -31,7 +31,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Fecha de Registro del Plan</mat-label>
-    <input matInput type="datetime-local" formControlName="fechaRegistroPlan" required>
+    <input matInput formControlName="fechaRegistroPlan" readonly>
   </mat-form-field>
 
 
@@ -56,8 +56,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Valor Total</mat-label>
+    <mat-label>Valor Por mes</mat-label>
     <input matInput type="number" formControlName="monto" required readonly>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Valor total</mat-label>
+    <input matInput type="number" formControlName="total" required readonly>
   </mat-form-field>
  
 
