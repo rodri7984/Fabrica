@@ -20,6 +20,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from '../app-root/app.component';
+import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 
 
 
@@ -51,7 +52,7 @@ export class TablaClienteComponent implements OnInit {
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido','fechaNacimiento', 'fechaRegistro','fono'];
+  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido','fechaNacimiento', 'fechaRegistro','fono','acciones'];
   dataSource = new MatTableDataSource<Usuario>();
   planes: { [key: string]: number } = {};
 
@@ -118,4 +119,11 @@ export class TablaClienteComponent implements OnInit {
   editarUsuario(_t68: any) {
     throw new Error('Method not implemented.');
   }
+
+  relacionarPlan(cliente: Usuario) {
+    const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
+      width: '500px',
+      data: { cliente }
+    });
+}
 }

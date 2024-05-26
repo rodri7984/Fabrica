@@ -71,6 +71,12 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>Fecha registro</mat-label>
+        <input matInput formControlName="fechaRegistro" required readonly>
+      </mat-form-field>
+      
+
       <!-- <div class="row">
         <mat-form-field>
           <mat-select name="idTipoPlan" placeholder="Tipo Planes" (selectionChange)="onPlanSelectionChange($event)">

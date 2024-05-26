@@ -2,21 +2,25 @@
 <h1>Asociar Cliente con Plan</h1>
 <form [formGroup]="relacionForm" (ngSubmit)="postRelacion()">
   <mat-form-field>
-    <mat-label>RUN</mat-label>
-    <mat-select formControlName="run" required>
-      <mat-option *ngFor="let cliente of clientes" [value]="cliente.run">
-        {{ cliente.run }}
+    <mat-label>RUT</mat-label>
+    <input matInput formControlName="run" readonly>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ID del Plan</mat-label>
+    <input matInput formControlName="idPlan" required readonly>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Nombre del Plan</mat-label>
+    <mat-select formControlName="nombrePlan" (selectionChange)="onPlanChange($event.value)" required>
+      <mat-option *ngFor="let nom of planes" [value]="nom.nombrePlan">
+        {{ nom.nombrePlan }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>ID del Plan</mat-label>
-    <input matInput formControlName="idPlan" required>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Nombre del Plan</mat-label>
-    <input matInput formControlName="nombrePlan" required>
-  </mat-form-field>
+
+
   <mat-form-field>
     <mat-label>Nombre del Usuario</mat-label>
     <input matInput formControlName="nombreUsuario" required>
@@ -29,26 +33,47 @@
     <mat-label>Fecha de Registro del Plan</mat-label>
     <input matInput type="datetime-local" formControlName="fechaRegistroPlan" required>
   </mat-form-field>
+
+
   <mat-form-field>
     <mat-label>Fecha de Inicio</mat-label>
-    <input matInput type="datetime-local" formControlName="fechaInicio" required>
+    <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+
+
   <mat-form-field>
-    <mat-label>Fecha de Fin</mat-label>
-    <input matInput type="datetime-local" formControlName="fechaFin" required>
+    <mat-label>Fecha Fin</mat-label>
+    <input matInput formControlName="fechaFin" readonly>
   </mat-form-field>
+
   <mat-form-field>
-    <mat-label>Monto</mat-label>
-    <input matInput type="number" formControlName="monto" required>
+    <mat-label>Meses a pagar</mat-label>
+    <input matInput type="number" formControlName="mensualidades" required>
   </mat-form-field>
+
   <mat-form-field>
-    <mat-label>Método de Pago</mat-label>
-    <input matInput formControlName="metodoPago" required>
+    <mat-label>Valor Total</mat-label>
+    <input matInput type="number" formControlName="monto" required readonly>
   </mat-form-field>
+ 
+
+
+
+
   <mat-form-field>
     <mat-label>Descuento</mat-label>
     <input matInput type="number" formControlName="descuento" required>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Método de Pago</mat-label>
+    <input matInput formControlName="metodoPago" required>
+  </mat-form-field>
+ 
   <div>
     <button mat-button type="submit" [disabled]="!relacionForm.valid">Asociar</button>
   </div>

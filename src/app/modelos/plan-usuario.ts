@@ -10,6 +10,7 @@ export class PlanUsuario {
     monto: number;
     metodoPago: string;
     descuento: number;
+    mensualidades : number;
 
 
     constructor(
@@ -24,6 +25,7 @@ export class PlanUsuario {
         monto: number,
         metodoPago: string,
         descuento: number,
+        mensualidades: number,
   
       ) {
         this.run = run;
@@ -37,6 +39,7 @@ export class PlanUsuario {
         this.monto = monto;
         this.metodoPago = metodoPago;
         this.descuento = descuento;
+        this.mensualidades = mensualidades;
   
       }
     }

@@ -4,6 +4,7 @@ export class Plan
     idPlan: string;
     nombrePlan: string;
     valorPlan: number;
+    mensualidades : number;
     descripcionPlan: string;
 
 
@@ -13,6 +14,7 @@ export class Plan
         idPlan: string ,
         nombrePlan: string,
         valorPlan: number,
+        mensualidades : number,
         descripcionPlan: string,
 
 
@@ -21,6 +23,7 @@ export class Plan
         this.idPlan = idPlan;
         this.nombrePlan = nombrePlan;
         this.valorPlan = valorPlan;
+        this.mensualidades = mensualidades;
         this.descripcionPlan = descripcionPlan;
         
     }

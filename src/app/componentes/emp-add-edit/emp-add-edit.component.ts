@@ -18,6 +18,7 @@ import { TipoPlan } from '../../modelos/tipo-plan';
 import { Location } from '@angular/common';
 import { Plan } from '../../modelos/plan';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import dayjs from 'dayjs';
 
 
 
@@ -57,6 +58,7 @@ export class EmpAddEditComponent {
     email: '',
     fono: null,
     estado: '',
+    tienePlan: false,
  
   }
 
@@ -103,10 +105,15 @@ export class EmpAddEditComponent {
     dv: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern(/^[0-9kK]$/)]],
     email: ['', [Validators.required, Validators.email]],
     fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-    fechaNacimiento: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), [Validators.required]],
-    fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
+    fechaNacimiento: ['', [Validators.required]],
+    fechaRegistro:  [  this.obtenerFechaActual(), Validators.required],
+    // fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
     estado: ["ACTIVO"]
   });
+
+  obtenerFechaActual(): string {
+    return formatDate(new Date(), 'dd-MM-yyyy', 'en'); // Devuelve la fecha actual en el formato deseado
+  }
 
 
   // ngOnInit() {

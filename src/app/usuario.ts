@@ -13,6 +13,7 @@ export class Usuario {
     fechaNacimiento: Date;
     fechaRegistro: Date;
     estado: string;
+    tienePlan : boolean;
  
 
 
@@ -29,6 +30,7 @@ export class Usuario {
       fechaNacimientoUser: Date,
       estado: string,
       fechaRegistro: Date,
+      tienePlan : boolean,
 
     ) {
       this.run = run;
@@ -42,6 +44,7 @@ export class Usuario {
       this.fechaNacimiento = fechaNacimientoUser;
       this.estado = estado;
       this.fechaRegistro = fechaRegistro;
+      this.tienePlan = tienePlan;
 
     }
   }
