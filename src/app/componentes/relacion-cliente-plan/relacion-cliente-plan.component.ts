@@ -14,13 +14,32 @@ import { MatSelectModule } from '@angular/material/select';
 import { PlanService } from '../../core/services/plan.service';
 import { Plan } from '../../modelos/plan';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import dayjs from 'dayjs';
+import { MatMomentDateModule, MomentDateAdapter  } from '@angular/material-moment-adapter';
+import * as moment from 'moment';
+import 'moment/locale/es';
+
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-relacion-cliente-plan',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'es' },
+  ],
   imports: [CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -29,7 +48,7 @@ import dayjs from 'dayjs';
     RouterModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatMomentDateModule,
   ],
   templateUrl: './relacion-cliente-plan.component.html',
   styleUrl: './relacion-cliente-plan.component.css'
@@ -47,8 +66,10 @@ export class RelacionClientePlanComponent implements OnInit {
   private http: HttpClient,
   private planUsuarioService : PlanUsuarioService,
   private clienteService : ClienteService,
-  private planService : PlanService
+  private planService : PlanService,
+  private dateAdapter: DateAdapter<any>
 ) {
+  this.dateAdapter.setLocale('es');
   this.relacionForm = this.fb.group({
     run: [data.cliente.run, Validators.required],
     idPlan: ['', Validators.required],
