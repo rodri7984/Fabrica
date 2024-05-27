@@ -58,6 +58,7 @@ export class RelacionClientePlanComponent implements OnInit {
  relacionForm: FormGroup;
  clientes: Usuario[] = [];
  planes :Plan[] = [];
+ metodosPago: string[] = ['efectivo', 'transferencia', 'getnet'];
 
  constructor(
   private dialogRef: MatDialogRef<RelacionClientePlanComponent>,
@@ -91,6 +92,7 @@ export class RelacionClientePlanComponent implements OnInit {
       this.calculateTotal();
     });
     this.relacionForm.get('monto')?.valueChanges.subscribe(() => this.calculateTotal());
+    this.relacionForm.get('descuento')?.valueChanges.subscribe(() => this.calculateTotal());
     this.setFechaRegistroPlan();
   }
 
@@ -113,8 +115,10 @@ calculateFechaFin() {
 calculateTotal() {
   const monto = this.relacionForm.get('monto')?.value || 0;
   const mensualidades = this.relacionForm.get('mensualidades')?.value || 0;
-  const total = monto * mensualidades;
-  this.relacionForm.patchValue({ total });
+  const descuento = this.relacionForm.get('descuento')?.value || 0;
+  const totalAntesDescuento = monto * mensualidades;
+  const totalConDescuento = totalAntesDescuento - (totalAntesDescuento * (descuento / 100));
+  this.relacionForm.patchValue({ total: totalConDescuento });
 }
 
 

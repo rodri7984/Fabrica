@@ -1,15 +1,6 @@
 <!-- src/app/associate-client-plan/associate-client-plan.component.html -->
 <h1>Asociar Cliente con Plan</h1>
 <form [formGroup]="relacionForm" (ngSubmit)="postRelacion()">
-  <mat-form-field>
-    <mat-label>RUT</mat-label>
-    <input matInput formControlName="run" readonly>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>ID del Plan</mat-label>
-    <input matInput formControlName="idPlan" required readonly>
-  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Nombre del Plan</mat-label>
@@ -18,6 +9,11 @@
         {{ nom.nombrePlan }}
       </mat-option>
     </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>ID del Plan</mat-label>
+    <input matInput formControlName="idPlan" required readonly>
   </mat-form-field>
 
 
@@ -29,6 +25,12 @@
     <mat-label>Apellido del Usuario</mat-label>
     <input matInput formControlName="apellidoUsuario" required>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>RUT</mat-label>
+    <input matInput formControlName="run" readonly>
+  </mat-form-field>
+
   <mat-form-field>
     <mat-label>Fecha de Registro del Plan</mat-label>
     <input matInput formControlName="fechaRegistroPlan" readonly>
@@ -43,6 +45,10 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Meses a pagar</mat-label>
+    <input matInput type="number" formControlName="mensualidades" required>
+  </mat-form-field>
 
 
   <mat-form-field>
@@ -50,14 +56,15 @@
     <input matInput formControlName="fechaFin" readonly>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Meses a pagar</mat-label>
-    <input matInput type="number" formControlName="mensualidades" required>
-  </mat-form-field>
 
   <mat-form-field>
     <mat-label>Valor Por mes</mat-label>
     <input matInput type="number" formControlName="monto" required readonly>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Descuento</mat-label>
+    <input matInput type="number" formControlName="descuento" required>
   </mat-form-field>
 
   <mat-form-field>
@@ -66,17 +73,14 @@
   </mat-form-field>
  
 
-
-
-
-  <mat-form-field>
-    <mat-label>Descuento</mat-label>
-    <input matInput type="number" formControlName="descuento" required>
-  </mat-form-field>
-
+ 
   <mat-form-field>
     <mat-label>Método de Pago</mat-label>
-    <input matInput formControlName="metodoPago" required>
+    <mat-select formControlName="metodoPago">
+      <mat-option *ngFor="let metodo of metodosPago" [value]="metodo">
+        {{ metodo }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
  
   <div>
