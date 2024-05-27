@@ -78,7 +78,7 @@ export class RelacionClientePlanComponent implements OnInit {
     nombreUsuario: [data.cliente.primerNombre, Validators.required],
     apellidoUsuario: [data.cliente.paternoApellido, Validators.required],
     fechaRegistroPlan: ['', Validators.required],
-    fechaInicio: ['', Validators.required],
+    fechaInicio: [dayjs().toDate(), Validators.required],
     fechaFin: ['', Validators.required],
     monto: [0, Validators.required],
     metodoPago: ['', Validators.required],
@@ -121,6 +121,10 @@ calculateTotal() {
   this.relacionForm.patchValue({ total: totalConDescuento });
 }
 
+myDateFilter = (d: Date | null): boolean => {
+  const fechaActual = dayjs().startOf('day');
+  return d ? dayjs(d).isSame(fechaActual) || dayjs(d).isAfter(fechaActual) : false;
+};
 
 ngOnInit() {
   this.clienteService.getUsuarios().subscribe((data) => {

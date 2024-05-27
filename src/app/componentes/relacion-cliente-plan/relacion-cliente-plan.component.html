@@ -39,7 +39,7 @@
 
   <mat-form-field>
     <mat-label>Fecha de Inicio</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="fechaInicio">
+    <input matInput [matDatepicker]="picker" formControlName="fechaInicio" [matDatepickerFilter]="myDateFilter">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -83,7 +83,9 @@
     </mat-select>
   </mat-form-field>
  
-  <div>
-    <button mat-button type="submit" [disabled]="!relacionForm.valid">Asociar</button>
+
+
+  <div style="text-align: center;" mat-dialog-actions class="action">
+    <button   mat-raised-button class="boton" color="primary" type="submit" [disabled]="!relacionForm.valid"  >Asociar</button>
   </div>
 </form>
