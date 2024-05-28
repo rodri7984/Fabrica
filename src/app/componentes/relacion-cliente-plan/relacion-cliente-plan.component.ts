@@ -59,6 +59,7 @@ export class RelacionClientePlanComponent implements OnInit {
  clientes: Usuario[] = [];
  planes :Plan[] = [];
  metodosPago: string[] = ['efectivo', 'transferencia', 'getnet'];
+ valorPorMes: number = 0;
 
  constructor(
   private dialogRef: MatDialogRef<RelacionClientePlanComponent>,
@@ -80,7 +81,6 @@ export class RelacionClientePlanComponent implements OnInit {
     fechaRegistroPlan: ['', Validators.required],
     fechaInicio: [dayjs().toDate(), Validators.required],
     fechaFin: ['', Validators.required],
-    monto: [0, Validators.required],
     metodoPago: ['', Validators.required],
     descuento: [0, Validators.required],
     mensualidades: [0, Validators.required],
@@ -113,10 +113,9 @@ calculateFechaFin() {
 }
 
 calculateTotal() {
-  const monto = this.relacionForm.get('monto')?.value || 0;
   const mensualidades = this.relacionForm.get('mensualidades')?.value || 0;
   const descuento = this.relacionForm.get('descuento')?.value || 0;
-  const totalAntesDescuento = monto * mensualidades;
+  const totalAntesDescuento = this.valorPorMes * mensualidades;
   const totalConDescuento = totalAntesDescuento - (totalAntesDescuento * (descuento / 100));
   this.relacionForm.patchValue({ total: totalConDescuento });
 }
@@ -138,6 +137,7 @@ ngOnInit() {
 onPlanChange(selectedPlanName: string) {
   const selectedPlan = this.planes.find(plan => plan.nombrePlan === selectedPlanName);
   if (selectedPlan) {
+    this.valorPorMes = selectedPlan.valorPlan; // Actualizar valor por mes
     this.relacionForm.patchValue({
       idPlan: selectedPlan.idPlan,
       monto: selectedPlan.valorPlan
@@ -145,16 +145,31 @@ onPlanChange(selectedPlanName: string) {
   }
 }
 
+
 postRelacion() {
   if (this.relacionForm.valid) {
+    const formValue = this.relacionForm.value;
 
-    this.planUsuarioService.agregarPlanUsuario(this.relacionForm.value).subscribe(
+    // Convertir las fechas al formato correcto
+    // Convertir las fechas al formato correcto
+    const fechaRegistroPlan = dayjs(formValue.fechaRegistroPlan, 'DD/MM/YYYY').format('dd-MM-yyyy');
+    const fechaInicio = dayjs(formValue.fechaInicio).format('YYYY-MM-DD');
+    const fechaFin = dayjs(formValue.fechaFin, 'DD/MM/YYYY').format('dd-MM-yyyy');
+
+    const envio = {
+      ...formValue,
+      monto: formValue.total, // Usa el total calculado como monto
+      fechaRegistroPlan,
+      fechaInicio,
+      fechaFin
+    };
+
+    this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
       (response) => {
         console.log('Relacion guardada exitosamente:', response);
       },
       (error) => {
         console.error('Error al guardar el usuario:', error);
-
       }
     );
   } else {

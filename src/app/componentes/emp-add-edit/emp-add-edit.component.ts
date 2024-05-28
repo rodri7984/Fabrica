@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Validators, F
 import { ClienteService } from '../../core/services/cliente.service';
 import { Usuario } from '../../usuario';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app-root/app.component';
 import { formatDate } from '@angular/common';
 import { PlanService } from '../../core/services/plan.service';
@@ -19,10 +18,12 @@ import { Location } from '@angular/common';
 import { Plan } from '../../modelos/plan';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import dayjs from 'dayjs';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import utc from 'dayjs/plugin/utc';
 
-
-
-
+dayjs.extend(utc); 
+registerLocaleData(localeEs, 'es');
 
 @Component({
   selector: 'app-emp-add-edit',
@@ -66,30 +67,16 @@ export class EmpAddEditComponent {
   tipo: Usuario[] = [];
 
 
-  tipoUsuarioSeleccionado2: string[] = ['CLIENTE', 'STAFF'];
-  mesesAPagar : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   idsPlanes: string[] = [];
   selectedPlanId: string = '';
 
-  
-  // onPlanSelectionChange(event: any) {
-  //   this.selectedPlanId = event.value; // Actualiza el valor seleccionado
-  //   this.empForm.get('idTipoPlan')?.setValue(this.selectedPlanId); // Actualiza el valor en el 
-  // }
-  
-
-  // onTipoUsuarioSelectionChange(event: any) {
-  //   const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-  //   this.empForm.get('descuento')?.setValue(selectedValue); // Actualiza el valor en el FormGroup
-  // }
-
-  // onmesesAPagarSelectionChange(event: any) {
-  //   const selectedValue = event.value; // Valor seleccionado (por ejemplo, 'staff' o 'cliente')
-    
-  // }
 
   editForm!: FormGroup;
+  // empForm! : FormGroup;
   nombresPlanes: any[] = [];
+
+  
+
   constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router,
     public _location : Location, private planService : PlanService
   ) { }
@@ -105,16 +92,21 @@ export class EmpAddEditComponent {
     dv: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern(/^[0-9kK]$/)]],
     email: ['', [Validators.required, Validators.email]],
     fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-    fechaNacimiento: ['', [Validators.required]],
-    fechaRegistro:  [  this.obtenerFechaActual(), Validators.required],
+    fechaNacimiento: [this.post.fechaNacimiento, [Validators.required]],
+    fechaRegistro:  [ this.post.fechaRegistro , Validators.required],
     // fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
-    estado: ["ACTIVO"]
+    estado: ["ACTIVO"],
+    tienePlan: [this.post.tienePlan],
   });
 
-  obtenerFechaActual(): string {
-    return formatDate(new Date(), 'dd-MM-yyyy', 'en'); // Devuelve la fecha actual en el formato deseado
+  obtenerFechaActual(): Date {
+    return new Date(); // Devuelve la fecha actual
   }
 
+
+  formatearFecha(fecha: Date): string {
+    return dayjs(fecha).utc().format(); // Formato ISO 8601
+  }
 
   // ngOnInit() {
   //   this.PlanService.obtenerPlanesDesdeAPI().subscribe((planes) => {
@@ -135,20 +127,26 @@ export class EmpAddEditComponent {
 
   guardarDatos() {
     if (this.empForm.valid) {
-      // Si el formulario es válido, crea un objeto con los datos del formulario
+      const formValue = this.empForm.value;
 
-      // Llama al método agregarUsuario del servicio para guardar los datos
-      this.clienteService.agregarUsuario(this.empForm.value).subscribe(
+      const fechaNacimiento = formValue.fechaNacimiento ? this.formatearFecha(new Date(formValue.fechaNacimiento)) : null;
+      const fechaRegistro = formValue.fechaRegistro ? this.formatearFecha(new Date(formValue.fechaRegistro)) : this.formatearFecha(this.obtenerFechaActual());
+
+      const envio = {
+        ...formValue,
+        fechaNacimiento,
+        fechaRegistro
+      };
+
+      console.log('Datos enviados:', envio); // Log para verificar los datos enviados
+
+      this.clienteService.agregarUsuario(envio).subscribe(
         (response) => {
           console.log('Usuario guardado exitosamente:', response);
           console.log('rut:', this.empForm.value);
-          
-
-
         },
         (error) => {
           console.error('Error al guardar el usuario:', error);
-
         }
       );
     } else {

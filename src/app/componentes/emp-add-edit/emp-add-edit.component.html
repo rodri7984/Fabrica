@@ -66,14 +66,14 @@
       <mat-form-field>
         <mat-label>Fecha nacimento</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-hint>xxxxx</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Fecha registro</mat-label>
-        <input matInput formControlName="fechaRegistro" required readonly>
+        <input matInput formControlName="fechaRegistro" >
       </mat-form-field>
       
 
@@ -115,6 +115,6 @@
 <div style="text-align: center;" mat-dialog-actions class="action">
 
 
-  <button   mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() " (click)="traerPlanes()" (click)="refrescar()">Agregar</button>
+  <button   mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() " (click)="traerPlanes()" >Agregar</button>
 </div>
 
