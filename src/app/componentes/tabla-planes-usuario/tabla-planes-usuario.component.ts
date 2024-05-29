@@ -53,7 +53,7 @@ export class TablaPlanesUsuarioComponent {
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = [ 'nombreUsuario', 'nombrePlan', 'fechaRegistroPlan', 'fechaInicio','fechaFin','monto'];
+  desplegarColumna: string[] = [ 'nombreUsuario', 'nombrePlan',  'fechaInicio','fechaFin','mensualidades','monto'];
   dataSource = new MatTableDataSource<PlanUsuario>();
   
   constructor(
@@ -82,5 +82,9 @@ export class TablaPlanesUsuarioComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  formatDate(date: string | Date): string {
+    return dayjs(date).format('DD/MM/YYYY');
   }
 }
