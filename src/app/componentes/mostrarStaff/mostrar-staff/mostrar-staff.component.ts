@@ -15,7 +15,8 @@ import { MatListModule } from '@angular/material/list';
 import { Colaborador } from '../../../modelos/colaborador';
 import { ColaboradorService } from '../../../core/services/colaborador.service';
 import { ColaboradorComponent } from '../../form-colaboradores/colaboradores-component.component';
-
+import { RelacionActividadColaboradorComponent } from '../../../relacion-actividad-colaborador/relacion-actividad-colaborador.component';
+import { escape } from 'querystring';
 
 @Component({
   selector: 'app-mostrar-staff',
@@ -47,7 +48,7 @@ export class MostrarStaffComponent {
     this.sidenav.close();
   }
 
-  desplegarColumna: string[] = ['nombre','username','rolColaborador','estado'];
+  desplegarColumna: string[] = ['nombre','username','rolColaborador','estado', 'acciones'];
   dataSource = new MatTableDataSource<Colaborador>();
   // planes: { [key: string]: number } = {};
 
@@ -72,6 +73,34 @@ openColaborador() {
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+
+relacionarEstado(staff: Colaborador) {
+  const dialogRef = this._dialog.open(RelacionActividadColaboradorComponent, {
+    width: '500px',
+    data: { staff }
+  });
+}
+
+cambiarEstado(staff: Colaborador){
+  console.log(staff);
+  console.log('pasa por aqui');
+  if(staff.estado === "ACTIVO"){
+    console.log('no pasa');
+    return this.colaboradorService.cambiarEstadoColaborador(staff.username, "INACTIVO");
+    console.log('pasó');
+  } else {
+    return this.colaboradorService.cambiarEstadoColaborador(staff.username, "ACTIVO");
+
+  }
+}
+
+changeEstado(staff: Colaborador){
+  console.log('...');
+  console.log(staff);
+  return this.colaboradorService.cambiarEstadoColaborador(staff.username, "INACTIVO");
+  console.log('pasa por aqui porfin');
+  return console.log(staff);
 }
 
 }

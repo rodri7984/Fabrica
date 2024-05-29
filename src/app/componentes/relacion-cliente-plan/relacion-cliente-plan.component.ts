@@ -17,7 +17,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import dayjs from 'dayjs';
 import { MatMomentDateModule, MomentDateAdapter  } from '@angular/material-moment-adapter';
-import * as moment from 'moment';
 import 'moment/locale/es';
 
 const MY_DATE_FORMATS = {
