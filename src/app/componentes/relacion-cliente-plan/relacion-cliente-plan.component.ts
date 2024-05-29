@@ -19,6 +19,11 @@ import dayjs from 'dayjs';
 import { MatMomentDateModule, MomentDateAdapter  } from '@angular/material-moment-adapter';
 import * as moment from 'moment';
 import 'moment/locale/es';
+import { PlanUsuario } from '../../modelos/plan-usuario';
+
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -55,125 +60,143 @@ const MY_DATE_FORMATS = {
 })
 export class RelacionClientePlanComponent implements OnInit {
 
- relacionForm: FormGroup;
- clientes: Usuario[] = [];
- planes :Plan[] = [];
- metodosPago: string[] = ['efectivo', 'transferencia', 'getnet'];
- valorPorMes: number = 0;
+  post: PlanUsuario = {
+    run: '',
+    idPlan: '',
+    nombrePlan: '',
+    nombreUsuario: '',
+    apellidoUsuario: '',
+    fechaRegistroPlan: new Date(Date.now()),
+    fechaInicio: new Date(Date.now()),
+    fechaFin: new Date(Date.now()),
+    metodoPago: '',
+    descuento: 0,
+    mensualidades: 0,
+    monto : 0 
+  }
 
- constructor(
-  private dialogRef: MatDialogRef<RelacionClientePlanComponent>,
-  @Inject(MAT_DIALOG_DATA) public data: { cliente: Usuario },
-  private fb: FormBuilder,
-  private http: HttpClient,
-  private planUsuarioService : PlanUsuarioService,
-  private clienteService : ClienteService,
-  private planService : PlanService,
-  private dateAdapter: DateAdapter<any>
-) {
-  this.dateAdapter.setLocale('es');
-  this.relacionForm = this.fb.group({
-    run: [data.cliente.run, Validators.required],
-    idPlan: ['', Validators.required],
-    nombrePlan: ['', Validators.required],
-    nombreUsuario: [data.cliente.primerNombre, Validators.required],
-    apellidoUsuario: [data.cliente.paternoApellido, Validators.required],
-    fechaRegistroPlan: ['', Validators.required],
-    fechaInicio: [dayjs().toDate(), Validators.required],
-    fechaFin: ['', Validators.required],
-    metodoPago: ['', Validators.required],
-    descuento: [0, Validators.required],
-    mensualidades: [0, Validators.required],
-    total: [{ value: 0, disabled: true }] 
-  });
-  this.relacionForm.get('fechaInicio')?.valueChanges.subscribe(() => this.calculateFechaFin());
+  relacionForm: FormGroup;
+  clientes: Usuario[] = [];
+  planes: Plan[] = [];
+  metodosPago: string[] = ['efectivo', 'transferencia', 'getnet'];
+  valorPorMes: number = 0;
+
+  constructor(
+    private dialogRef: MatDialogRef<RelacionClientePlanComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { cliente: Usuario },
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private planUsuarioService: PlanUsuarioService,
+    private clienteService: ClienteService,
+    private planService: PlanService,
+    private dateAdapter: DateAdapter<any>
+  ) {
+    this.dateAdapter.setLocale('es');
+    this.relacionForm = this.fb.group({
+      run: [data.cliente.run, Validators.required],
+      idPlan: ['', Validators.required],
+      nombrePlan: ['', Validators.required],
+      nombreUsuario: [data.cliente.primerNombre, Validators.required],
+      apellidoUsuario: [data.cliente.paternoApellido, Validators.required],
+      fechaRegistroPlan: [dayjs().toDate(), Validators.required],
+      fechaInicio: [dayjs().toDate(), Validators.required],
+      fechaFin: [dayjs().toDate(), Validators.required],
+      metodoPago: ['', Validators.required],
+      descuento: [0, Validators.required],
+      mensualidades: [0, Validators.required],
+      monto: [0, Validators.required]
+    });
+
+    this.relacionForm.get('fechaInicio')?.valueChanges.subscribe(() => this.calculateFechaFin());
     this.relacionForm.get('mensualidades')?.valueChanges.subscribe(() => {
       this.calculateFechaFin();
       this.calculateTotal();
     });
-    this.relacionForm.get('monto')?.valueChanges.subscribe(() => this.calculateTotal());
     this.relacionForm.get('descuento')?.valueChanges.subscribe(() => this.calculateTotal());
-    this.setFechaRegistroPlan();
   }
 
-  setFechaRegistroPlan() {
-    const fechaActual = dayjs().format('DD/MM/YYYY');
-    this.relacionForm.patchValue({ fechaRegistroPlan: fechaActual });
+  calculateFechaFin() {
+    const fechaInicio = this.relacionForm.get('fechaInicio')?.value;
+    const mensualidades = this.relacionForm.get('mensualidades')?.value;
+
+    if (fechaInicio && mensualidades) {
+      const fechaInicioDayjs = dayjs(fechaInicio);
+      const fechaFin = fechaInicioDayjs.add(mensualidades, 'month').format('YYYY-MM-DD');
+      this.relacionForm.patchValue({ fechaFin });
+    }
   }
 
-calculateFechaFin() {
-  const fechaInicio = this.relacionForm.get('fechaInicio')?.value;
-  const mensualidades = this.relacionForm.get('mensualidades')?.value;
-
-  if (fechaInicio && mensualidades) {
-    const fechaInicioDayjs = dayjs(fechaInicio);
-    const fechaFin = fechaInicioDayjs.add(mensualidades, 'month').format('DD/MM/YYYY');
-    this.relacionForm.patchValue({ fechaFin });
+  calculateTotal() {
+    const mensualidades = this.relacionForm.get('mensualidades')?.value || 0;
+    const descuento = this.relacionForm.get('descuento')?.value || 0;
+    const totalAntesDescuento = this.valorPorMes * mensualidades;
+    const totalConDescuento = totalAntesDescuento - (totalAntesDescuento * (descuento / 100));
+    this.relacionForm.patchValue({ monto: totalConDescuento });
   }
-}
 
-calculateTotal() {
-  const mensualidades = this.relacionForm.get('mensualidades')?.value || 0;
-  const descuento = this.relacionForm.get('descuento')?.value || 0;
-  const totalAntesDescuento = this.valorPorMes * mensualidades;
-  const totalConDescuento = totalAntesDescuento - (totalAntesDescuento * (descuento / 100));
-  this.relacionForm.patchValue({ total: totalConDescuento });
-}
+  myDateFilter = (d: Date | null): boolean => {
+    const fechaActual = dayjs().startOf('day');
+    return d ? dayjs(d).isSame(fechaActual) || dayjs(d).isAfter(fechaActual) : false;
+  };
 
-myDateFilter = (d: Date | null): boolean => {
-  const fechaActual = dayjs().startOf('day');
-  return d ? dayjs(d).isSame(fechaActual) || dayjs(d).isAfter(fechaActual) : false;
-};
-
-ngOnInit() {
-  this.clienteService.getUsuarios().subscribe((data) => {
-    this.clientes = data;
-  });
-  this.planService.getPLanes().subscribe((data) => {
-    this.planes = data;
-  });
-}
-
-onPlanChange(selectedPlanName: string) {
-  const selectedPlan = this.planes.find(plan => plan.nombrePlan === selectedPlanName);
-  if (selectedPlan) {
-    this.valorPorMes = selectedPlan.valorPlan; // Actualizar valor por mes
-    this.relacionForm.patchValue({
-      idPlan: selectedPlan.idPlan,
-      monto: selectedPlan.valorPlan
+  ngOnInit() {
+    this.clienteService.getUsuarios().subscribe((data) => {
+      this.clientes = data;
     });
+    this.planService.getPLanes().subscribe((data) => {
+      this.planes = data;
+    });
+    this.calculateTotal(); // Calcular el total inicialmente
   }
-}
 
-
-postRelacion() {
-  if (this.relacionForm.valid) {
-    const formValue = this.relacionForm.value;
-
-    // Convertir las fechas al formato correcto
-    // Convertir las fechas al formato correcto
-    const fechaRegistroPlan = dayjs(formValue.fechaRegistroPlan, 'DD/MM/YYYY').format('dd-MM-yyyy');
-    const fechaInicio = dayjs(formValue.fechaInicio).format('YYYY-MM-DD');
-    const fechaFin = dayjs(formValue.fechaFin, 'DD/MM/YYYY').format('dd-MM-yyyy');
-
-    const envio = {
-      ...formValue,
-      monto: formValue.total, // Usa el total calculado como monto
-      fechaRegistroPlan,
-      fechaInicio,
-      fechaFin
-    };
-
-    this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
-      (response) => {
-        console.log('Relacion guardada exitosamente:', response);
-      },
-      (error) => {
-        console.error('Error al guardar el usuario:', error);
-      }
-    );
-  } else {
-    console.warn('El formulario no es válido. Verifica los campos.');
+  onPlanChange(selectedPlanName: string) {
+    const selectedPlan = this.planes.find(plan => plan.nombrePlan === selectedPlanName);
+    if (selectedPlan) {
+      this.valorPorMes = selectedPlan.valorPlan; // Actualizar valor por mes
+      this.relacionForm.patchValue({
+        idPlan: selectedPlan.idPlan,
+        nombrePlan: selectedPlan.nombrePlan
+      });
+      this.calculateTotal(); // Recalcular el total cuando cambia el plan
+    }
   }
-}
+
+  obtenerFechaActual(): Date {
+    return new Date(); // Devuelve la fecha actual
+  }
+
+  formatearFecha(fecha: Date): string {
+    return dayjs(fecha).utc().format(); // Formato ISO 8601
+  }
+
+  postRelacion() {
+    if (this.relacionForm.valid) {
+      const formValue = this.relacionForm.value;
+
+      // Convertir las fechas al formato correcto
+      const fechaRegistroPlan = dayjs(formValue.fechaRegistroPlan).format('YYYY-MM-DD');
+      const fechaInicio = dayjs(formValue.fechaInicio).format('YYYY-MM-DD');
+      const fechaFin = dayjs(formValue.fechaFin).format('YYYY-MM-DD');
+
+      const envio = {
+        ...formValue,
+        fechaRegistroPlan,
+        fechaInicio,
+        fechaFin
+      };
+
+      console.log('Datos enviados:', envio); // Verifica aquí que monto no sea undefined
+
+      this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
+        (response) => {
+          console.log('Relacion guardada exitosamente:', response);
+        },
+        (error) => {
+          console.error('Error al guardar el usuario:', error);
+        }
+      );
+    } else {
+      console.warn('El formulario no es válido. Verifica los campos.');
+    }
+  }
 }

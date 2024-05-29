@@ -71,36 +71,18 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>Fecha registro</mat-label>
-        <input matInput formControlName="fechaRegistro" >
+        <input matInput formControlName="fechaRegistro" type="date">
       </mat-form-field>
-      
+       -->
 
-      <!-- <div class="row">
-        <mat-form-field>
-          <mat-select name="idTipoPlan" placeholder="Tipo Planes" (selectionChange)="onPlanSelectionChange($event)">
-            <mat-option value="">Tipo Planes</mat-option>
-            <mat-option *ngFor="let plan of nombresPlanes" [value]="plan">
-              {{plan}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div> -->
-
-  
-
-<!-- 
-      <div class="row"> 
-        <mat-form-field >
-          <mat-select name="numeroMes"    placeholder="Meses a pagar" (selectionChange)="onTipoUsuarioSelectionChange($event)">
-            <mat-option value="">Meses a pagar </mat-option>
-            <mat-option *ngFor="let numMes of mesesAPagar" [value]="numMes">
-              {{numMes}}
-            </mat-option>      
-          </mat-select>
-        </mat-form-field> -->
+      <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="fechaRegistro" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin [disabled]="true"></mat-datepicker>
+      </mat-form-field>
 
       </div>
     

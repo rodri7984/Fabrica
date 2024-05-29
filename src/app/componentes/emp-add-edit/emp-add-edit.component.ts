@@ -93,11 +93,24 @@ export class EmpAddEditComponent {
     email: ['', [Validators.required, Validators.email]],
     fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     fechaNacimiento: [this.post.fechaNacimiento, [Validators.required]],
-    fechaRegistro:  [ this.post.fechaRegistro , Validators.required],
+    fechaRegistro:  [this.post.fechaRegistro , Validators.required],
     // fechaRegistro: [formatDate(this.post.fechaNacimiento, 'yyyy-MM-dd', 'en'), Validators.required],
     estado: ["ACTIVO"],
     tienePlan: [this.post.tienePlan],
   });
+
+  formatearFechaISO8601(fecha: Date): Date {
+    // Convertir la fecha a un string en formato ISO 8601
+    const fechaISO8601 = fecha.toISOString();
+
+    // Parsear la fecha ISO 8601 utilizando Day.js
+    const fechaFormateada = dayjs.utc(fechaISO8601).format('DD/MM/YYYY');
+
+    // Crear un nuevo objeto Date a partir de la fecha formateada
+    const fechaFinal = new Date(fechaFormateada);
+
+    return fechaFinal;
+}
 
   obtenerFechaActual(): Date {
     return new Date(); // Devuelve la fecha actual
@@ -153,6 +166,8 @@ export class EmpAddEditComponent {
       console.warn('El formulario no es válido. Verifica los campos.');
     }
   }
+
+
 
 
   refrescar(): void {
