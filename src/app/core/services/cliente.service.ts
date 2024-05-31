@@ -36,6 +36,13 @@ export class ClienteService {
     getUsuarios(): Observable<Usuario[]> {
       return this.httpClient.get<Usuario[]>(`${this.apiUrl}/listUsuarios`);
     }
+
+   
+    
+    actualizarUsuario(run: string, usuario: Partial<Usuario>): Observable<Usuario> {
+      return this.httpClient.patch<Usuario>(`${this.apiUrl}/updateUsuario/${run}`, usuario);
+    }
+  
   
 }
 

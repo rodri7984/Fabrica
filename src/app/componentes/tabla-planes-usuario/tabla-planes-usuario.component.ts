@@ -53,7 +53,8 @@ export class TablaPlanesUsuarioComponent {
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = [ 'nombreUsuario', 'nombrePlan',  'fechaInicio','fechaFin','mensualidades','monto'];
+  
+  desplegarColumna: string[] = [ 'run','nombreUsuario', 'nombrePlan',  'fechaInicio','fechaFin','mensualidades','monto','diasRestantes'];
   dataSource = new MatTableDataSource<PlanUsuario>();
   
   constructor(
@@ -86,5 +87,19 @@ export class TablaPlanesUsuarioComponent {
 
   formatDate(date: string | Date): string {
     return dayjs(date).format('DD/MM/YYYY');
+  }
+
+  calcularDiferencia(date: Date): number {
+    const today = dayjs(new Date());
+    const masUnMes = dayjs(date).add(30, 'days');
+    return masUnMes.diff(today, 'days');
+  }
+
+  getColor(diasTotal: number): string {
+    if (diasTotal >= 15 && diasTotal <= 30) return 'green';
+    if (diasTotal >= 7 && diasTotal <= 14) return 'yellow';
+    if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
+    if (diasTotal <= 0) return 'red';
+    return 'black';
   }
 }

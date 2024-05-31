@@ -190,6 +190,15 @@ export class RelacionClientePlanComponent implements OnInit {
       this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
         (response) => {
           console.log('Relacion guardada exitosamente:', response);
+          // Actualizar el atributo tienePlan del usuario
+          this.clienteService.actualizarUsuario(formValue.run, { tienePlan: true }).subscribe(
+            (userResponse) => {
+              console.log('Usuario actualizado exitosamente:', userResponse);
+            },
+            (userError) => {
+              console.error('Error al actualizar el usuario:', userError);
+            }
+          );
         },
         (error) => {
           console.error('Error al guardar el usuario:', error);
