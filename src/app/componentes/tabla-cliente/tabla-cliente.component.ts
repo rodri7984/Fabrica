@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router } from '@angular/router';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { ClienteService } from '../../core/services/cliente.service';
 import { HttpClient } from '@angular/common/http';
@@ -18,18 +16,15 @@ import { ColaboradorComponent } from '../form-colaboradores/colaboradores-compon
 import { PlanService } from '../../core/services/plan.service';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from '../app-root/app.component';
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
-
-
 
 @Component({
     selector: 'app-tabla-cliente',
     standalone: true,
     templateUrl: './tabla-cliente.component.html',
-    styleUrl: './tabla-cliente.component.css',
-    imports: [RouterOutlet,
+    styleUrls: ['./tabla-cliente.component.css'],
+    imports: [
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
@@ -41,89 +36,62 @@ import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-
         CommonModule,
         MatSidenavModule,
         MatListModule,
-        RouterModule, AppComponent]
+        AppComponent
+    ]
 })
 export class TablaClienteComponent implements OnInit {
-  usuarios: Usuario[] = [];
-  title = 'tabla cliente';
+    usuarios: Usuario[] = [];
+    title = 'tabla cliente';
+    desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaNacimiento', 'fechaRegistro', 'fono', 'acciones'];
+    dataSource = new MatTableDataSource<Usuario>();
+    planes: { [key: string]: number } = {};
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+    constructor(
+        private _dialog: MatDialog,
+        private clienteService: ClienteService,
+        private planService: PlanService
+    ) { }
 
-  closeSidenav() {
-    this.sidenav.close();
-  }
-  desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido','fechaNacimiento', 'fechaRegistro','fono','acciones'];
-  dataSource = new MatTableDataSource<Usuario>();
-  planes: { [key: string]: number } = {};
+    listarUsuarios() {
+        this.clienteService.getUsuarios().subscribe((data) => {
+            this.usuarios = data;
+            this.dataSource.data = this.usuarios;
+        });
 
-  constructor(
-    private _dialog: MatDialog,
-    private router: Router,
-    private http: HttpClient,
-    private clienteService: ClienteService,
-    private planService: PlanService
-  ) { }
+        this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
+            this.planes = planes.reduce<{ [key: string]: number }>((acc, plan) => {
+                acc[plan.idPlan] = plan.valorPlan;
+                return acc;
+            }, {});
+        });
+    }
 
-  ngOnInit(): void {
-    this.clienteService.getUsuarios().subscribe((data) => {
-      this.usuarios = data;
-      this.dataSource.data = this.usuarios; // Asegúrate de actualizar la dataSource aquí
-    });
+    ngOnInit(): void {
+        this.listarUsuarios();
+    }
 
-    this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
-      console.log("Planes obtenidos desde la API:", planes);
-      this.planes = planes.reduce<{ [key: string]: number }>((acc, plan) => {
-        acc[plan.idPlan] = plan.valorPlan;
-        return acc;
-      }, {});
-      console.log("Objeto planes mapeado:", this.planes);
-    });
-  }
+    showEmpAddEditComponent() {
+        const dialogRef = this._dialog.open(EmpAddEditComponent);
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.listarUsuarios(); // Actualiza la lista de clientes cuando se agrega uno nuevo
+            }
+        });
+    }
 
-  openAddEditEmpForm() {
-    this._dialog.open(EmpAddEditComponent);
-  }
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 
-  openColaborador() {
-    this._dialog.open(ColaboradorComponent);
-  }
+    formatDate(date: Date): string {
+        return dayjs(date).format('DD/MM/YYYY');
+    }
 
-  calcularDiferencia(date: Date): number {
-    const today = dayjs(new Date());
-    const masUnMes = dayjs(date).add(30, 'days');
-    return masUnMes.diff(today, 'days');
-  }
-
-  getColor(diasTotal: number): string {
-    if (diasTotal >= 15 && diasTotal <= 30) return 'green';
-    if (diasTotal >= 7 && diasTotal <= 14) return 'yellow';
-    if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
-    if (diasTotal <= 0) return 'red';
-    return 'black';
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  formatDate(date: Date): string {
-    return dayjs(date).format('DD/MM/YYYY');
-  }
-
-  getPrecioPlan(idPlan: string): number {
-    // console.log("Obteniendo precio para el plan:", idPlan, "Valor:", this.planes[idPlan]);
-    return this.planes[idPlan] || 0;
-  }
-
-  editarUsuario(_t68: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  relacionarPlan(cliente: Usuario) {
-    const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
-      width: '500px',
-      data: { cliente }
-    });
-}
+    relacionarPlan(cliente: Usuario) {
+        const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
+            width: '500px',
+            data: { cliente }
+        });
+    }
 }

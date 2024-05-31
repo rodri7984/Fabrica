@@ -4,18 +4,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import dayjs from 'dayjs';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+// import { RouterModule } from '@angular/router';
 import { ColaboradorComponent } from '../form-colaboradores/colaboradores-component.component';
 import { TablaClienteComponent } from '../tabla-cliente/tabla-cliente.component';
 import { MostrarStaffComponent } from '../mostrarStaff/mostrar-staff/mostrar-staff.component';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { ReactiveFormsModule } from '@angular/forms';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
@@ -37,12 +37,12 @@ import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-plane
         MatButtonModule,
         MatDialogModule,
         MatFormFieldModule,
-        ReactiveFormsModule,
+        
         MatInputModule,
         CommonModule,
         MatSidenavModule,
         MatListModule,
-        RouterModule, TablaClienteComponent, MostrarStaffComponent,
+         TablaClienteComponent, MostrarStaffComponent,
         TablaPlanesUsuarioComponent,
         EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent]
 })

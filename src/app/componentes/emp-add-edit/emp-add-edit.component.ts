@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -6,21 +6,21 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Validators, FormsModule } from '@angular/forms';
+
 import { ClienteService } from '../../core/services/cliente.service';
 import { Usuario } from '../../usuario';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AppComponent } from '../app-root/app.component';
 import { formatDate } from '@angular/common';
 import { PlanService } from '../../core/services/plan.service';
 import { TipoPlan } from '../../modelos/tipo-plan';
 import { Location } from '@angular/common';
 import { Plan } from '../../modelos/plan';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import dayjs from 'dayjs';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import utc from 'dayjs/plugin/utc';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 dayjs.extend(utc); 
 registerLocaleData(localeEs, 'es');
@@ -39,13 +39,14 @@ registerLocaleData(localeEs, 'es');
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    RouterModule,
+    
 
   ],
   templateUrl: './emp-add-edit.component.html',
   styleUrl: './emp-add-edit.component.css'
 })
 export class EmpAddEditComponent {
+  @Output() clienteAgregado = new EventEmitter<void>();
 
   post: Usuario = {
     fechaNacimiento: new Date(Date.now()),
@@ -77,8 +78,9 @@ export class EmpAddEditComponent {
 
   
 
-  constructor(private fb: FormBuilder, private clienteService: ClienteService, private router: Router,
-    public _location : Location, private planService : PlanService
+  constructor(private fb: FormBuilder, private clienteService: ClienteService, 
+    public _location : Location, private planService : PlanService,
+    private dialogRef: MatDialogRef<EmpAddEditComponent>
   ) { }
 
 
@@ -155,6 +157,8 @@ export class EmpAddEditComponent {
 
       this.clienteService.agregarUsuario(envio).subscribe(
         (response) => {
+          this.clienteAgregado.emit();
+          this.dialogRef.close(true);
           console.log('Usuario guardado exitosamente:', response);
           console.log('rut:', this.empForm.value);
         },
