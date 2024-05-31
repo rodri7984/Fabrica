@@ -10,15 +10,21 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
      <!-- id Column -->
-  <ng-container matColumnDef="run">
-    <th mat-header-cell *matHeaderCellDef class="columna">Id</th>
-    <td mat-cell *matCellDef="let element">{{ element.run }}</td>
+  <ng-container matColumnDef="nombreUsuario">
+    <th mat-header-cell *matHeaderCellDef class="columna">Nombre cliente</th>
+    <td mat-cell *matCellDef="let element">{{ element.nombreUsuario }}</td>
   </ng-container>
-       <!-- id nombre -->
-       <ng-container matColumnDef="idPlan">
-        <th mat-header-cell *matHeaderCellDef class="columna">ID plan</th>
-        <td mat-cell *matCellDef="let element">{{ element.idPlan }}</td>
+       <!--  nombre -->
+       <ng-container matColumnDef="nombrePlan">
+        <th mat-header-cell *matHeaderCellDef class="columna">Nombre del plan</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombrePlan }}</td>
       </ng-container>
+
+             <!--  nombre -->
+             <ng-container matColumnDef="monto">
+              <th mat-header-cell *matHeaderCellDef class="columna">Monto pagado</th>
+              <td mat-cell *matCellDef="let element">{{ element.monto }}</td>
+            </ng-container>
 
            <!-- valorPlan Column -->
   <!-- <ng-container matColumnDef="valorPlan">

@@ -22,6 +22,7 @@ import { PlanUsuario } from '../../modelos/plan-usuario';
 import duration from 'dayjs/plugin/duration';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PagoService } from '../../core/services/pago.service';
 
 dayjs.extend(duration);
 
@@ -88,7 +89,8 @@ export class RelacionClientePlanComponent implements OnInit {
     private planUsuarioService: PlanUsuarioService,
     private clienteService: ClienteService,
     private planService: PlanService,
-    private dateAdapter: DateAdapter<any>
+    private dateAdapter: DateAdapter<any>,
+    private pagoService : PagoService
   ) {
     this.dateAdapter.setLocale('es');
     this.relacionForm = this.fb.group({
@@ -184,19 +186,40 @@ export class RelacionClientePlanComponent implements OnInit {
         fechaFin
       };
 
+      const pago = {
+        run: formValue.run,
+        nombreUsuario: formValue.nombreUsuario,
+        apellidoUsuario: formValue.apellidoUsuario,
+        idPlan: formValue.idPlan,
+        nombrePlan: formValue.nombrePlan,
+        fechaPago: dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'), // Formato ISO 8601 con tiempo actual
+        monto: formValue.monto,
+        metodoPago: formValue.metodoPago,
+        descuento: formValue.descuento
+      };
+
       console.log('Datos enviados:', envio); // Verifica aquí que monto no sea undefined
 
       this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
         (response) => {
           console.log('Relacion guardada exitosamente:', response);
-          // Actualizar el atributo tienePlan del usuario
-          this.clienteService.actualizarPlanTrue(formValue.run).subscribe(
-            (userResponse) => {
-              console.log('Usuario actualizado exitosamente:', userResponse);
-              this.dialogRef.close(true);
+          // Enviar el pago al servicio PagoService
+          this.pagoService.agregarPago(pago).subscribe(
+            (pagoResponse) => {
+              console.log('Pago guardado exitosamente:', pagoResponse);
+              // Actualizar el atributo tienePlan del usuario
+              this.clienteService.actualizarPlanTrue(formValue.run).subscribe(
+                (userResponse) => {
+                  console.log('Usuario actualizado exitosamente:', userResponse);
+                  this.dialogRef.close(true);
+                },
+                (userError) => {
+                  console.error('Error al actualizar el usuario:', userError);
+                }
+              );
             },
-            (userError) => {
-              console.error('Error al actualizar el usuario:', userError);
+            (pagoError) => {
+              console.error('Error al guardar el pago:', pagoError);
             }
           );
         },

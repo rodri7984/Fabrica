@@ -46,7 +46,7 @@ export class TablaHPagoComponent implements OnInit {
       this.sidenav.close();
     }
 
-    desplegarColumna: string[] = ['run', 'idPlan'];
+    desplegarColumna: string[] = ['nombreUsuario', 'nombrePlan','monto'];
   dataSource = new MatTableDataSource<Pago>();
   planes: { [key: string]: number } = {};
 
