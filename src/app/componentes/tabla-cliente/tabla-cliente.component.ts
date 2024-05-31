@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -18,6 +17,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { AppComponent } from '../app-root/app.component';
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
+import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 
 @Component({
     selector: 'app-tabla-cliente',
@@ -28,7 +28,7 @@ import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
-        EmpAddEditComponent,
+        
         MatDialogModule,
         MatFormFieldModule,
         MatTableModule,
@@ -36,7 +36,8 @@ import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-
         CommonModule,
         MatSidenavModule,
         MatListModule,
-        AppComponent
+        AppComponent,
+        EmpAddEditComponent
     ]
 })
 export class TablaClienteComponent implements OnInit {
@@ -90,8 +91,13 @@ export class TablaClienteComponent implements OnInit {
 
     relacionarPlan(cliente: Usuario) {
         const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
-            width: '500px',
-            data: { cliente }
+          width: '500px',
+          data: { cliente }
         });
-    }
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.listarUsuarios(); // Actualiza la lista de clientes cuando se relaciona un plan
+          }
+        });
+      }
 }

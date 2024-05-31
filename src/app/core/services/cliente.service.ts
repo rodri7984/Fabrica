@@ -43,6 +43,9 @@ export class ClienteService {
       return this.httpClient.patch<Usuario>(`${this.apiUrl}/updateUsuario/${run}`, usuario);
     }
   
+    actualizarPlanTrue(run: string): Observable<Usuario> {
+      return this.httpClient.put<Usuario>(`${this.apiUrl}/changeTienePlan/${run}/true`, {});
+    }
   
 }
 

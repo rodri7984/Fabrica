@@ -1,12 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
 import { PlanUsuarioService } from '../../core/services/plan-usuario.service';
 import { ClienteService } from '../../core/services/cliente.service';
 import { Usuario } from '../../usuario';
@@ -22,6 +20,8 @@ import 'moment/locale/es';
 import { PlanUsuario } from '../../modelos/plan-usuario';
 
 import duration from 'dayjs/plugin/duration';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 dayjs.extend(duration);
 
@@ -50,7 +50,6 @@ const MY_DATE_FORMATS = {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterModule,
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
@@ -191,9 +190,10 @@ export class RelacionClientePlanComponent implements OnInit {
         (response) => {
           console.log('Relacion guardada exitosamente:', response);
           // Actualizar el atributo tienePlan del usuario
-          this.clienteService.actualizarUsuario(formValue.run, { tienePlan: true }).subscribe(
+          this.clienteService.actualizarPlanTrue(formValue.run).subscribe(
             (userResponse) => {
               console.log('Usuario actualizado exitosamente:', userResponse);
+              this.dialogRef.close(true);
             },
             (userError) => {
               console.error('Error al actualizar el usuario:', userError);

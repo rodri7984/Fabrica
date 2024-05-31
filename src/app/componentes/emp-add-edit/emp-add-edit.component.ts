@@ -20,7 +20,7 @@ import dayjs from 'dayjs';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import utc from 'dayjs/plugin/utc';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 dayjs.extend(utc); 
 registerLocaleData(localeEs, 'es');
@@ -90,7 +90,7 @@ export class EmpAddEditComponent {
     segundoNombre: [''], // Sin validadores para el segundo nombre
     paternoApellido: ['', Validators.required],
     maternoApellido: ['', Validators.required],
-    run: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+    run: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
     dv: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern(/^[0-9kK]$/)]],
     email: ['', [Validators.required, Validators.email]],
     fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
@@ -143,7 +143,6 @@ export class EmpAddEditComponent {
   guardarDatos() {
     if (this.empForm.valid) {
       const formValue = this.empForm.value;
-
       const fechaNacimiento = formValue.fechaNacimiento ? this.formatearFecha(new Date(formValue.fechaNacimiento)) : null;
       const fechaRegistro = formValue.fechaRegistro ? this.formatearFecha(new Date(formValue.fechaRegistro)) : this.formatearFecha(this.obtenerFechaActual());
 
@@ -152,7 +151,6 @@ export class EmpAddEditComponent {
         fechaNacimiento,
         fechaRegistro
       };
-
       console.log('Datos enviados:', envio); // Log para verificar los datos enviados
 
       this.clienteService.agregarUsuario(envio).subscribe(
