@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { formatDate } from '@angular/common';
 import { ColaboradorService } from '../../core/services/colaborador.service';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MostrarStaffComponent } from '../mostrarStaff/mostrar-staff/mostrar-staff.component';
 
 
 @Component({
@@ -25,16 +27,18 @@ import { ColaboradorService } from '../../core/services/colaborador.service';
     MatButtonModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   templateUrl: './colaboradores-component.component.html',
   styleUrl: './colaboradores-component.component.css'
 })
 export class ColaboradorComponent {
-
+  @Output() colaboradorAgregado = new EventEmitter<void>();
   constructor(
     private fb: FormBuilder,
-    private colaboradorService: ColaboradorService
+    private colaboradorService: ColaboradorService,
+    private dialogRef: MatDialogRef<MostrarStaffComponent>
 
   ){}
 
@@ -52,6 +56,8 @@ export class ColaboradorComponent {
     if(this.colForm.valid) {
       this.colaboradorService.agregarColaborador(this.colForm.value).subscribe(
         (response: any) => {
+          this.colaboradorAgregado.emit();
+          this.dialogRef.close(true);
           console.log('Colaborador guardado exitosamente: ', response);
         },
       (error: any) => {

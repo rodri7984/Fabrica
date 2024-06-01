@@ -61,6 +61,9 @@ sidenavv!: MatSidenav;
 
  constructor( private _dialog: MatDialog) { }
 
+ ngOnInit(): void {
+  this.activeComponent = 'planesUsuario'; // Mostrar planes de usuario al inicio
+}
 
  showClienteDashboard() {
   this.activeComponent = 'cliente';
