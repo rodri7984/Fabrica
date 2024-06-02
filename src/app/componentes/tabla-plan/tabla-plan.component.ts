@@ -14,6 +14,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Plan } from "../../modelos/plan";
 import { HttpClient } from "@angular/common/http";
 import { PlanService } from "../../core/services/plan.service";
+import { FormAddPlanComponent } from "../form-add-plan/form-add-plan.component";
 
 
 @Component({
@@ -35,23 +36,21 @@ import { PlanService } from "../../core/services/plan.service";
     MatSidenavModule,
     MatListModule,
     RouterModule,
-     AppComponent]
-
-    
-  
-
+     AppComponent,
+     FormAddPlanComponent
+    ]
 })
 export class TablaPlanComponent implements OnInit{
   planes: Plan[] = [];
   title = 'tabla plan';
+  desplegarColumna: string[] = ['idPlan','nombrePlan','valorPlan'];
+  dataSource = new MatTableDataSource<Plan>();
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   closeSidenav() {
     this.sidenav.close();
   }
-  desplegarColumna: string[] = ['idPlan','nombrePlan','valorPlan'];
-  dataSource = new MatTableDataSource<Plan>();
 
 
   constructor(
@@ -62,15 +61,41 @@ export class TablaPlanComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.planService.obtenerPlanesDesdeAPI().subscribe((data) => {
-      this.planes = data;
-      this.dataSource.data = this.planes; // Asegúrate de actualizar la dataSource aquí
-    });
+    this.listarPlanes();
+}
+
+listarPlanes(){
+  this.planService.obtenerPlanesDesdeAPI().subscribe((data) => {
+    this.planes = data;
+    this.dataSource.data = this.planes; // Asegúrate de actualizar la dataSource aquí
+  });
+}
+
+showFormAddPlanComponent() {
+  const dialogRef = this._dialog.open(FormAddPlanComponent);
+  dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+          this.listarPlanes(); 
+      }
+  });
 }
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
+
+FormAddPlan(cliente: FormAddPlanComponent) {
+  const dialogRef = this._dialog.open(FormAddPlanComponent, {
+    width: '500px',
+    data: { cliente }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.listarPlanes(); 
+    }
+  });
+}
+
 
 }
