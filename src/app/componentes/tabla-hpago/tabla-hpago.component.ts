@@ -15,6 +15,8 @@ import { Pago } from '../../modelos/pago';
 import { HttpClient } from '@angular/common/http';
 import { ClienteService } from '../../core/services/cliente.service';
 import { PagoService } from '../../core/services/pago.service';
+import dayjs from 'dayjs';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-tabla-hpago',
@@ -31,7 +33,8 @@ import { PagoService } from '../../core/services/pago.service';
     MatSidenavModule,
     MatListModule,
     RouterModule,
-    AppComponent
+    AppComponent,
+    MatSelectModule
   ],
   templateUrl: './tabla-hpago.component.html',
   styleUrl: './tabla-hpago.component.css'
@@ -46,9 +49,28 @@ export class TablaHPagoComponent implements OnInit {
       this.sidenav.close();
     }
 
-    desplegarColumna: string[] = ['nombreUsuario', 'nombrePlan','monto'];
+    desplegarColumna: string[] = ['nombreUsuario', 'nombrePlan','monto','fecha'];
   dataSource = new MatTableDataSource<Pago>();
   planes: { [key: string]: number } = {};
+
+  months = [
+    { value: null, viewValue: 'Todos' },
+    { value: 0, viewValue: 'Enero' },
+    { value: 1, viewValue: 'Febrero' },
+    { value: 2, viewValue: 'Marzo' },
+    { value: 3, viewValue: 'Abril' },
+    { value: 4, viewValue: 'Mayo' },
+    { value: 5, viewValue: 'Junio' },
+    { value: 6, viewValue: 'Julio' },
+    { value: 7, viewValue: 'Agosto' },
+    { value: 8, viewValue: 'Septiembre' },
+    { value: 9, viewValue: 'Octubre' },
+    { value: 10, viewValue: 'Noviembre' },
+    { value: 11, viewValue: 'Diciembre' }
+  ];
+  selectedMonth: number | null = null;
+  totalGananciaMes: number = 0;
+  totalGananciaAnual: number = 0;
 
   constructor(
     private _dialog: MatDialog,
@@ -61,6 +83,7 @@ export class TablaHPagoComponent implements OnInit {
     this.pagoService.obtenerPagos().subscribe((data) => {
       this.pagos = data;
       this.dataSource.data = this.pagos;
+      this.calculateTotalGananciaAnual();
     });
 
   }
@@ -69,5 +92,45 @@ export class TablaHPagoComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  onMonthSelected(event: any) {
+    this.selectedMonth = event.value;
+    this.calculateTotalGananciaMes();
+    this.filtrarPagosPorMes();
+  }
+
+  calculateTotalGananciaMes() {
+    if (this.selectedMonth !== null) {
+      const pagosFiltrados = this.pagos.filter((pago) => {
+        const month = new Date(pago.fechaPago).getMonth();
+        return month === this.selectedMonth;
+      });
+      this.totalGananciaMes = pagosFiltrados.reduce((total, pago) => total + pago.monto, 0);
+    } else {
+      this.totalGananciaMes = 0;
+    }
+  }
+
+  filtrarPagosPorMes() {
+    if (this.selectedMonth !== null) {
+      const pagosFiltrados = this.pagos.filter((pago) => {
+        const month = new Date(pago.fechaPago).getMonth();
+        return month === this.selectedMonth;
+      });
+      this.dataSource.data = pagosFiltrados;
+    } else {
+      this.dataSource.data = this.pagos;
+    }
+  }
+
+  calculateTotalGananciaAnual() {
+    this.totalGananciaAnual = this.pagos.reduce((total, pago) => total + pago.monto, 0);
+  }
+
+  formatDate(date: Date): string {
+    return dayjs(date).format('DD/MM/YYYY');
+}
+
+
 
 }
