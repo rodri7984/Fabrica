@@ -31,6 +31,9 @@
     <input matInput formControlName="run" readonly>
   </mat-form-field>
 
+
+
+
   <mat-form-field>
     <mat-label>Fecha de Registro</mat-label>
     <input matInput [matDatepicker]="pickerRegistro" formControlName="fechaRegistroPlan" readonly>
@@ -85,6 +88,16 @@
     </mat-select>
   </mat-form-field>
  
+
+<!-- Select that is shown only when the plan name is 2x1 -->
+<mat-form-field *ngIf="is2x1Selected">
+  <mat-label>Segundo cliente</mat-label>
+  <mat-select formControlName="specialSelect">
+    <mat-option *ngFor="let run of runes" [value]="run">
+      {{ run }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
 
   <div style="text-align: center;" mat-dialog-actions class="action">

@@ -78,8 +78,10 @@ export class RelacionClientePlanComponent implements OnInit {
   relacionForm: FormGroup;
   clientes: Usuario[] = [];
   planes: Plan[] = [];
+  runes: string[] = [];
   metodosPago: string[] = ['efectivo', 'transferencia', 'getnet'];
   valorPorMes: number = 0;
+  is2x1Selected: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<RelacionClientePlanComponent>,
@@ -104,8 +106,9 @@ export class RelacionClientePlanComponent implements OnInit {
       fechaFin: [dayjs().toDate(), Validators.required],
       metodoPago: ['', Validators.required],
       descuento: [0, Validators.required],
-      mensualidades: [0, Validators.required],
-      monto: [0, Validators.required]
+      mensualidades: [null, Validators.required],
+      monto: [0, Validators.required],
+      specialSelect: ['']
     });
 
     this.relacionForm.get('fechaInicio')?.valueChanges.subscribe(() => this.calculateFechaFin());
@@ -143,6 +146,7 @@ export class RelacionClientePlanComponent implements OnInit {
   ngOnInit() {
     this.clienteService.getUsuarios().subscribe((data) => {
       this.clientes = data;
+      this.runes = data.map(cliente => cliente.run); // Extract run values
     });
     this.planService.getPLanes().subscribe((data) => {
       this.planes = data;
@@ -153,12 +157,15 @@ export class RelacionClientePlanComponent implements OnInit {
   onPlanChange(selectedPlanName: string) {
     const selectedPlan = this.planes.find(plan => plan.nombrePlan === selectedPlanName);
     if (selectedPlan) {
-      this.valorPorMes = selectedPlan.valorPlan; // Actualizar valor por mes
+      this.valorPorMes = selectedPlan.valorPlan;
       this.relacionForm.patchValue({
         idPlan: selectedPlan.idPlan,
         nombrePlan: selectedPlan.nombrePlan
       });
-      this.calculateTotal(); // Recalcular el total cuando cambia el plan
+      this.calculateTotal();
+
+      // Check if the selected plan is '2x1'
+      this.is2x1Selected = selectedPlanName === '2x1 ';
     }
   }
 
@@ -173,19 +180,19 @@ export class RelacionClientePlanComponent implements OnInit {
   postRelacion() {
     if (this.relacionForm.valid) {
       const formValue = this.relacionForm.value;
-
+  
       // Convertir las fechas al formato correcto
       const fechaRegistroPlan = dayjs(formValue.fechaRegistroPlan).format('YYYY-MM-DD');
       const fechaInicio = dayjs(formValue.fechaInicio).format('YYYY-MM-DD');
       const fechaFin = dayjs(formValue.fechaFin).format('YYYY-MM-DD');
-
+  
       const envio = {
         ...formValue,
         fechaRegistroPlan,
         fechaInicio,
         fechaFin
       };
-
+  
       const pago = {
         run: formValue.run,
         nombreUsuario: formValue.nombreUsuario,
@@ -197,9 +204,22 @@ export class RelacionClientePlanComponent implements OnInit {
         metodoPago: formValue.metodoPago,
         descuento: formValue.descuento
       };
-
+      const specialSelectRun = formValue.specialSelect;
+      const specialUser = this.clientes.find(cliente => cliente.run === specialSelectRun);
+      const pagoEspecial = specialUser ? {
+        run: specialUser.run,
+        nombreUsuario: specialUser.primerNombre,
+        apellidoUsuario: specialUser.paternoApellido,
+        idPlan: formValue.idPlan,
+        nombrePlan: formValue.nombrePlan,
+        fechaPago: dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'), // Formato ISO 8601 con tiempo actual
+        monto: formValue.monto,
+        metodoPago: formValue.metodoPago,
+        descuento: formValue.descuento
+      } : null;
+  
       console.log('Datos enviados:', envio); // Verifica aquí que monto no sea undefined
-
+  
       this.planUsuarioService.agregarPlanUsuario(envio).subscribe(
         (response) => {
           console.log('Relacion guardada exitosamente:', response);
@@ -207,14 +227,38 @@ export class RelacionClientePlanComponent implements OnInit {
           this.pagoService.agregarPago(pago).subscribe(
             (pagoResponse) => {
               console.log('Pago guardado exitosamente:', pagoResponse);
-              // Actualizar el atributo tienePlan del usuario
+              // Enviar el pago especial si existe
+              if (pagoEspecial) {
+                this.pagoService.agregarPago(pagoEspecial).subscribe(
+                  (pagoEspecialResponse) => {
+                    console.log('Pago especial guardado exitosamente:', pagoEspecialResponse);
+                  },
+                  (pagoEspecialError) => {
+                    console.error('Error al guardar el pago especial:', pagoEspecialError);
+                  }
+                );
+              }
+              // Actualizar el atributo tienePlan del usuario principal
               this.clienteService.actualizarPlanTrue(formValue.run).subscribe(
                 (userResponse) => {
-                  console.log('Usuario actualizado exitosamente:', userResponse);
-                  this.dialogRef.close(true);
+                  console.log('Usuario principal actualizado exitosamente:', userResponse);
+                  // Actualizar el atributo tienePlan del usuario seleccionado en specialSelect
+                  if (specialSelectRun) {
+                    this.clienteService.actualizarPlanTrue(specialSelectRun).subscribe(
+                      (specialUserResponse) => {
+                        console.log('Usuario especial actualizado exitosamente:', specialUserResponse);
+                        this.dialogRef.close(true);
+                      },
+                      (specialUserError) => {
+                        console.error('Error al actualizar el usuario especial:', specialUserError);
+                      }
+                    );
+                  } else {
+                    this.dialogRef.close(true);
+                  }
                 },
                 (userError) => {
-                  console.error('Error al actualizar el usuario:', userError);
+                  console.error('Error al actualizar el usuario principal:', userError);
                 }
               );
             },
@@ -231,4 +275,5 @@ export class RelacionClientePlanComponent implements OnInit {
       console.warn('El formulario no es válido. Verifica los campos.');
     }
   }
+  
 }

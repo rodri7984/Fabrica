@@ -42,7 +42,7 @@ export class MostrarStaffComponent {
   usuarios: Colaborador[] = [];
   title = 'Dashboard colaboradores';
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  desplegarColumna: string[] = ['nombre','username','rolColaborador','estado'];
+  desplegarColumna: string[] = ['nombre', 'username', 'rolColaborador', 'estado', 'acciones'];
   dataSource = new MatTableDataSource<Colaborador>();
 
   constructor(
@@ -82,8 +82,17 @@ applyFilter(event: Event) {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
 
-closeSidenav() {
-  this.sidenav.close();
+changeEstado(staff: Colaborador) {
+  const newEstado = staff.estado === "ACTIVO" ? "INACTIVO" : "ACTIVO";
+  this.colaboradorService.changeEstadoColab(staff.username, newEstado)
+    .subscribe(response => {
+      console.log('Estado del colaborador actualizado:', response);
+      this.listarColaboradores(); // Llama a listarColaboradores para actualizar la lista
+    }, error => {
+      console.error('Error al actualizar el estado del colaborador:', error);
+    });
 }
+
+
 
 }

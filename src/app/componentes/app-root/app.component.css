@@ -1,12 +1,22 @@
-
-
 .example-spacer {
-    flex: 1 1 auto;
-  }
-  
+  flex: 1 1 auto;
+}
+
+.full-width-button {
+  width: 100%;
+  justify-content: flex-start;
+}
+mat-list-item {
+  padding: 0 !important;
+}
+
+mat-list-item .mat-list-item-content {
+  padding: 0 !important;
+}
+
 .toolbar {
   color: white;
-  
+
   /* background-color: ; */
   background: linear-gradient(to right, #4D2F6B 20%, #694491);
 }
@@ -15,9 +25,7 @@
   background-color: #4D2F6B;
 }
 
-.horizontal-gradient {
-  
-}
+.horizontal-gradient {}
 
 .sidenav-container {
   height: 100%;
