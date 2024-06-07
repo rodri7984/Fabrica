@@ -1,0 +1,57 @@
+@use '@angular/material' as mat;
+
+
+
+    /* For use in src/lib/core/theming/_palette.scss */
+    $custom-primary-palette: (
+    50 : #efecf6,
+    100 : #d6cfe8,
+    200 : #bbafd9,
+    300 : #9f8ec9,
+    400 : #8b76be,
+    500 : #765eb2,
+    600 : #6e56ab,
+    700 : #634ca2,
+    800 : #594299,
+    900 : #46318a,
+    A100 : #ddd3ff,
+    A200 : #b5a0ff,
+    A400 : #8d6dff,
+    A700 : #7953ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+
+
+
+$custom-primary : mat.define-palette($custom-primary-palette);
+$custom-accent : mat.define-palette(mat.$pink-palette, A200 , A100, A400);
+$custom-warn : mat.define-palette(mat.$red-palette);
+
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
+  ),
+
+  
+));
+
+@include mat.all-component-themes($my-theme);
