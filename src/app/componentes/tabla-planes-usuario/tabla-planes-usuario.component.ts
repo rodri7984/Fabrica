@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -62,13 +62,15 @@ export class TablaPlanesUsuarioComponent {
     private router: Router,
     private http: HttpClient,
     private clienteService: ClienteService,
-    private planUsuarioService: PlanUsuarioService
+    private planUsuarioService: PlanUsuarioService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.planUsuarioService.obtenerPlanUsuario().subscribe((data) => {
       this.planUsers = data;
       this.dataSource.data = this.planUsers; // Asegúrate de actualizar la dataSource aquí
+      this.cdr.detectChanges();
     });
   }
 
@@ -95,11 +97,18 @@ export class TablaPlanesUsuarioComponent {
     return masUnMes.diff(today, 'days');
   }
 
-  getColor(diasTotal: number): string {
-    if (diasTotal >= 15 && diasTotal <= 30) return 'green';
-    if (diasTotal >= 7 && diasTotal <= 14) return 'yellow';
-    if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
-    if (diasTotal <= 0) return 'red';
-    return 'black';
-  }
+getColor(diasTotal: number): string {
+  if (diasTotal >= 22 && diasTotal <= 30) return '#92D86B';
+  if (diasTotal >= 7 && diasTotal <= 21) return '#EDD661';
+  if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
+  if (diasTotal <= 0) return '#C4534E';
+  return 'black';
 }
+}
+// getColor(diasTotal: number): string {
+//   if (diasTotal >= 15 && diasTotal <= 30) return '#92D86B';
+//   if (diasTotal >= 7 && diasTotal <= 14) return '#EDD661';
+//   if (diasTotal >= 1 && diasTotal <= 6) return 'orange';
+//   if (diasTotal <= 0) return '#C4534E';
+//   return 'black';
+// }
