@@ -13,6 +13,13 @@ mat-list-item {
 mat-list-item .mat-list-item-content {
   padding: 0 !important;
 }
+mat-list-item:hover{
+  background-color: #324AB2;
+}
+
+tr {
+  background-color: #324AB2;
+}
 
 .toolbar {
   color: white;

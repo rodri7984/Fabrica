@@ -54,4 +54,17 @@ $my-theme: mat.define-light-theme((
   
 ));
 
+tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
+    background-color: rgb(61, 61, 181);
+    color: white;
+}
+
+html {
+    --mat-table-background-color: white;
+    --mat-table-header-headline-color: rgba(0, 0, 0, 0.87);
+    --mat-table-row-item-label-text-color: rgba(0, 0, 0, 0.87);
+    --mat-table-row-item-outline-color: rgb(61, 61, 181) !important;
+}
+  
+
 @include mat.all-component-themes($my-theme);
