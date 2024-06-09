@@ -89,10 +89,10 @@ export class EmpAddEditComponent {
     primerNombre: ['', Validators.required],
     segundoNombre: [''], // Sin validadores para el segundo nombre
     paternoApellido: ['', Validators.required],
-    maternoApellido: ['', Validators.required],
+    maternoApellido: ['' ],
     run: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
     dv: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern(/^[0-9kK]$/)]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [ Validators.email]],
     fono: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     fechaNacimiento: [this.post.fechaNacimiento, [Validators.required]],
     fechaRegistro:  [this.post.fechaRegistro , Validators.required],

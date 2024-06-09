@@ -23,4 +23,11 @@ export class PlanService {
     getPLanes(): Observable<Plan[]> {
       return this.httpClient.get<Plan[]>(`${this.apiUrl}/listPlanes`);
     }
+
+    desactivarPlan(nombrePlan: string, estado: string): Observable<any> {
+      const url = `${this.apiUrl}/changeStatePlan/${nombrePlan}/${estado}`;
+      return this.httpClient.put(url, { estado});
+    }
+       
+
 }

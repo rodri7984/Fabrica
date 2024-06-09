@@ -98,7 +98,7 @@ export class TablaPlanesUsuarioComponent {
   }
 
 getColor(diasTotal: number): string {
-  if (diasTotal >= 22 && diasTotal <= 30) return '#bee3ba';
+  if (diasTotal >= 22 && diasTotal <= 31) return '#bee3ba';
   if (diasTotal >= 7 && diasTotal <= 21) return '#fffeba';
   if (diasTotal >= 1 && diasTotal <= 6) return 'rgba(255, 166, 0, 0.911)';
   if (diasTotal <= 0) return '#db4040';

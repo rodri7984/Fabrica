@@ -149,13 +149,18 @@ export class RelacionClientePlanComponent implements OnInit {
       this.runes = data.map(cliente => cliente.run); // Extract run values
     });
     this.planService.getPLanes().subscribe((data) => {
-      this.planes = data;
+      this.planes = data.filter(plan => plan.estado === "ACTIVO");
     });
     this.calculateTotal(); // Calcular el total inicialmente
   }
 
   onPlanChange(selectedPlanName: string) {
-    const selectedPlan = this.planes.find(plan => plan.nombrePlan === selectedPlanName);
+    // Filtra los planes para obtener solo aquellos con estado "ACTIVO"
+    const activePlans = this.planes.filter(plan => plan.estado === "ACTIVO");
+  
+    // Encuentra el plan seleccionado entre los planes activos
+    const selectedPlan = activePlans.find(plan => plan.nombrePlan === selectedPlanName);
+  
     if (selectedPlan) {
       this.valorPorMes = selectedPlan.valorPlan;
       this.relacionForm.patchValue({
@@ -163,9 +168,9 @@ export class RelacionClientePlanComponent implements OnInit {
         nombrePlan: selectedPlan.nombrePlan
       });
       this.calculateTotal();
-
+  
       // Check if the selected plan is '2x1'
-      this.is2x1Selected = selectedPlanName === '2x1 ';
+      this.is2x1Selected = selectedPlanName === '2x1';
     }
   }
 
