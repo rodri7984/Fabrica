@@ -16,6 +16,7 @@ import { HttpClient } from "@angular/common/http";
 import { PlanService } from "../../core/services/plan.service";
 import { FormAddPlanComponent } from "../form-add-plan/form-add-plan.component";
 import { DesactivarPlanComponent } from "../desactivar-plan/desactivar-plan.component";
+import { EditarPlanComponent } from "../editar-plan/editar-plan.component";
 
 
 @Component({
@@ -44,7 +45,7 @@ import { DesactivarPlanComponent } from "../desactivar-plan/desactivar-plan.comp
 export class TablaPlanComponent implements OnInit{
   planes: Plan[] = [];
   title = 'tabla plan';
-  desplegarColumna: string[] = ['idPlan','nombrePlan','valorPlan', 'estado','acciones'];
+  desplegarColumna: string[] = ['idPlan','nombrePlan','valorPlan', 'estado','acciones','editar'];
   dataSource = new MatTableDataSource<Plan>();
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -110,5 +111,16 @@ ShowDesactivarPlan(plan: Plan) {
   });
 }
 
+showEditarPlan(plan: Plan) {
+  const dialogRef = this._dialog.open(EditarPlanComponent, {
+    width: '500px',
+    data: { plan }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.listarPlanes(); // Actualiza la lista de clientes cuando se relaciona un plan
+    }
+  });
+}
 
 }

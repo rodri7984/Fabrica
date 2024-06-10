@@ -42,6 +42,14 @@
       </td>
     </ng-container>
 
+        <!-- Editar column-->
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef> Editar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="showEditarPlan(element)"  >Editar</button>
+          </td>
+        </ng-container>
+
    
 
     <tr mat-header-row *matHeaderRowDef="desplegarColumna"></tr>

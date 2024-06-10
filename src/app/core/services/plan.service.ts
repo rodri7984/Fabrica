@@ -28,6 +28,11 @@ export class PlanService {
       const url = `${this.apiUrl}/changeStatePlan/${nombrePlan}/${estado}`;
       return this.httpClient.put(url, { estado});
     }
+
+    actualizarPlan(plan: Plan): Observable<any> {
+      const url = `${this.apiUrl}/updatePlan`;
+      return this.httpClient.put(url, plan);
+    }
        
 
 }
