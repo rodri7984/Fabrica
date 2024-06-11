@@ -22,7 +22,7 @@ import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
 import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-planes-usuario.component';
-
+import { LoginComponent } from '../login/login.component';
 
 
 
@@ -44,7 +44,9 @@ import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-plane
         MatListModule,
          TablaClienteComponent, MostrarStaffComponent,
         TablaPlanesUsuarioComponent,
-        EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent]
+        EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent,
+        LoginComponent
+      ]
 })
 export class AppComponent {
   toggleSidenav = new EventEmitter<void>();
@@ -53,7 +55,7 @@ sidenavv!: MatSidenav;
   title = 'fabrica';
   
   activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' |
-  'historialPago' | null = null;
+  'historialPago'| 'login' | null = null;
  
 
 
@@ -79,6 +81,10 @@ showplanesUsuarioDashboard() {
 
 showHPagoDashboard() {
   this.activeComponent = 'historialPago';
+}
+
+showLogin(){
+  this.activeComponent = 'login';
 }
 
 showpEmpAddEditComponent() {
