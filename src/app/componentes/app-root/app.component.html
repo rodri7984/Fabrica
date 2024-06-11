@@ -5,16 +5,19 @@
         <button mat-button (click)="showClienteDashboard()"> Cliente</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button (click)="showStaffDashboard()" > Staff</button>
+        <button mat-button (click)="showStaffDashboard()"> Staff</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button (click)="showplanesUsuarioDashboard()" > Clientes con planes</button>
+        <button mat-button (click)="showplanesUsuarioDashboard()"> Clientes con planes</button>
       </mat-list-item>
       <mat-list-item>
         <button mat-button (click)="showPLanDashboard()"> PLanes</button>
       </mat-list-item>
       <mat-list-item>
         <button mat-button (click)="showHPagoDashboard()"> Historial Pagos</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button (click)="showLogin()"> Login</button>
       </mat-list-item>
 
     </mat-nav-list>
@@ -33,4 +36,5 @@
     <app-tabla-planes-usuario *ngIf="activeComponent === 'planesUsuario'"></app-tabla-planes-usuario>
     <app-tabla-plan *ngIf="activeComponent === 'plan'"></app-tabla-plan>
     <!-- <app-emp-add-edit *ngIf="activeComponent === 'EmpAddEditComponent'"></app-emp-add-edit> -->
-<app-tabla-hpago *ngIf="activeComponent === 'historialPago'"></app-tabla-hpago>
+    <app-tabla-hpago *ngIf="activeComponent === 'historialPago'"></app-tabla-hpago>
+    <app-tabla-hpago *ngIf="activeComponent === 'login'"></app-tabla-hpago>

@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from '../app-root/app.component';
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
     selector: 'app-tabla-cliente',
@@ -73,6 +74,15 @@ export class TablaClienteComponent implements OnInit {
 
     showEmpAddEditComponent() {
         const dialogRef = this._dialog.open(EmpAddEditComponent);
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.listarUsuarios(); // Actualiza la lista de clientes cuando se agrega uno nuevo
+            }
+        });
+    }
+
+    showLogin() {
+        const dialogRef = this._dialog.open(LoginComponent);
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.listarUsuarios(); // Actualiza la lista de clientes cuando se agrega uno nuevo
