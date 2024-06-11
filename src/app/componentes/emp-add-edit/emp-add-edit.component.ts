@@ -3,7 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -21,14 +21,30 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import utc from 'dayjs/plugin/utc';
 import {  FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 dayjs.extend(utc); 
 registerLocaleData(localeEs, 'es');
 
+const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
+
 @Component({
   selector: 'app-emp-add-edit',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [ { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+  { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+  { provide: MAT_DATE_LOCALE, useValue: 'es' },],
   imports: [MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
@@ -39,6 +55,7 @@ registerLocaleData(localeEs, 'es');
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    MatMomentDateModule
     
 
   ],
@@ -80,8 +97,9 @@ export class EmpAddEditComponent {
 
   constructor(private fb: FormBuilder, private clienteService: ClienteService, 
     public _location : Location, private planService : PlanService,
-    private dialogRef: MatDialogRef<EmpAddEditComponent>
-  ) { }
+    private dialogRef: MatDialogRef<EmpAddEditComponent>,
+    private dateAdapter: DateAdapter<any>,
+  ) {   this.dateAdapter.setLocale('es');}
 
 
 
