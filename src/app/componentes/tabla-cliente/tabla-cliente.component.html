@@ -54,16 +54,13 @@
     </td>
   </ng-container>
 
-  <!-- Días Vencimiento Column -->
-  <!-- <ng-container matColumnDef="fechaRegistro2">
-      <th mat-header-cell *matHeaderCellDef>Días vencimiento</th>
-      <td mat-cell *matCellDef="let element" [ngStyle]="{'background-color': getColor(calcularDiferencia(element.fechaRegistro))}">
-        {{ calcularDiferencia(element.fechaRegistro) }}
-        <button mat-icon-button (click)="editarUsuario(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container> -->
+        <!-- Editar column-->
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef> Editar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="showEditarCliente(element)"  >Editar</button>
+          </td>
+        </ng-container>
 
 
 

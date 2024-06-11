@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from '../app-root/app.component';
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
+import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 
 @Component({
     selector: 'app-tabla-cliente',
@@ -43,7 +44,7 @@ import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 export class TablaClienteComponent implements OnInit {
     usuarios: Usuario[] = [];
     title = 'tabla cliente';
-    desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaNacimiento', 'fechaRegistro', 'fono', 'acciones'];
+    desplegarColumna: string[] = ['rut', 'primerNombre', 'paternoApellido', 'fechaNacimiento', 'fechaRegistro', 'fono', 'acciones','editar'];
     dataSource = new MatTableDataSource<Usuario>();
     planes: { [key: string]: number } = {};
 
@@ -93,6 +94,18 @@ export class TablaClienteComponent implements OnInit {
         const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
           width: '500px',
           data: { cliente }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.listarUsuarios(); // Actualiza la lista de clientes cuando se relaciona un plan
+          }
+        });
+      }
+
+      showEditarCliente (usuario: Usuario) {
+        const dialogRef = this._dialog.open(EditarClienteComponent, {
+          width: '500px',
+          data: { usuario }
         });
         dialogRef.afterClosed().subscribe(result => {
           if (result) {

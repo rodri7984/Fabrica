@@ -39,8 +39,9 @@ export class ClienteService {
 
    
     
-    actualizarUsuario(run: string, usuario: Partial<Usuario>): Observable<Usuario> {
-      return this.httpClient.patch<Usuario>(`${this.apiUrl}/updateUsuario/${run}`, usuario);
+    actualizarCliente(usuario: Usuario): Observable<any> {
+      const url = `${this.apiUrl}/updateUsuario`;
+      return this.httpClient.put(url, usuario);
     }
   
     actualizarPlanTrue(run: string): Observable<Usuario> {
