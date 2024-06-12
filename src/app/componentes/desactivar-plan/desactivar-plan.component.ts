@@ -42,6 +42,7 @@ export class DesactivarPlanComponent {
   }
   onConfirm(): void {
     this.changeEstado(this.data.plan);
+    this.listarPlanes();
   }
 
   changeEstado(planx: Plan): void {
