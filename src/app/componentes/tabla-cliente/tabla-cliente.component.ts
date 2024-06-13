@@ -83,11 +83,6 @@ export class TablaClienteComponent implements OnInit {
 
     showLogin() {
         const dialogRef = this._dialog.open(LoginComponent);
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.listarUsuarios(); // Actualiza la lista de clientes cuando se agrega uno nuevo
-            }
-        });
     }
 
     applyFilter(event: Event) {

@@ -61,6 +61,10 @@ export class LoginComponent {
     email: ['', Validators.required],
     password: ['', Validators.required]
   });
+
+  onSubmit() {
+    this.authFirebase.iniciarSesion(this.emailUser, this.passwordUser);
+  }
   
 
   async ingresar(){
