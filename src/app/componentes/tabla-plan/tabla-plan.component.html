@@ -1,12 +1,14 @@
 
-<div style="text-align: center;" mat-dialog-actions class="action">
-  <button   mat-raised-button class="boton" color="primary" type="submit" (click)="showFormAddPlanComponent()" >Agregar nuevo Plan</button>
-</div>
+<div class="content-container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <mat-form-field style="flex: 1; margin-right: 16px;">
+      <mat-label>Buscar...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nombre / Rut " #input>
+    </mat-form-field>
+    <button   mat-raised-button class="boton" color="primary" type="submit" (click)="showFormAddPlanComponent()" >Agregar nuevo Plan</button>
+  </div>
 
-<mat-form-field>
-    <mat-label>Buscar...</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Nombre / Rut " #input>
-  </mat-form-field>
+
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

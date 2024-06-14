@@ -75,15 +75,18 @@ showStaffDashboard() {
 
 showplanesUsuarioDashboard() {
   this.activeComponent = 'planesUsuario';
+
 }
 
 showHPagoDashboard() {
   this.activeComponent = 'historialPago';
 }
 
-showpEmpAddEditComponent() {
+showEmpAddEditComponent() {
   this.activeComponent = 'EmpAddEditComponent';
-  this._dialog.open(EmpAddEditComponent);
+  this._dialog.open(EmpAddEditComponent, {
+    panelClass: 'custom-dialog-container' // Aplica la clase CSS personalizada
+  });
 }
  onToggleSidenav(): void {
    this.toggleSidenav.emit();
@@ -105,8 +108,11 @@ showPLanDashboard(){
 }
 
 openRelacionClientePlanComponent() {
-  const dialogRef = this._dialog.open(RelacionClientePlanComponent);
-
+  const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
+    panelClass: 'custom-dialog-container' // Aplica la clase CSS personalizada
+  });
 }
+
+
 
 }

@@ -1,9 +1,11 @@
 
-<mat-form-field>
-  <mat-label>Buscar...</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Nombre / Rut " #input>
-</mat-form-field>
-
+<div class="content-container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <mat-form-field style="flex: 1; margin-right: 16px;">
+      <mat-label>Buscar...</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nombre / Rut " #input>
+    </mat-form-field>
+  </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- Run Column -->

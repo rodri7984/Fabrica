@@ -10,17 +10,11 @@
     background-color: #db4040;
   }
   
-
-
-
-
-
-
-
-
-
-
-  
   .black {
     background-color: rgba(255, 166, 0, 0.911);
   } */
+
+  .content-container {
+    margin-top: 40px; 
+  }
+  

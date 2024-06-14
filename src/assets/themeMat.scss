@@ -57,6 +57,7 @@ $my-theme: mat.define-light-theme((
 tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
     background-color:#b5a0ff;
     color: white;
+    
 }
 
 html {
@@ -64,6 +65,11 @@ html {
     --mat-table-header-headline-color: rgba(0, 0, 0, 0.87);
     --mat-table-row-item-label-text-color: rgba(0, 0, 0, 0.87);
     --mat-table-row-item-outline-color: #c7f9eb !important;
+}
+
+.custom-dialog-container {
+  border-radius: 80px; 
+  overflow: hidden; 
 }
   
 

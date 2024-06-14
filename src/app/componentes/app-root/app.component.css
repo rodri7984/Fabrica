@@ -17,6 +17,9 @@ mat-list-item:hover{
   background-color:#b5a0ff;
   
 }
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  border-radius: 22px;
+}
 
 
 .toolbar {
