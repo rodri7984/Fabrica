@@ -1,0 +1,28 @@
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    font-size: 40px;
+  }
+
+
+.carousel-image {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: auto; /* Ajusta automáticamente la altura proporcionalmente */
+    max-height: 400px; 
+    border-radius: 10px; 
+  }
+  .content{
+    text-align: center;
+  }
+
+  mat-grid-list {
+    background-color: rgb(212, 190, 238);
+  }
+
+  p-carousel {
+    border-radius: 25px;
+    outline-color: black;
+  }
