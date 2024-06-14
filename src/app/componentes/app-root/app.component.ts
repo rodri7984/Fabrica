@@ -22,6 +22,7 @@ import { TablaPlanComponent } from "../tabla-plan/tabla-plan.component";
 import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-planes-usuario.component';
+import { MostrarBienvenidaComponent } from '../mostrar-bienvenida/mostrar-bienvenida.component';
 
 
 
@@ -44,7 +45,8 @@ import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-plane
         MatListModule,
          TablaClienteComponent, MostrarStaffComponent,
         TablaPlanesUsuarioComponent,
-        EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent]
+        EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent,
+      MostrarBienvenidaComponent]
 })
 export class AppComponent {
   toggleSidenav = new EventEmitter<void>();
@@ -53,7 +55,7 @@ sidenavv!: MatSidenav;
   title = 'fabrica';
   
   activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' |
-  'historialPago' | null = null;
+  'historialPago' | 'bienvenida' | null = null;
  
 
 
@@ -62,8 +64,13 @@ sidenavv!: MatSidenav;
  constructor( private _dialog: MatDialog) { }
 
  ngOnInit(): void {
-  this.activeComponent = 'planesUsuario'; // Mostrar planes de usuario al inicio
+  this.activeComponent = 'bienvenida'; // Mostrar planes de usuario al inicio
 }
+
+showBienvenida() {
+  this.activeComponent = 'bienvenida';
+}
+
 
  showClienteDashboard() {
   this.activeComponent = 'cliente';
