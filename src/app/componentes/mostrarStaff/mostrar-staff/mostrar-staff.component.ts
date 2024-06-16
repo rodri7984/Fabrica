@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { Colaborador } from '../../../modelos/colaborador';
 import { ColaboradorService } from '../../../core/services/colaborador.service';
 import { ColaboradorComponent } from '../../form-colaboradores/colaboradores-component.component';
+import { LoginComponent } from '../../login/login.component';
 
 
 @Component({
@@ -70,6 +71,14 @@ showFormColaboradores() {
           this.listarColaboradores(); // Actualiza la lista de clientes cuando se agrega uno nuevo
       }
   });
+}
+
+showMatLogin(){
+  const dialogReal = this._dialog.open(LoginComponent);
+}
+
+openLogin(){
+  this._dialog.open(LoginComponent);
 }
 
 

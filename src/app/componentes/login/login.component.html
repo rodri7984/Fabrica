@@ -1,0 +1,31 @@
+
+
+<div mat-dialog-title>
+    <h1 style="text-align: center;">Inicio de sesion</h1>
+</div>
+
+<div mat-dialog-content class="content">
+
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Nickname</mat-label>
+            <input matInput formControlName="username">
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" />
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="action" style="text-align: center;">
+        <button mat-raised-button class="boton" color="primary" type="submit" (click)="metodoEstandar()">
+        Iniciar Sesión    
+        </button>
+    </div>
+
+</div>

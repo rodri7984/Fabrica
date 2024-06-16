@@ -23,6 +23,7 @@ import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-planes-usuario.component';
 import { MostrarBienvenidaComponent } from '../mostrar-bienvenida/mostrar-bienvenida.component';
+import { LoginComponent } from '../login/login.component';
 
 
 
@@ -55,7 +56,7 @@ sidenavv!: MatSidenav;
   title = 'fabrica';
   
   activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' |
-  'historialPago' | 'bienvenida' | null = null;
+  'historialPago' | 'login' | 'bienvenida' | null = null;
  
 
 
@@ -89,6 +90,10 @@ showHPagoDashboard() {
   this.activeComponent = 'historialPago';
 }
 
+showLogin() {
+  this.activeComponent = 'login';
+}
+
 showEmpAddEditComponent() {
   this.activeComponent = 'EmpAddEditComponent';
   this._dialog.open(EmpAddEditComponent, {
@@ -108,6 +113,10 @@ showEmpAddEditComponent() {
 
 openColaborador() {
   this._dialog.open(ColaboradorComponent);
+}
+
+openLogin(){
+  this._dialog.open(LoginComponent);
 }
 
 showPLanDashboard(){
