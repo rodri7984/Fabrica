@@ -1,45 +1,14 @@
-<!-- Primer bloque -->
-<mat-grid-list cols="7" rowHeight="400px">
-    <!-- Encabezado -->
-    <mat-grid-tile [colspan]="7" [rowspan]="1" class="header-container">
-      <h1>Bienvenidos equipo La Fabrica!</h1>
-    </mat-grid-tile>
-  
-    <!-- Contenido con carrusel -->
-    <mat-grid-tile [colspan]="3" [rowspan]="1" class="carousel-container">
-      <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
-        <ng-template pTemplate="item" let-image>
-          <img [src]="image" style="width: 100%; border-radius: 10px;" class="carousel-image">
-        </ng-template>
-      </p-carousel>
-    </mat-grid-tile>
-  
-    <!-- Contenido de texto -->
-    <mat-grid-tile [colspan]="4" [rowspan]="1" class="content-container">
-      <div class="content">
-        <h2 class="content-title">Como registrar un cliente?</h2>
-        <p>En la barra lateral haz click en 'Cliente'. Busca el boton agregar cliente y rellena el formulario con los datos del nuevo cliente</p>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-  
-  <!-- Segundo bloque -->
-  <mat-grid-list cols="7" rowHeight="400px">
-    <!-- Contenido de texto -->
-    <mat-grid-tile [colspan]="4" [rowspan]="1" class="content-container">
-      <div class="content">
-        <h2>Como vincular un plan a un cliente?</h2>
-        <p>En la barra lateral haz click en 'Cliente'. Busca en la tabla el boton de Vincular plan. Agrega el plan que el cliente desea comprar. No olvides agregar cuantos meses el cliente desea pagar</p>
-      </div>
-    </mat-grid-tile>
-  
-    <!-- Contenido con carrusel -->
-    <mat-grid-tile [colspan]="3" [rowspan]="1" class="carousel-container">
-      <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
-        <ng-template pTemplate="item" let-image>
-          <img [src]="image" style="width: 100%; border-radius: 10px;" class="carousel-image">
-        </ng-template>
-      </p-carousel>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="relative-container">
+    <swiper-container loop="true" pagination="true" pagination-clickable="true" space-between="30" effect="fade" navigation="true" class="custom-swiper">
+      <swiper-slide>
+        <img src="https://picsum.photos/3000/1000" class="carousel-image">
+      </swiper-slide>
+      <swiper-slide>
+        <img src="https://picsum.photos/id/10/3000/1000" class="carousel-image">
+      </swiper-slide>
+      <swiper-slide>
+        <img src="https://picsum.photos/3000/1000" class="carousel-image">
+      </swiper-slide>
+    </swiper-container>
+  </div>
   
