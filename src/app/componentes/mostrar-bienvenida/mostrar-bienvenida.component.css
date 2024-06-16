@@ -5,6 +5,33 @@
     background: linear-gradient(to bottom, #800080, #ffffff); /* Degradado de morado a blanco */
     display: flex;
     align-items: center;
+    min-height: 100vh;
+  }
+
+  #ambos{
+    height: 100vh; 
+    margin-top: 100px;
+  }
+
+  h1 {
+    font-size: 72px;
+    margin: 0; /* Elimina márgenes adicionales */
+    padding: 0; /* Elimina padding adicional */
+    line-height: 1.2em; /* Ajusta la altura de la línea para evitar superposiciones */
+    font-weight: 530;
+}
+
+  .text-container{
+    color: #ffffff;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    line-height: 1.2;
+    margin-top: 10%;
+
   }
   
   .custom-swiper {
