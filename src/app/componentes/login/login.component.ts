@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -23,6 +23,7 @@ import utc from 'dayjs/plugin/utc';
 import {  FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatIconModule} from '@angular/material/icon';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -42,19 +43,22 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+
+  // hide =true;
 
   metodoEstandar(){
     console.log('funciona');
   }
 
 
-  // hide = signal(true);
-  // clickEvent(event: MouseEvent) {
-  //   this.hide.set(!this.hide);
-  //   event.stopPropagation();
-  // }
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide);
+    event.stopPropagation();
+  }
 
 }
