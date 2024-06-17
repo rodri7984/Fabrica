@@ -1,7 +1,7 @@
 .relative-container {
     position: relative;
     width: 100%;
-    background: linear-gradient(to bottom, #800080, #ffffff); /* Degradado de morado a blanco */
+    background: linear-gradient(to bottom, #800080, #ffffff); 
     display: flex;
     align-items: center;
     min-height: 80vh;
@@ -72,16 +72,13 @@
 
 .custom-swiper {
     position: relative;
-    padding: 2px; /* Padding interno opcional */
+
     
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leve sombreado */
     overflow: hidden; /* Asegura que el contenido no exceda los bordes */
 }
 
-.custom-swiper::before {
-
-}
 
 
 .swiper-slide {
@@ -92,15 +89,15 @@
     position: absolute;
     top: 6px; /* Ajusta según el grosor del borde */
     left: 6px; /* Ajusta según el grosor del borde */
-    right: 1px; /* Ajusta según el grosor del borde */
+    right: 6px; /* Ajusta según el grosor del borde */
     bottom: 6px; /* Ajusta según el grosor del borde */
     background: linear-gradient(to bottom, #800080, #ffffff); /* Degradado de morado a blanco */
     border-radius: 12px; /* Ajusta según el radio del borde */
-    z-index: -1; /* Coloca el pseudo-elemento detrás del swiper */
+    z-index: -1; 
 }
 
 .text-container-2{
     color: #4b5563;
-    
+    padding: 5%;
     font-weight: 530;
 }
