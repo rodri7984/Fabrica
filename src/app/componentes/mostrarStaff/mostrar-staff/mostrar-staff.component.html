@@ -21,7 +21,7 @@
 
   <!-- Primer Nombre Column -->
   <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef>username</th>
+    <th mat-header-cell *matHeaderCellDef>Nombre de usuario</th>
     <td mat-cell *matCellDef="let element">{{ element.username }}</td>
   </ng-container>
 
@@ -29,20 +29,22 @@
 
   <!--  rol Column -->
   <ng-container matColumnDef="rolColaborador">
-    <th mat-header-cell *matHeaderCellDef>rolColaborador</th>
+    <th mat-header-cell *matHeaderCellDef>Rol del staff</th>
     <td mat-cell *matCellDef="let element">{{ element.rolColaborador }}</td>
   </ng-container>
 
     <!-- estado Column -->
     <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef>estado</th>
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
       <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
     </ng-container>
 
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef>Cambiar Estado</th>
       <td mat-cell *matCellDef="let staff">
-        <button mat-button  (click)="changeEstado(staff)">Cambiar estado</button>
+        <button mat-button  (click)="changeEstado(staff)">
+          <img src="assets/img/changeMorado.svg" alt="Cambiar estado" class="iconChange">  
+        </button>
  
       </td>
     </ng-container>

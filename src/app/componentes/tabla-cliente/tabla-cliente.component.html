@@ -48,9 +48,12 @@
 
   <!-- Columna para el botón -->
   <ng-container matColumnDef="acciones">
-    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <th mat-header-cell *matHeaderCellDef> Vincular </th>
     <td mat-cell *matCellDef="let cliente">
-      <button mat-button *ngIf="!cliente.tienePlan" (click)="relacionarPlan(cliente)">Vincular Plan</button>
+      <button mat-button *ngIf="!cliente.tienePlan" (click)="relacionarPlan(cliente)">
+        <img src="assets/img/link-svgrepo-com.svg" alt="Cambiar estado" class="iconLink"> 
+      
+      </button>
     </td>
   </ng-container>
 
@@ -58,10 +61,12 @@
         <ng-container matColumnDef="editar">
           <th mat-header-cell *matHeaderCellDef> Editar </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-button (click)="showEditarCliente(element)"  >Editar</button>
+            <button mat-button (click)="showEditarCliente(element)"  >
+              <img src="assets/img/edit-fill-1480-svgrepo-com.svg" alt="Cambiar estado" class="icon"> 
+            </button>
           </td>
         </ng-container>
-
+        
 
 
   <tr mat-header-row *matHeaderRowDef="desplegarColumna"></tr>

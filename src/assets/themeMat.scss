@@ -77,6 +77,32 @@ html {
   width: 100%;
   z-index: 1000; /* Un z-index alto para que se superponga a otros elementos */
 }
+
+.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base{
+ 
+  border: 1px solid rgb(150, 19, 141);
+}
+
+.iconChange{
+  width: 50px; /* Ajusta el tamaño del icono según tus necesidades */
+  height: 50px;
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+  vertical-align: middle;
+}
+
+.icon {
+  width: 24px; /* Ajusta el tamaño del icono según tus necesidades */
+  height: 24px;
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+  vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+}
+
+.iconLink{
+  width: 24px; /* Ajusta el tamaño del icono según tus necesidades */
+  height: 24px;
+  margin-right: 4px; /* Espacio entre el icono y el texto */
+  vertical-align: middle;
+}
   
 
 @include mat.all-component-themes($my-theme);

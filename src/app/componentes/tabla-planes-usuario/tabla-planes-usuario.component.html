@@ -22,7 +22,7 @@
 
   <!-- Nombre plan  Column -->
   <ng-container matColumnDef="nombrePlan">
-    <th mat-header-cell *matHeaderCellDef>nombrePlan</th>
+    <th mat-header-cell *matHeaderCellDef>Nombre plan</th>
     <td mat-cell *matCellDef="let element">{{ element.nombrePlan }}</td>
   </ng-container>
 
@@ -34,7 +34,7 @@
 
   <!-- fechaInicio Column -->
   <ng-container matColumnDef="fechaInicio">
-    <th mat-header-cell *matHeaderCellDef>fechaInicio</th>
+    <th mat-header-cell *matHeaderCellDef>Fecha de inicio</th>
     <td mat-cell *matCellDef="let element">{{formatDate(element.fechaInicio) }}</td>
   </ng-container>
 
@@ -42,7 +42,7 @@
 
   <!-- fechaFin Column -->
   <ng-container matColumnDef="fechaFin">
-    <th mat-header-cell *matHeaderCellDef>fechaFin</th>
+    <th mat-header-cell *matHeaderCellDef>Fecha de fin</th>
     <td mat-cell *matCellDef="let element">{{formatDate(element.fechaFin) }}</td>
   </ng-container>
 
@@ -54,7 +54,7 @@
 
   <!-- monto Column -->
   <ng-container matColumnDef="monto">
-    <th mat-header-cell *matHeaderCellDef>monto</th>
+    <th mat-header-cell *matHeaderCellDef>Monto</th>
     <td mat-cell *matCellDef="let element">{{ element.monto }}</td>
   </ng-container>
 
