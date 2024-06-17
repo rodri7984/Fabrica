@@ -70,6 +70,13 @@ html {
   border-radius: 80px; 
   overflow: hidden; 
 }
+
+.navbar {
+  position: fixed; /* Asegura que la barra de navegación permanezca en la parte superior */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Un z-index alto para que se superponga a otros elementos */
+}
   
 
 @include mat.all-component-themes($my-theme);

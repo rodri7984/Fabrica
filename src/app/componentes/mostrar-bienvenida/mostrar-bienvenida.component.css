@@ -1,7 +1,7 @@
 .relative-container {
   position: relative;
   width: 100%;
-  background: linear-gradient(to bottom, #800080, #ffffff); 
+  background: linear-gradient(to bottom, #4D2F6B 20%, #694491); 
   display: flex;
   align-items: center;
   min-height: 80vh;
@@ -32,6 +32,7 @@ h1 {
 }
 
 .custom-swiper {
+  z-index: 1;
   width: 80%;
   max-width: 600px;
   height: 75%;
@@ -67,10 +68,16 @@ h1 {
   align-items: center;
   position: relative;
   padding: 5%;
+  background-color: #06132b;
 }
 
 .text-container-2 {
-  color: #4b5563;
+  color: #bfdbfe;
   padding-right: 8%;
   font-weight: 530;
+}
+
+.relative-container-3{
+  background-color: aqua;
+  height: 50vh;
 }

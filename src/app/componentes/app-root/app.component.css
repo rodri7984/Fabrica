@@ -1,6 +1,23 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+.toolbar {
+  position: fixed; /* Fija la barra de navegación en la parte superior */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333; /* Fondo sólido */
+  color: #fff; /* Color del texto */
+  z-index: 1000; /* Asegura que la barra de navegación esté por encima de otros elementos */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade sombra para mejor visibilidad */
+}
+
+.sidenav-container{
+  position: fixed; /* Asegura que la barra de navegación permanezca en la parte superior */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Un z-index alto para que se superponga a otros elementos */
+}
 
 .full-width-button {
   width: 100%;
