@@ -5,6 +5,7 @@
 .full-width-button {
   width: 100%;
   justify-content: flex-start;
+  transition: all 0.3s ease;
 }
 mat-list-item {
   padding: 0 !important;
@@ -15,6 +16,9 @@ mat-list-item .mat-list-item-content {
 }
 mat-list-item:hover{
   background-color:#b5a0ff;
+  z-index: 1;
+  transform: scale(1.06); /* Opcional: añade un pequeño zoom */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   
 }
 .mat-mdc-dialog-surface.mdc-dialog__surface {

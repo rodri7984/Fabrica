@@ -1,103 +1,76 @@
 .relative-container {
-    position: relative;
-    width: 100%;
-    background: linear-gradient(to bottom, #800080, #ffffff); 
-    display: flex;
-    align-items: center;
-    min-height: 80vh;
-  }
-
-  #ambos{
-    height: 100vh; 
-    margin-top: 100px;
-  }
-
-  h1 {
-    font-size: 72px;
-    margin: 0; /* Elimina márgenes adicionales */
-    padding: 0; /* Elimina padding adicional */
-    line-height: 1.2em; /* Ajusta la altura de la línea para evitar superposiciones */
-    font-weight: 530;
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to bottom, #800080, #ffffff); 
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
 }
 
-  .text-container{
-    color: #ffffff;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-    line-height: 1.2;
-    margin-top: 10%;
+#ambos {
+  height: 100vh; 
+  margin-top: 100px;
+}
 
-  }
-  
-  .custom-swiper {
-    width: 80%; /* Ajusta el ancho según tus necesidades */
-    max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
-    height: 75%; /* Asegura que el carrusel ocupe toda la altura del contenedor padre */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    margin-left: auto; /* Mueve el contenedor a la derecha */
-    margin-right: 100px;
-    margin-top: 10px;
-  }
-  
-  .carousel-image {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
-    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
-    border-radius: 10px; /* Mantiene las esquinas redondeadas */
-  }
-  
-  .swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Asegura que el slide ocupe toda la altura del contenedor */
-  }
-  
-  .relative-container-2 {
-    width: 100%;
-    min-height: 50vh; /* Ajusta la altura mínima según tus necesidades */
-    /* background: linear-gradient(to bottom, #800080, #ffffff);  */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: relative;
+h1 {
+  font-size: 72px;
+  margin: 0; /* Elimina márgenes adicionales */
+  padding: 0; /* Elimina padding adicional */
+  line-height: 1.2em; /* Ajusta la altura de la línea para evitar superposiciones */
+  font-weight: 530;
+}
 
-
+.text-container {
+  color: #ffffff;
+  font-size: 100%;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  line-height: 1.2;
+  margin-top: 10%;
 }
 
 .custom-swiper {
-    position: relative;
+  width: 80%;
+  max-width: 600px;
+  height: 75%;
+  margin: 0 auto;
+  margin-left: auto;
+  margin-right: 100px;
+  margin-top: 10px;
 
-    
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leve sombreado */
-    overflow: hidden; /* Asegura que el contenido no exceda los bordes */
 }
 
 
 
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    content: '';
-    position: absolute;
-    top: 6px; /* Ajusta según el grosor del borde */
-    left: 6px; /* Ajusta según el grosor del borde */
-    right: 6px; /* Ajusta según el grosor del borde */
-    bottom: 6px; /* Ajusta según el grosor del borde */
-    background: linear-gradient(to bottom, #800080, #ffffff); /* Degradado de morado a blanco */
-    border-radius: 12px; /* Ajusta según el radio del borde */
-    z-index: -1; 
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border: 1px solid rgb(150, 19, 141);
+  /* border-image: linear-gradient(to left, rgb(135, 20, 108), rgb(207, 197, 197)) 1; */
+  border-radius: 15px; /* Ajusta el radio de las esquinas */
+  padding: 0;
+  box-sizing:border-box;
+  
+  overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
+ 
 }
 
-.text-container-2{
-    color: #4b5563;
-    padding: 5%;
-    font-weight: 530;
+.relative-container-2 {
+  width: 100%;
+  min-height: 45; /* Ajusta la altura mínima según tus necesidades */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 5%;
+}
+
+.text-container-2 {
+  color: #4b5563;
+  padding-right: 8%;
+  font-weight: 530;
 }
