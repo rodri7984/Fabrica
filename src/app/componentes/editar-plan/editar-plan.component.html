@@ -1,47 +1,48 @@
-<form [formGroup]="relacionForm" (ngSubmit)="onSubmit()">
-    <div mat-dialog-title>
-        <h1>Editar</h1>
-    </div>
-
-    <div mat-dialog-content class="content">
-
-        <div class="row">
+<div class="contenedor-total">
+    <h1>Editar</h1>
+    <form [formGroup]="relacionForm" (ngSubmit)="onSubmit()">
 
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nombre Plan</mat-label>
-                <input formControlName="nombrePlan" matInput >
-            </mat-form-field>
+        <div mat-dialog-content class="content">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Id plan</mat-label>
-                <input formControlName="idPlan" matInput readonly>
-            </mat-form-field>
+            <div class="row">
+
+
+                <mat-form-field >
+                    <mat-label>Nombre Plan</mat-label>
+                    <input formControlName="nombrePlan" matInput>
+                </mat-form-field>
+
+                <mat-form-field >
+                    <mat-label>Id plan</mat-label>
+                    <input formControlName="idPlan" matInput readonly>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field >
+                    <mat-label>Valor Plan</mat-label>
+                    <input matInput formControlName="valorPlan">
+                </mat-form-field>
+
+                <mat-form-field >
+                    <mat-label>Estado</mat-label>
+                    <input matInput formControlName="estado" readonly>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="row">
+                    <mat-label>Descripción Plan</mat-label>
+                    <textarea matInput formControlName="descripcionPlan"></textarea>
+                </mat-form-field>
+            </div>
         </div>
 
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Valor Plan</mat-label>
-                <input matInput formControlName="valorPlan">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Estado</mat-label>
-                <input matInput formControlName="estado" readonly>
-            </mat-form-field>
+        <div style="text-align: center;" mat-dialog-actions class="action">
+            <button mat-raised-button class="boton" color="primary" type="submit">
+                Actualizar Plan
+            </button>
         </div>
-
-        <div class="row">
-            <mat-form-field class="row">
-                <mat-label>Descripción Plan</mat-label>
-                <textarea matInput formControlName="descripcionPlan"></textarea>
-            </mat-form-field>
-        </div>
-    </div>
-
-    <div style="text-align: center;" mat-dialog-actions class="action">
-        <button mat-raised-button class="boton" color="primary" type="submit">
-            Actualizar Plan
-        </button>
-    </div>
-</form>
+    </form>
+</div>

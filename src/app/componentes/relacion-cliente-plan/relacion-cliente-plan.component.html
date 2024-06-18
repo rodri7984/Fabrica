@@ -1,106 +1,118 @@
-<!-- src/app/associate-client-plan/associate-client-plan.component.html -->
-<h1>Asociar Cliente con Plan</h1>
-<form [formGroup]="relacionForm" (ngSubmit)="postRelacion()">
-
-  <mat-form-field>
-    <mat-label>Nombre del Plan</mat-label>
-    <mat-select formControlName="nombrePlan" (selectionChange)="onPlanChange($event.value)" required>
-      <mat-option *ngFor="let nom of planes" [value]="nom.nombrePlan">
-        {{ nom.nombrePlan }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>ID del Plan</mat-label>
-    <input matInput formControlName="idPlan" required readonly>
-  </mat-form-field>
-
-
-  <mat-form-field>
-    <mat-label>Nombre del Usuario</mat-label>
-    <input matInput formControlName="nombreUsuario" required>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Apellido del Usuario</mat-label>
-    <input matInput formControlName="apellidoUsuario" required>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>RUT</mat-label>
-    <input matInput formControlName="run" readonly>
-  </mat-form-field>
-
-
-
-
-  <mat-form-field>
-    <mat-label>Fecha de Registro</mat-label>
-    <input matInput [matDatepicker]="pickerRegistro" formControlName="fechaRegistroPlan" readonly>
-    <mat-datepicker-toggle matSuffix [for]="pickerRegistro"></mat-datepicker-toggle>
-    <mat-datepicker #pickerRegistro [disabled]="true"></mat-datepicker>
-  </mat-form-field>
-
-
-  <mat-form-field>
-    <mat-label>Fecha de Inicio</mat-label>
-    <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" [matDatepickerFilter]="myDateFilter">
-    <mat-hint>DD/MM/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
-    <mat-datepicker #pickerInicio></mat-datepicker>
-  </mat-form-field>
+<div class="contenedor-total">
+  <!-- src/app/associate-client-plan/associate-client-plan.component.html -->
+  <h1>Asociar Cliente con Plan</h1>
+  <form [formGroup]="relacionForm" (ngSubmit)="postRelacion()">
   
-  <mat-form-field>
-    <mat-label>Meses a pagar</mat-label>
-    <input matInput type="number" formControlName="mensualidades" required>
-  </mat-form-field>
+    <div mat-dialog-content class="content">
   
-  <mat-form-field>
-    <mat-label>Fecha de Fin</mat-label>
-    <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" readonly>
-    <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-    <mat-datepicker #pickerFin></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Valor Por mes</mat-label>
-    <input matInput type="number" [value]="valorPorMes" readonly>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Descuento</mat-label>
-    <input matInput type="number" formControlName="descuento" required>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Valor total</mat-label>
-    <input matInput type="number" formControlName="monto" required readonly>
-  </mat-form-field>
- 
-
- 
-  <mat-form-field>
-    <mat-label>Método de Pago</mat-label>
-    <mat-select formControlName="metodoPago">
-      <mat-option *ngFor="let metodo of metodosPago" [value]="metodo">
-        {{ metodo }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
- 
-
-<!-- Select that is shown only when the plan name is 2x1 -->
-<mat-form-field *ngIf="is2x1Selected">
-  <mat-label>Segundo cliente</mat-label>
-  <mat-select formControlName="specialSelect">
-    <mat-option *ngFor="let run of runes" [value]="run">
-      {{ run }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-
-  <div style="text-align: center;" mat-dialog-actions class="action">
-    <button mat-raised-button class="boton" color="primary" type="submit" [disabled]="!relacionForm.valid">Asociar</button>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Nombre del Plan</mat-label>
+          <mat-select formControlName="nombrePlan" (selectionChange)="onPlanChange($event.value)" required>
+            <mat-option *ngFor="let nom of planes" [value]="nom.nombrePlan">
+              {{ nom.nombrePlan }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>ID del Plan</mat-label>
+          <input matInput formControlName="idPlan" required readonly>
+        </mat-form-field>
+      </div>
+  
+  
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Nombre del Usuario</mat-label>
+        <input matInput formControlName="nombreUsuario" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Apellido del Usuario</mat-label>
+        <input matInput formControlName="apellidoUsuario" required>
+      </mat-form-field>
+    </div>
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>RUT</mat-label>
+        <input matInput formControlName="run" readonly>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [matDatepicker]="pickerRegistro" formControlName="fechaRegistroPlan" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerRegistro"></mat-datepicker-toggle>
+        <mat-datepicker #pickerRegistro [disabled]="true"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Fecha de Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" [matDatepickerFilter]="myDateFilter">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Meses a pagar</mat-label>
+        <input matInput type="number" formControlName="mensualidades" required>
+      </mat-form-field>
+    </div>
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Fecha de Fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Valor Por mes</mat-label>
+        <input matInput type="number" [value]="valorPorMes" readonly>
+      </mat-form-field>
+    </div>
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Descuento</mat-label>
+        <input matInput type="number" formControlName="descuento" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Valor total</mat-label>
+        <input matInput type="number" formControlName="monto" required readonly>
+      </mat-form-field>
+    </div>
+  
+  
+  
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Método de Pago</mat-label>
+        <mat-select formControlName="metodoPago">
+          <mat-option *ngFor="let metodo of metodosPago" [value]="metodo">
+            {{ metodo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+  
+      <!-- Select that is shown only when the plan name is 2x1 -->
+      <mat-form-field *ngIf="is2x1Selected">
+      <mat-label>Segundo cliente</mat-label>
+      <mat-select formControlName="specialSelect">
+        <mat-option *ngFor="let run of runes" [value]="run">
+          {{ run }}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-</form>
+  
+    <div style="text-align: center;" mat-dialog-actions class="action">
+      <button mat-raised-button class="boton" color="primary" type="submit" [disabled]="!relacionForm.valid">Asociar</button>
+    </div>
+  </form>
+</div>

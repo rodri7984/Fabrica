@@ -1,0 +1,28 @@
+
+.contenedor-total{
+  background-color: #06132b;
+}
+
+h1 {
+  color: #bfdbfe;
+  text-align: center;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espacio entre filas */
+    padding: 5%;
+   
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Espacio entre columnas */
+  }
+  
+  mat-form-field {
+    flex: 1; /* Toma todo el espacio disponible */
+ 
+  }
+

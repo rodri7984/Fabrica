@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espacio entre filas */
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Espacio entre columnas */
+  }
+  
+  mat-form-field {
+    flex: 1; /* Toma todo el espacio disponible */
+  }
