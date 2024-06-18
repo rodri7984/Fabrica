@@ -31,13 +31,18 @@ mat-list-item {
 mat-list-item .mat-list-item-content {
   padding: 0 !important;
 }
-mat-list-item:hover{
+/* mat-list-item:hover{
+
+  
+} */
+
+.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base:hover{
   background-color:#b5a0ff;
   z-index: 1;
   transform: scale(1.06); /* Opcional: añade un pequeño zoom */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
 }
+
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   border-radius: 22px;
 }
