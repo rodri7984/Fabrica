@@ -104,6 +104,41 @@ html {
 }
 
 
+// estilos dialog 
+
+
+.contenedor-total{
+  background-color: #06132b;
+}
+
+
+
+.h1-dialog{
+  color: #bfdbfe;
+  text-align: center;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+    padding: 5%;
+   
+  }
+  
+  .rowMat {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  mat-form-field {
+    flex: 1; 
+ 
+  }
+
+
+
+
   
 
 @include mat.all-component-themes($my-theme);
