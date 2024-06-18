@@ -92,7 +92,7 @@ export class TablaClienteComponent implements OnInit {
 
     relacionarPlan(cliente: Usuario) {
         const dialogRef = this._dialog.open(RelacionClientePlanComponent, {
-          width: '800px',
+          // width: '800px',
           data: { cliente }
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -104,7 +104,7 @@ export class TablaClienteComponent implements OnInit {
 
       showEditarCliente (usuario: Usuario) {
         const dialogRef = this._dialog.open(EditarClienteComponent, {
-          width: '800px',
+          
           data: { usuario }
         });
         dialogRef.afterClosed().subscribe(result => {

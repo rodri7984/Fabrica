@@ -1,63 +1,65 @@
-
-<form [formGroup]="colForm" #f="ngForm">
-    <div mat-dialog-title>
-        <h1 style="text-align: center;">Formulario Empleado</h1>
-    </div>
-
-
-    <div mat-dialog-content class="content">
-
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Nombre Empleado</mat-label>
-
-                <input formControlName="nombre" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Apellido Empleado</mat-label>
-                <input formControlName="apellido" matInput>
-            </mat-form-field>
+<div class="contenedor-total">
+    
+    <form [formGroup]="colForm" #f="ngForm">
+        <div mat-dialog-title>
+            <h1 class="h1-dialog">Formulario Empleado</h1>
         </div>
-
-        <div class="row">
-
-        </div>
-
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Nickname</mat-label>
-                <input matInput formControlName="username">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Contraseña</mat-label>
-                <input matInput formControlName="password">
-            </mat-form-field>
-        </div>
-
-        <!-- <div class="row">
-
+    
+    
+        <div mat-dialog-content class="content">
+    
             <div class="row">
-                <mat-form-field>
-                    <mat-select name="colaborador" placeholder="Tipo" (selectionChange)="selecTipoColaborador($event)">
-                        <mat-option value=""> Tipo usuario </mat-option>
-                        <mat-option *ngFor="let colaborador of tipoColaborador" [value]="colaborador">
-                            {{colaborador}}
-
-                        </mat-option>
-                    </mat-select>
+                <mat-form-field >
+                    <mat-label>Nombre Empleado</mat-label>
+    
+                    <input formControlName="nombre" matInput>
+                </mat-form-field>
+    
+                <mat-form-field >
+                    <mat-label>Apellido Empleado</mat-label>
+                    <input formControlName="apellido" matInput>
                 </mat-form-field>
             </div>
-        </div> -->
-
+    
+            <div class="row">
+    
+            </div>
+    
+            <div class="row">
+                <mat-form-field >
+                    <mat-label>Nickname</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+    
+                <mat-form-field >
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password">
+                </mat-form-field>
+            </div>
+    
+            <!-- <div class="row">
+    
+                <div class="row">
+                    <mat-form-field>
+                        <mat-select name="colaborador" placeholder="Tipo" (selectionChange)="selecTipoColaborador($event)">
+                            <mat-option value=""> Tipo usuario </mat-option>
+                            <mat-option *ngFor="let colaborador of tipoColaborador" [value]="colaborador">
+                                {{colaborador}}
+    
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div> -->
+    
+        </div>
+    
+    
+    
+    </form>
+    
+    <div mat-dialog-actions class="action" style="text-align: center;">
+        <button  mat-raised-button class="boton" color="primary" type="submit" (click)="guardarColaborador()" >Agregar
+            Empleado</button>
     </div>
-
-
-
-</form>
-
-<div mat-dialog-actions class="action" style="text-align: center;">
-    <button  mat-raised-button class="boton" color="primary" type="submit" (click)="guardarColaborador()" >Agregar
-        Empleado</button>
 </div>

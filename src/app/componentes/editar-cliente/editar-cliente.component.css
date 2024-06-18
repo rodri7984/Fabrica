@@ -13,3 +13,10 @@
   mat-form-field {
     flex: 1; /* Toma todo el espacio disponible */
   }
+
+  .action {
+    padding: 0px 25px 20px;
+        button {
+            flex:1;
+        }
+}
