@@ -66,10 +66,9 @@ html {
     --mat-table-row-item-outline-color: #c7f9eb !important;
 }
 
-.custom-dialog-container {
-  border-radius: 80px; 
-  overflow: hidden; 
-}
+// .mat-mdc-dialog-content {
+//   display: ruby;
+// }
 
 .navbar {
   position: fixed; /* Asegura que la barra de navegación permanezca en la parte superior */

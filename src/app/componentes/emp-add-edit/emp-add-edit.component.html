@@ -1,52 +1,51 @@
-
-
-<form [formGroup]="empForm"  *ngIf ="mostrarFormulario" #f="ngForm" >
+<form [formGroup]="empForm" *ngIf="mostrarFormulario" #f="ngForm">
   <div mat-dialog-title>
     <h1 style="text-align: center;">Formulario Cliente</h1>
-</div>
-
-<div mat-dialog-content class="content">
-  
-    <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre </mat-label>
-            
-            <input formControlName="primerNombre" matInput>          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Segundo nombre </mat-label>
-            <input formControlName="segundoNombre" matInput >
-          </mat-form-field>
-    </div>
-
-    <div class="row">
-
   </div>
 
-    <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Apellido</mat-label>
-            <input matInput formControlName="paternoApellido">
-          </mat-form-field>
+  <div mat-dialog-content class="content">
 
-          <mat-form-field appearance="outline">
-            <mat-label>Segundo apellido</mat-label>
-            <input matInput formControlName="maternoApellido">
-          </mat-form-field>
+    <div class="row">
+      <mat-form-field appearance="outline" >
+        <mat-label>Nombre </mat-label>
+
+
+        <input formControlName="primerNombre" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Segundo nombre </mat-label>
+        <input formControlName="segundoNombre" matInput>
+      </mat-form-field>
+
     </div>
 
 
 
     <div class="row">
-        <mat-form-field appearance="outline">
-            <mat-label>Run</mat-label>
-            <input matInput formControlName="run">
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="paternoApellido">
+      </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>digito verificador</mat-label>
-            <input matInput formControlName="dv">
-          </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Segundo apellido</mat-label>
+        <input matInput formControlName="maternoApellido">
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Run</mat-label>
+        <input matInput formControlName="run">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>digito verificador</mat-label>
+        <input matInput formControlName="dv">
+      </mat-form-field>
     </div>
 
     <div class="row">
@@ -67,7 +66,7 @@
         <mat-label>Fecha nacimento</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
         <mat-hint>xxxxx</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
@@ -84,11 +83,11 @@
         <mat-datepicker #pickerFin [disabled]="true"></mat-datepicker>
       </mat-form-field>
 
-      </div>
-    
+    </div>
 
-  
-</div>
+
+
+  </div>
 
 
 
@@ -97,6 +96,6 @@
 <div style="text-align: center;" mat-dialog-actions class="action">
 
 
-  <button   mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() " (click)="traerPlanes()" >Agregar</button>
+  <button mat-raised-button class="boton" color="primary" type="submit" (click)="guardarDatos() "
+    (click)="traerPlanes()">Agregar</button>
 </div>
-

@@ -1,15 +1,18 @@
 .content {
-    padding: 60px;
-}
-
-
-.row {
     display: flex;
-    gap: 10px;
-    mat-form-field{
-        width: 100%;
-    }
-}
+    flex-direction: column;
+    gap: 16px; /* Espacio entre filas */
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Espacio entre columnas */
+  }
+  
+  mat-form-field {
+    flex: 1; /* Toma todo el espacio disponible */
+  }
 
 .action {
     padding: 0px 25px 20px;

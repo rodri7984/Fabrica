@@ -7,6 +7,16 @@
   min-height: 80vh;
 }
 
+.subtitulo-1{
+  padding: 1%;
+}
+
+p{
+  font-size: 40px;
+  color:#ffffffaa
+
+}
+
 #ambos {
   height: 100vh; 
   margin-top: 100px;
@@ -18,6 +28,15 @@ h1 {
   padding: 0; /* Elimina padding adicional */
   line-height: 1.2em; /* Ajusta la altura de la línea para evitar superposiciones */
   font-weight: 530;
+}
+
+h2{
+  color: #ffffff;
+  
+}
+
+h3{
+  color:#ffffffaa;
 }
 
 .text-container {
@@ -69,12 +88,15 @@ h1 {
   position: relative;
   padding: 5%;
   background-color: #06132b;
+  padding-left: 10%;
+  z-index: 1;
 }
 
 .text-container-2 {
   color: #bfdbfe;
   padding-right: 8%;
   font-weight: 530;
+  padding-top: 1%;
 }
 
 .relative-container-3{
