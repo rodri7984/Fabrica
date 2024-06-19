@@ -113,4 +113,9 @@ export class TablaClienteComponent implements OnInit {
           }
         });
       }
+
+      
+getRowClass(index: number): string {
+  return index % 2 === 0 ? 'white-row' : 'alternate-row';
+}
 }

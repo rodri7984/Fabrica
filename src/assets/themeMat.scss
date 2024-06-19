@@ -54,7 +54,7 @@ $my-theme: mat.define-light-theme((
 ));
 
 tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
-    background-color:#b5a0ff;
+    background-color:#307473;
     color: white;
     
 }
@@ -136,6 +136,14 @@ html {
  
   }
 
+//  getRowClass
+  .white-row {
+    background-color: white;
+  }
+  
+  .alternate-row {
+    background-color: #C1CFDA;
+  }
 
 
 

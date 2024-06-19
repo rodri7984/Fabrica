@@ -2,3 +2,10 @@
     margin-top: 40px; 
   }
   
+  .white-row {
+    background-color: white;
+  }
+  
+  .alternate-row {
+    background-color: #C1CFDA;
+  }
