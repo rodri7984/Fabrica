@@ -94,5 +94,10 @@ changeEstado(staff: Colaborador) {
 }
 
 
+getRowClass(index: number): string {
+  return index % 2 === 0 ? 'white-row' : 'alternate-row';
+}
+
+
 
 }

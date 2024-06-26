@@ -104,6 +104,10 @@ getColor(diasTotal: number): string {
   if (diasTotal <= 0) return '#db4040';
   return 'black';
 }
+
+getRowClass(index: number): string {
+  return index % 2 === 0 ? 'white-row' : 'alternate-row';
+}
 }
 // getColor(diasTotal: number): string {
 //   if (diasTotal >= 15 && diasTotal <= 30) return '#92D86B';
