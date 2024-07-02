@@ -17,6 +17,8 @@ import { ClienteService } from '../../core/services/cliente.service';
 import { PagoService } from '../../core/services/pago.service';
 import dayjs from 'dayjs';
 import { MatSelectModule } from '@angular/material/select';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-tabla-hpago',
@@ -40,16 +42,16 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './tabla-hpago.component.css'
 })
 export class TablaHPagoComponent implements OnInit {
-    pagos: Pago[] = [];
-    title = 'tabla Historial pagos';
-  
-    @ViewChild('sidenav') sidenav!: MatSidenav;
-  
-    closeSidenav() {
-      this.sidenav.close();
-    }
+  pagos: Pago[] = [];
+  title = 'tabla Historial pagos';
 
-    desplegarColumna: string[] = ['nombreUsuario', 'nombrePlan','monto','fecha'];
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  closeSidenav() {
+    this.sidenav.close();
+  }
+
+  desplegarColumna: string[] = ['nombreUsuario', 'nombrePlan', 'monto', 'fecha'];
   dataSource = new MatTableDataSource<Pago>();
   planes: { [key: string]: number } = {};
 
@@ -129,12 +131,32 @@ export class TablaHPagoComponent implements OnInit {
 
   formatDate(date: Date): string {
     return dayjs(date).format('DD/MM/YYYY');
-}
+  }
 
+  getRowClass(index: number): string {
+    return index % 2 === 0 ? 'white-row' : 'alternate-row';
+  }
 
-getRowClass(index: number): string {
-  return index % 2 === 0 ? 'white-row' : 'alternate-row';
-}
+  exportToExcel(): void {
+    // Crear una nueva hoja de trabajo
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.pagos.map(pago => ({
+      'Nombre de Usuario': pago.nombreUsuario,
+      'Nombre del Plan': pago.nombrePlan,
+      'Monto': pago.monto,
+      'Fecha de Pago': this.formatDate(new Date(pago.fechaPago))
+    })));
 
+    // Crear un libro de trabajo y agregar la hoja de trabajo
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'Historial de Pagos': worksheet },
+      SheetNames: ['Historial de Pagos']
+    };
 
+    // Convertir el libro de trabajo a un archivo de Excel binario
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+    // Crear un Blob a partir del archivo de Excel binario y descargarlo
+    const data: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(data, 'historial_de_pagos.xlsx');
+  }
 }

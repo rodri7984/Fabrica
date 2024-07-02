@@ -55,13 +55,17 @@ sidenavv!: MatSidenav;
   title = 'fabrica';
   
   activeComponent: 'cliente' | 'staff' | 'planesUsuario' | 'EmpAddEditComponent' | 'plan' |
-  'historialPago' | 'bienvenida' | null = null;
+  'historialPago' | 'bienvenida' | 'login' | null = null;
  
 
 
 
 
  constructor( private _dialog: MatDialog) { }
+
+ showLogin() {
+  this.activeComponent = 'login';
+} 
 
  ngOnInit(): void {
   this.activeComponent = 'bienvenida'; // Mostrar planes de usuario al inicio

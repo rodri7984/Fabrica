@@ -1,12 +1,11 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-mostrar-bienvenida',
   standalone: true,
   imports: [MatGridListModule,
-    CarouselModule,
+    
     
   ],
   templateUrl: './mostrar-bienvenida.component.html',
