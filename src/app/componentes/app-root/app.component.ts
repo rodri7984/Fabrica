@@ -95,6 +95,9 @@ showEmpAddEditComponent() {
     panelClass: 'custom-dialog-container' // Aplica la clase CSS personalizada
   });
 }
+
+
+
  onToggleSidenav(): void {
    this.toggleSidenav.emit();
  }

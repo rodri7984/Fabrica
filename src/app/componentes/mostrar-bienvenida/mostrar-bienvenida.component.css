@@ -103,3 +103,24 @@ h3{
   background-color: aqua;
   height: 50vh;
 }
+
+.footer {
+  padding: 40px 0;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .fab {
+  font-size: 24px;
+}
+
+.footer .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer .row {
+  margin-bottom: 20px;
+}

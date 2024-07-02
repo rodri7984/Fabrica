@@ -23,8 +23,10 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <img src="favicon.ico" alt="logo" class="icon">
-      <span>La Fabrica</span>
+      <button mat-button class="logo-button" (click)="showBienvenida()">
+        <img src="favicon.ico" alt="logo" class="icon">
+        <span class="botonHome">La Fabrica</span>
+      </button>
        
       <span class="example-spacer"></span>
     </mat-toolbar>
