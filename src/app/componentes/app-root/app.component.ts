@@ -23,7 +23,7 @@ import { TablaHPagoComponent } from "../tabla-hpago/tabla-hpago.component";
 import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-cliente-plan.component';
 import { TablaPlanesUsuarioComponent } from '../tabla-planes-usuario/tabla-planes-usuario.component';
 import { MostrarBienvenidaComponent } from '../mostrar-bienvenida/mostrar-bienvenida.component';
-
+import { LoginComponent } from '../login/login.component';
 
 
 
@@ -44,7 +44,7 @@ import { MostrarBienvenidaComponent } from '../mostrar-bienvenida/mostrar-bienve
         MatSidenavModule,
         MatListModule,
          TablaClienteComponent, MostrarStaffComponent,
-        TablaPlanesUsuarioComponent,
+        TablaPlanesUsuarioComponent, LoginComponent,
         EmpAddEditComponent, TablaPlanComponent, TablaHPagoComponent,
       MostrarBienvenidaComponent]
 })

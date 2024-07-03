@@ -42,7 +42,7 @@ export class ColaboradorComponent {
 
   ){}
 
-  colForm = this.fb.group({
+  public colForm = this.fb.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
     nombre: ['', Validators.required],

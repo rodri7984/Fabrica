@@ -8,7 +8,8 @@
         <button mat-button class="full-width-button" (click)="showStaffDashboard()"> Staff</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button class="full-width-button" (click)="showplanesUsuarioDashboard()"> Clientes con planes</button>
+        <button mat-button class="full-width-button" (click)="showplanesUsuarioDashboard()"> Clientes con
+          planes</button>
       </mat-list-item>
       <mat-list-item>
         <button mat-button class="full-width-button" (click)="showPLanDashboard()"> Planes</button>
@@ -30,7 +31,7 @@
         <img src="favicon.ico" alt="logo" class="icon">
         <span class="botonHome">La Fabrica</span>
       </button>
-       
+
       <span class="example-spacer"></span>
     </mat-toolbar>
 
@@ -38,5 +39,7 @@
     <app-mostrar-staff *ngIf="activeComponent === 'staff'"></app-mostrar-staff>
     <app-tabla-planes-usuario *ngIf="activeComponent === 'planesUsuario'"></app-tabla-planes-usuario>
     <app-tabla-plan *ngIf="activeComponent === 'plan'"></app-tabla-plan>
-<app-tabla-hpago *ngIf="activeComponent === 'historialPago'"></app-tabla-hpago>
-<app-mostrar-bienvenida *ngIf="activeComponent === 'bienvenida'"></app-mostrar-bienvenida>
+    <app-tabla-hpago *ngIf="activeComponent === 'historialPago'"></app-tabla-hpago>
+    
+    <app-mostrar-bienvenida *ngIf="activeComponent === 'bienvenida'"></app-mostrar-bienvenida>
+    
