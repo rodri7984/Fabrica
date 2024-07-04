@@ -3,6 +3,7 @@ import { EmpAddEditComponent } from './componentes/emp-add-edit/emp-add-edit.com
 import { AppComponent } from './componentes/app-root/app.component';
 import { MostrarStaffComponent } from './componentes/mostrarStaff/mostrar-staff/mostrar-staff.component';
 import { TablaClienteComponent } from './componentes/tabla-cliente/tabla-cliente.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 
@@ -11,7 +12,8 @@ export const routes: Routes = [
     { path: 'home', component: AppComponent },
     { path: 'cliente', component: TablaClienteComponent },
     { path: 'colaboradores', component: MostrarStaffComponent },
+    { path: 'login', component: LoginComponent},
     
-    { path: '', redirectTo: '/home', pathMatch: 'full' }
+    { path: '', redirectTo: '/login', pathMatch: 'full' }
   
 ];
