@@ -91,16 +91,16 @@ export class TablaPlanesUsuarioComponent {
     return dayjs(date).format('DD/MM/YYYY');
   }
 
-  calcularDiferencia(date: Date): number {
-    const today = dayjs(new Date());
-    const masUnMes = dayjs(date).add(30, 'days');
-    return masUnMes.diff(today, 'days');
+  calcularDiferencia(fechaFin: Date): number {
+    const today = dayjs();
+    const endDate = dayjs(fechaFin);
+    return endDate.diff(today, 'days');
   }
 
 getColor(diasTotal: number): string {
-  if (diasTotal >= 22 && diasTotal <= 31) return '#bee3ba';
-  if (diasTotal >= 7 && diasTotal <= 21) return '#fffeba';
-  if (diasTotal >= 1 && diasTotal <= 6) return 'rgba(255, 166, 0, 0.911)';
+  if (diasTotal >= 15 && diasTotal <= 999) return '#bee3ba';
+  if (diasTotal >= 8 && diasTotal <= 14) return '#fffeba';
+  if (diasTotal >= 1 && diasTotal <= 7) return 'rgba(255, 166, 0, 0.911)';
   if (diasTotal <= 0) return '#db4040';
   return 'black';
 }

@@ -17,7 +17,7 @@ export class MostrarBienvenidaComponent implements OnInit {
 
   ngOnInit() {
     this.images = [
-      'assets/img/Screenshot 2024-06-14 131938.png',
+      'assets/img/dlBar.jpeg',
       
       'assets/img/Screenshot 2024-06-14 133342.png'
     

@@ -61,8 +61,8 @@
     <!-- diasRestantes Column -->
     <ng-container matColumnDef="diasRestantes">
       <th mat-header-cell *matHeaderCellDef>Días vencimiento</th>
-      <td mat-cell *matCellDef="let element" [style.backgroundColor]="getColor(calcularDiferencia(element.fechaInicio))">
-        {{ calcularDiferencia(element.fechaInicio) }}
+      <td mat-cell *matCellDef="let element" [style.backgroundColor]="getColor(calcularDiferencia(element.fechaFin))">
+        {{ calcularDiferencia(element.fechaFin) }}
       </td>
     </ng-container>
 
