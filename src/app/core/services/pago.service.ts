@@ -7,9 +7,10 @@ import { Pago } from '../../modelos/pago';
   providedIn: 'root'
 })
 export class PagoService {
-  private apiUrl = 'http://localhost:8080/pagos';
+  private apiUrl = 'http://127.0.0.1:8000/pagos';
 
   constructor(private httpClient: HttpClient) { }
+
 
   agregarPago(pago: any) {
     return this.httpClient.post(`${this.apiUrl}/createPago`, pago);

@@ -10,7 +10,7 @@ import { run } from 'node:test';
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = 'http://localhost:8080/usuarios';
+  private apiUrl = 'http://127.0.0.1:8000/users';
   
   private run = '19331975';
 
@@ -19,6 +19,7 @@ export class ClienteService {
 
 
   agregarUsuario(usuario: any) {
+    
     return this.httpClient.post(`${this.apiUrl}/createUsuario`, usuario);
   }
 
@@ -40,7 +41,7 @@ export class ClienteService {
    
     
     actualizarCliente(usuario: Usuario): Observable<any> {
-      const url = `${this.apiUrl}/updateUsuario`;
+      const url = `${this.apiUrl}/updateUsuario/${usuario.run}`;  // Incluye el run en la URL
       return this.httpClient.put(url, usuario);
     }
   

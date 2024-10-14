@@ -48,7 +48,7 @@ export class EditarPlanComponent implements OnInit {
     this.relacionForm = this.fb.group({
       idPlan: [{ value: '', disabled: true }],
       nombrePlan: ['', Validators.required],
-      valorPlan: ['', Validators.required],
+      valorPlan: [ null, Validators.required],
       estado: [{ value: '', disabled: true }],
       descripcionPlan: ['', Validators.required]
     });
@@ -59,13 +59,14 @@ export class EditarPlanComponent implements OnInit {
       const planActualizado: Plan = {
         ...this.data.plan,
         ...this.relacionForm.getRawValue(),
-        idPlan: this.data.plan.idPlan, // Asegurar que el idPlan se mantenga
-        estado: this.data.plan.estado  // Asegurar que el estado se mantenga
+        idPlan: this.data.plan.idPlan, 
+        estado: this.data.plan.estado  
       };
       this.planService.actualizarPlan(planActualizado).subscribe(response => {
         console.log('Plan actualizado:', response);
         this.dialogRef.close(true); // Cierra el diálogo y devuelve un valor verdadero
-      }, error => {
+      }, (error: any) => {
+        console.log('objeto: ', planActualizado)
         console.error('Error al actualizar el plan:', error);
       });
     }

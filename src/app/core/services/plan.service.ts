@@ -7,12 +7,12 @@ import { Plan } from '../../modelos/plan';
   providedIn: 'root'
 })
 export class PlanService {
-  private apiUrl = 'http://localhost:8080/planes';
+  private apiUrl = 'http://localhost:8000/planes';
 
   constructor(private httpClient: HttpClient) { }
 
-  agregarPlan(plan: any) {
-    return this.httpClient.post(`${this.apiUrl}/createPlan`, plan);
+  agregarPlan(planData: any): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}/createPlan`, planData);
   }
 
 

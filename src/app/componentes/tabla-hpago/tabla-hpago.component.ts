@@ -73,6 +73,7 @@ export class TablaHPagoComponent implements OnInit {
   selectedMonth: number | null = null;
   totalGananciaMes: number = 0;
   totalGananciaAnual: number = 0;
+  
 
   constructor(
     private _dialog: MatDialog,
@@ -82,10 +83,25 @@ export class TablaHPagoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.listarPagos();
+    // this.calculateTotalGananciaAnual();
+    this.obtenerPagos();
+
+  }
+
+  obtenerPagos() {
+    this.pagoService.obtenerPagos().subscribe((pagos: Pago[]) => {
+      console.log(pagos); // Verifica aquí el formato de los datos.
+      this.pagos = pagos;
+      this.calculateTotalGananciaAnual();
+    });
+  }
+
+  listarPagos(){
     this.pagoService.obtenerPagos().subscribe((data) => {
       this.pagos = data;
       this.dataSource.data = this.pagos;
-      this.calculateTotalGananciaAnual();
+      // this.calculateTotalGananciaAnual();
     });
 
   }
@@ -126,7 +142,11 @@ export class TablaHPagoComponent implements OnInit {
   }
 
   calculateTotalGananciaAnual() {
-    this.totalGananciaAnual = this.pagos.reduce((total, pago) => total + pago.monto, 0);
+    if (Array.isArray(this.pagos)) {
+      this.totalGananciaAnual = this.pagos.reduce((total, pago) => total + pago.monto, 0);
+    } else {
+      console.error("this.pagos no es un arreglo");
+    }
   }
 
   formatDate(date: Date): string {

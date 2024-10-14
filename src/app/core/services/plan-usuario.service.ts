@@ -7,16 +7,16 @@ import { PlanUsuario } from '../../modelos/plan-usuario';
 })
 export class PlanUsuarioService {
 
-  private apiUrl = 'http://localhost:8080/planesUsuarios';
+  private apiUrl = 'http://127.0.0.1:8000/PlanesUsuario';
 
   constructor(private httpClient: HttpClient) { }
 
   agregarPlanUsuario(planUsuario: any) {
-    return this.httpClient.post(`${this.apiUrl}/createPlanUsuario`, planUsuario);
+    return this.httpClient.post(`${this.apiUrl}/createPlanesUsuario`, planUsuario);
   }
 
 
-    obtenerPlanUsuario() {
-      return this.httpClient.get<PlanUsuario[]>(`${this.apiUrl}/listPlanUsuario`);// Reemplaza 'URL_DE_TU_API' con la URL real de tu API
-    }
+  obtenerPlanUsuario() {
+    return this.httpClient.get<PlanUsuario[]>(`${this.apiUrl}/listPlanesUsuario`);
+  }
 }

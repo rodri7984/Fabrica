@@ -41,7 +41,7 @@ export class FormAddPlanComponent {
   planForm = this.fb.group({
     idPlan: ['', ],
     nombrePlan: ['', Validators.required],
-    valorPlan: ['', Validators.required],
+    valorPlan: [null, Validators.required],
     descripcionPlan: ['', Validators.required],
     estado: ['ACTIVO']
   });
@@ -59,9 +59,21 @@ export class FormAddPlanComponent {
   }
   
   guardarPlan() {
+  
+    // console.log('Datos enviados:', envio); 
+
     if (this.planForm.valid) {
-      this.planService.agregarPlan(this.planForm.value).subscribe(
+      const planData = { ...this.planForm.value };
+      delete planData.idPlan;
+
+      this.planService.agregarPlan(planData).subscribe(
         (response: any) => {
+          const idPlan = response.idPlan;
+          console.log('Nuevo idPlan:', idPlan);
+          console.log('Respuesta del backend:', response);
+          this.planForm.patchValue({ idPlan: idPlan });
+
+
           this.planAgregado.emit();
           this.dialogRef.close(true);
           this.listarPlanes();
@@ -70,6 +82,7 @@ export class FormAddPlanComponent {
         },
         (error: any) => {
           console.error('Error al guardar plan: ', error);
+          console.log('objeto', this.planForm.value);
         });
     } else {
       console.warn('El formulario no es valido. Verifica los campos')

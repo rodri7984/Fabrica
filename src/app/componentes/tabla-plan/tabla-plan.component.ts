@@ -69,7 +69,7 @@ export class TablaPlanComponent implements OnInit{
 listarPlanes(){
   this.planService.obtenerPlanesDesdeAPI().subscribe((data) => {
     this.planes = data;
-    this.dataSource.data = this.planes; // Asegúrate de actualizar la dataSource aquí
+    this.dataSource.data = this.planes; 
   });
 }
 
@@ -118,7 +118,7 @@ showEditarPlan(plan: Plan) {
   });
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      this.listarPlanes(); // Actualiza la lista de clientes cuando se relaciona un plan
+      this.listarPlanes(); 
     }
   });
 }

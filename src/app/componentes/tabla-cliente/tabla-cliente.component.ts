@@ -20,6 +20,7 @@ import { RelacionClientePlanComponent } from '../relacion-cliente-plan/relacion-
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 
+
 @Component({
     selector: 'app-tabla-cliente',
     standalone: true,
@@ -54,22 +55,29 @@ export class TablaClienteComponent implements OnInit {
         private planService: PlanService
     ) { }
 
-    listarUsuarios() {
-        this.clienteService.getUsuarios().subscribe((data) => {
-            this.usuarios = data;
-            this.dataSource.data = this.usuarios;
-        });
-
-        this.planService.obtenerPlanesDesdeAPI().subscribe((planes: any[]) => {
+    listarPlanes() {
+      
+      this.planService.obtenerPlanesDesdeAPI().subscribe((response: any) => {
+        const planes = response.data;  // Acceder a la propiedad correcta
+        if (Array.isArray(planes)) {
             this.planes = planes.reduce<{ [key: string]: number }>((acc, plan) => {
                 acc[plan.idPlan] = plan.valorPlan;
                 return acc;
             }, {});
-        });
+        }
+    });
     }
+  listarUsuarios() {
+    this.clienteService.getUsuarios().subscribe((data) => {
+      this.usuarios = data;
+      this.dataSource.data = this.usuarios;
+    });
+  }
+
 
     ngOnInit(): void {
-        this.listarUsuarios();
+      this.listarUsuarios();
+        this.listarPlanes();
     }
 
     showEmpAddEditComponent() {
